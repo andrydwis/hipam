@@ -54,6 +54,11 @@
                                 <span class="sidebar-text"><i class="fas fa-user"></i> User</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('client.index')}}">
+                                <span class="sidebar-text"><i class="fas fa-user"></i> Pelanggan</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

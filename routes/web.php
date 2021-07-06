@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,15 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
+    Route::post('/client/create', [ClientController::class, 'store'])->name('client.store');
+    Route::get('/client/import', [ClientController::class, 'import'])->name('client.import');
+    Route::post('/client/import', [ClientController::class, 'importProcess'])->name('client.import-process');
+    Route::get('/client/export', [ClientController::class, 'export'])->name('client.export');
+    Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
+    Route::patch('/client/{client}/edit', [ClientController::class, 'update'])->name('client.update');
+    Route::delete('/client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
     Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log.index');
 });
 
