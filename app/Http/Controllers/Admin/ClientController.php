@@ -170,7 +170,6 @@ class ClientController extends Controller
                 ->log('Berhasil menghapus pelanggan');
 
             session()->flash('success', 'Berhasil menghapus pelanggan');
-            
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();
 
@@ -182,6 +181,12 @@ class ClientController extends Controller
 
     public function export(Request $request)
     {
+        activity()
+            ->causedBy(Auth::user())
+            ->log('Berhasil export data pelanggan');
+
+        session()->flash('success', 'Berhasil export data pelanggan');
+
         return Excel::download(new ClientsExport, 'daftar pelanggan.xlsx');
     }
 }

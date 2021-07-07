@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\UsageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
     Route::get('/client', [ClientController::class, 'index'])->name('client.index');
     Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
     Route::post('/client/create', [ClientController::class, 'store'])->name('client.store');
@@ -37,6 +39,15 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
     Route::patch('/client/{client}/edit', [ClientController::class, 'update'])->name('client.update');
     Route::delete('/client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+
+    Route::get('/usage', [UsageController::class, 'index'])->name('usage.index');
+    Route::get('/usage/{client}/{month}/{year}/create', [UsageController::class, 'create'])->name('usage.create');
+    Route::post('/usage/{client}/{month}/{year}/create', [UsageController::class, 'store'])->name('usage.store');
+    Route::get('/usage/{client}/{month}/{year}/edit', [UsageController::class, 'edit'])->name('usage.edit');
+    Route::patch('/usage/{client}/{month}/{year}/edit', [UsageController::class, 'update'])->name('usage.update');
+    Route::get('/usage/{month}/{year}', [UsageController::class, 'show'])->name('usage.show');
+    Route::get('/usage/{month}/{year}/export', [UsageController::class, 'export'])->name('usage.export');
+
     Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log.index');
 });
 

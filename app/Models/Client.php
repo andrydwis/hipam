@@ -15,4 +15,9 @@ class Client extends Model
         'rt',
         'rw'
     ];
+
+    public function usages()
+    {
+        return $this->hasMany(Usage::class);
+    }
 }

@@ -59,6 +59,11 @@
                                 <span class="sidebar-text"><i class="fas fa-user"></i> Pelanggan</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('usage.index')}}">
+                                <span class="sidebar-text"><i class="fas fa-fill-drip"></i> Pemakaian</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

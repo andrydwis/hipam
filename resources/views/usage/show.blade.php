@@ -5,58 +5,48 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Profile</li>
+            <li class="breadcrumb-item"><a href="{{route('usage.index')}}">Pemakaian</a></li>
+            <li class="breadcrumb-item active">{{$month}} {{$year}}</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Profile</h1>
-            <p class="mb-0">Show your personal general information and user activity log</p>
+            <h1 class="h4">Pemakaian {{$month}} {{$year}}</h1>
+            <p class="mb-0">Menampilkan pemakaian pengguna pada bulan dan tahun tersebut</p>
         </div>
     </div>
 </div>
 @include('layouts.alert')
-<div class="card mb-5">
-    <div class="card-body">
-        <h5 class="h5 mb-4">General information</h5>
-        <div class="mb-4">
-            <label for="name">Name</label>
-            <input type="text" name="name" class="form-control" placeholder="fullname" value="{{$user->name}}" readonly>
-        </div>
-        <div class="mb-4">
-            <label for="email">Email</label>
-            <input type="email" name="email" class="form-control" placeholder="example@gmail.com" value="{{$user->email}}" readonly>
-        </div>
-        <div class="mb-4">
-            <label for="">Status</label>
-            <div class="form-check">
-                <label class="form-check-label">Verified</label>
-                <input class="form-check-input" type="checkbox" @if($user->email_verified_at) checked @endif disabled>
-            </div>
-        </div>
-        <div class="mb-4">
-            <a href="{{route('profile.edit')}}" class="btn btn-primary">Edit</a>
-        </div>
-    </div>
-</div>
 <div class="card">
+    <div class="card-header d-flex justify-content-end">
+        <a href="{{route('usage.export', [$month, $year])}}" class="btn btn-outline-primary">Export Pemakaian</a>
+    </div>
     <div class="card-body">
-        <h5 class="h5 mb-4">User Activity Log</h5>
         <div class="table-responsive py-4">
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
                     <tr>
                         <th>No</th>
-                        <th>Description</th>
-                        <th>Datetime</th>
+                        <th>Nomor Pelanggan</th>
+                        <th>Nama</th>
+                        <th>Meter Kubik</th>
+                        <th>Menu</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($logs as $log)
+                    @foreach($clients as $client)
                     <tr>
                         <td>{{$loop->index+1}}</td>
-                        <td>{{$log->description}}</td>
-                        <td>{{$log->created_at->format('M d, Y H:i')}} <span class="badge bg-primary">{{$log->created_at->diffForHumans()}}</span></td>
+                        <td>{{$client->client_id}}</td>
+                        <td>{{$client->name}}</td>
+                        <td>{{$client->usages->first()->meter_cubic ?? 'belum diisi'}}</td>
+                        <td>
+                            @if($client->usages->first())
+                            <a href="{{route('usage.edit', [$client, $month, $year])}}" class="btn btn-outline-primary">Edit</a>
+                            @else
+                            <a href="{{route('usage.create', [$client, $month, $year])}}" class="btn btn-primary">Tambah</a>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
