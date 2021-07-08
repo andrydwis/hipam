@@ -34,6 +34,12 @@ class UsageObserver
     public function updated(Usage $usage)
     {
         //
+        $bill = Bill::where('usage_id', $usage->id)->first();
+        $bill->usage_id = $usage->id;
+        $bill->subscription = config('custom.subscription');
+        $bill->cost = $usage->meter_cubic * config('custom.cost');
+        $bill->total = $bill->subscription + $bill->cost + ($bill->fine ?? 0);
+        $bill->save();
     }
 
     /**
