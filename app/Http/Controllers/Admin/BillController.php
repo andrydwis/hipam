@@ -105,8 +105,8 @@ class BillController extends Controller
 
     public function acceptLate(Request $request, Bill $bill)
     {
-        $bill->fine = 5000;
-        $bill->total = $bill->total + $bill->fine;
+        $bill->fine = config('custom.fine');
+        $bill->total = $bill->total + config('custom.fine');
         $bill->status = 'late';
         $bill->save();
 
@@ -122,7 +122,7 @@ class BillController extends Controller
     public function declineLate(Request $request, Bill $bill)
     {
         $bill->fine = null;
-        $bill->total = $bill->total - 5000;
+        $bill->total = $bill->total - config('custom.fine');
         $bill->status = 'unpaid';
         $bill->save();
 

@@ -18,8 +18,8 @@ class UsageObserver
         //
         $bill = new Bill();
         $bill->usage_id = $usage->id;
-        $bill->subscription = 6000;
-        $bill->cost = $usage->meter_cubic * 500;
+        $bill->subscription = config('custom.subscription');
+        $bill->cost = $usage->meter_cubic * config('custom.cost');
         $bill->total = $bill->subscription + $bill->cost;
         $bill->status = 'unpaid';
         $bill->save();
