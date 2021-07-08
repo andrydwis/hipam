@@ -63,7 +63,7 @@
             </div>
             <div class="mb-4">
                 <label for="meter_kubik">Meter Kubik</label>
-                <input type="number" name="meter_kubik" class="form-control @error('meter_kubik') is-invalid @enderror" placeholder="jumlah pemakaian" value="{{old('meter_kubik')}}">
+                <input type="number" step=".01" name="meter_kubik" class="form-control @error('meter_kubik') is-invalid @enderror" placeholder="jumlah pemakaian" value="{{old('meter_kubik')}}">
                 @error('meter_kubik')
                 <div class="invalid-feedback">
                     {{$message}}

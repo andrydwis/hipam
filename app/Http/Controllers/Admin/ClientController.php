@@ -167,9 +167,9 @@ class ClientController extends Controller
 
             activity()
                 ->causedBy(Auth::user())
-                ->log('Berhasil menghapus pelanggan');
+                ->log('Berhasil import pelanggan');
 
-            session()->flash('success', 'Berhasil menghapus pelanggan');
+            session()->flash('success', 'Berhasil import pelanggan');
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();
 

@@ -16,7 +16,7 @@ class CreateUsagesTable extends Migration
         Schema::create('usages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
-            $table->integer('meter_cubic');
+            $table->double('meter_cubic');
             $table->string('month');
             $table->integer('year');
             $table->timestamps();

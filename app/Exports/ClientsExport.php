@@ -9,6 +9,12 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class ClientsExport implements FromView, ShouldAutoSize
 {
+    public function __construct($month, $year)
+    {
+        $this->month = $month;
+        $this->year = $year;
+    }
+    
     public function view(): View
     {
         return view('client.export', [

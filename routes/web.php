@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\ActivityLogController;
+use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UsageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\ProfileController;
@@ -47,6 +49,14 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::patch('/usage/{client}/{month}/{year}/edit', [UsageController::class, 'update'])->name('usage.update');
     Route::get('/usage/{month}/{year}', [UsageController::class, 'show'])->name('usage.show');
     Route::get('/usage/{month}/{year}/export', [UsageController::class, 'export'])->name('usage.export');
+
+    Route::get('/bill', [BillController::class, 'index'])->name('bill.index');
+    Route::patch('/bill/{bill}/accept-late', [BillController::class, 'acceptLate'])->name('bill.accept-late');
+    Route::patch('/bill/{bill}/decline-late', [BillController::class, 'declineLate'])->name('bill.decline-late');
+    Route::get('/bill/{month}/{year}', [BillController::class, 'show'])->name('bill.show');
+    Route::get('/bill/{month}/{year}/export', [BillController::class, 'export'])->name('bill.export');
+
+    Route::get('/transaction/{client}', [TransactionController::class, 'show'])->name('transaction.show');
 
     Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log.index');
 });
