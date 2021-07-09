@@ -10,23 +10,36 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    //
+    public function index()
+    {
+        $data = [
+            'clients' => Client::get()
+        ];
+
+        return view('transaction.index', $data);
+    }
+
     public function show(Client $client)
     {
+        $data = [
+            'client' => $client,
+            'usages' => Usage::where('client_id', $client->id)->with(['client', 'bill'])->orderBy('id', 'desc')->get()
+        ];
+
+        return view('transaction.show', $data);
+    }
+
+    public function pay(Client $client)
+    {
         $usages = Usage::where('client_id', $client->id)->get()->pluck('id');
-        $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->get();
-        $sumTotal = 0;
+        $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
 
-        echo ('pelanggan : ' . $client->client_id . ' - ' . $client->name . '<br>');
+        $data = [
+            'client' => $client,
+            'bills' => $bills,
+            'sumTotal' => 0
+        ];
 
-        foreach ($bills as $bill) {
-            if ($bill->status == 'late') {
-                echo ('bulan yang telat : ' . $bill->usage->month . ' ' . $bill->usage->year . ' = ' . $bill->total . '<br>');
-            } elseif ($bill->status == 'unpaid') {
-                echo ('bulan : ' . $bill->usage->month . ' ' . $bill->usage->year . ' = ' . $bill->total . '<br>');
-            }
-            $sumTotal += $bill->total;
-        }
-        echo ('total yang harus dibayar = ' . $sumTotal);
+        return view('transaction.pay', $data);
     }
 }

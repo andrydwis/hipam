@@ -56,7 +56,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/bill/{month}/{year}', [BillController::class, 'show'])->name('bill.show');
     Route::get('/bill/{month}/{year}/export', [BillController::class, 'export'])->name('bill.export');
 
+    Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
     Route::get('/transaction/{client}', [TransactionController::class, 'show'])->name('transaction.show');
+    Route::get('/transaction/{client}/pay', [TransactionController::class, 'pay'])->name('transaction.pay');
 
     Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log.index');
 });

@@ -80,6 +80,16 @@
             @endrole
             @role('admin')
             <li class="nav-item">
+                <a href="{{route('transaction.index')}}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="fas fa-money-bill"></i>
+                    </span>
+                    <span class="sidebar-text">Transaksi Pembayaran</span>
+                </a>
+            </li>
+            @endrole
+            @role('admin')
+            <li class="nav-item">
                 <a href="{{route('activity-log.index')}}" class="nav-link">
                     <span class="sidebar-icon">
                         <i class="fas fa-clock"></i>
