@@ -48,7 +48,7 @@
     @include('layouts.sidebar')
     <main class="content">
         @include('layouts.topbar')
-        <div class="container mb-5">
+        <div class="mb-5">
             @yield('content')
         </div>
     </main>
