@@ -22,7 +22,7 @@ class ClientController extends Controller
     {
         //
         $data = [
-            'clients' => Client::orderBy('name', 'asc')->get()
+            'clients' => Client::orderBy('client_id', 'asc')->get()
         ];
 
         return view('client.index', $data);

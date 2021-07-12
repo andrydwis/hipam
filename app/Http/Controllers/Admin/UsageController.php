@@ -90,7 +90,7 @@ class UsageController extends Controller
             'month' => $month,
             'year' => $year,
             'clients' => Client::with(['usages' => function ($query) use ($month, $year) {
-                $query->where('month', $month)->where('year', $year);
+                $query->where('month', $month)->where('year', $year)->orderBy('client_id', 'asc');
             }])->get()
         ];
 
