@@ -5,29 +5,33 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">User List</li>
+            <li class="breadcrumb-item active">Admin</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">User List</h1>
-            <p class="mb-0">Show all user that registered on system</p>
+            <h1 class="h4">Daftar Admin</h1>
+            <p class="mb-0">Menampilkan daftar semua admin pada sistem</p>
         </div>
     </div>
 </div>
 @include('layouts.alert')
 <div class="card">
+    @role('superadmin')
+    <div class="card-header">
+        <a href="{{route('user.create')}}" class="btn btn-primary">Tambah Admin</a>
+    </div>
+    @endrole
     <div class="card-body">
         <div class="table-responsive py-4">
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Nama</th>
                         <th>Role</th>
                         <th>Email</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>Menu</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,19 +42,14 @@
                         <td><span class="badge bg-primary">{{$user->getRoleNames()->first()}}</span></td>
                         <td>{{$user->email}}</td>
                         <td>
-                            @if($user->email_verified_at)
-                            <span class="badge bg-success">Verified</span>
-                            @else
-                            <span class="badge bg-primary">Not Verified</span>
-                            @endif
-                        </td>
-                        <td>
+                            @role('superadmin')
                             <form action="{{route('user.destroy', [$user])}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-primary">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Hapus</button>
                                 <a href="{{route('user.show', [$user])}}" class="btn btn-sm btn-primary">Detail</a>
                             </form>
+                            @endrole
                         </td>
                     </tr>
                     @endforeach

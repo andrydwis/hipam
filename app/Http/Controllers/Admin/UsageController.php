@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\UsagesExport;
 use App\Http\Controllers\Controller;
+use App\Imports\UsagesImport;
 use App\Models\Client;
 use App\Models\Usage;
 use Carbon\Carbon;
@@ -151,6 +152,40 @@ class UsageController extends Controller
     public function destroy(Usage $usage)
     {
         //
+    }
+
+    public function import($month, $year)
+    {
+        //
+        $data = [
+            'month' => $month,
+            'year' => $year
+        ];
+
+        return view('usage.import', $data);
+    }
+
+    public function importProcess(Request $request, $month, $year)
+    {
+        $request->validate([
+            'file' => ['required', 'mimes:xlsx']
+        ]);
+
+        try {
+            Excel::import(new UsagesImport($month, $year), $request->file('file'));
+
+            activity()
+                ->causedBy(Auth::user())
+                ->log('Berhasil import pemakaian');
+
+            session()->flash('success', 'Berhasil import pemakaian');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+
+            return redirect()->route('usage.import')->with('failures', $failures);
+        }
+
+        return redirect()->route('usage.index');
     }
 
     public function export($month, $year)

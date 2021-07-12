@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'name',
         'email',
         'password',
+        'email_verified_at'
     ];
 
     /**

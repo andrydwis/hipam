@@ -5,13 +5,13 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Activity Log</li>
+            <li class="breadcrumb-item active">Log Aktifitas</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Activity Log</h1>
-            <p class="mb-0">Show the latest record of all user activities on system</p>
+            <h1 class="h4">Log Aktifitas</h1>
+            <p class="mb-0">Tampilkan catatan terbaru dari semua aktivitas pengguna di sistem</p>
         </div>
     </div>
 </div>
@@ -24,8 +24,8 @@
                         <th>No</th>
                         <th>User</th>
                         <th>Role</th>
-                        <th>Description</th>
-                        <th>Datetime</th>
+                        <th>Deskripsi</th>
+                        <th>Waktu</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +35,7 @@
                         <td>{{$log->causer->name}}</td>
                         <td><span class="badge bg-primary">{{$log->causer->getRoleNames()->first()}}</span></td>
                         <td>{{$log->description}}</td>
-                        <td>{{$log->created_at->format('M d, Y H:i')}} <span class="badge bg-primary">{{$log->created_at->diffForHumans()}}</span></td>
+                        <td>{{$log->created_at->isoFormat('dddd, DD-MM-YYYY HH:MM')}} <span class="badge bg-primary">{{$log->created_at->diffForHumans()}}</span></td>
                     </tr>
                     @endforeach
                 </tbody>

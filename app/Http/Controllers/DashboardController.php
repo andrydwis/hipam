@@ -13,10 +13,10 @@ class DashboardController extends Controller
     public function index()
     {
         $role = Auth::user()->getRoleNames()->first();
-        if ($role == 'admin') {
+        if ($role == 'superadmin') {
             return $this->admin();
-        } elseif ($role == 'client') {
-            return $this->client();
+        } elseif ($role == 'admin') {
+            return $this->admin();
         }
     }
 

@@ -49,7 +49,7 @@
             <div class="container">
                 <p class="text-center">
                     <a href="{{route('root.index')}}" class="d-flex align-items-center justify-content-center">
-                        Back to homepage
+                        Kembali
                     </a>
                 </p>
                 <div class="row justify-content-center form-bg-image">
@@ -57,17 +57,17 @@
                         <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             @if (session('status') == 'verification-link-sent')
                             <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-                                A new verification link has been sent
+                                Link verifikasi telah dikirim
                                 <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
                             </div>
                             @endif
                             <div class="text-center text-md-center mb-4 mt-md-0">
-                                <h1 class="mb-0 h3">Please verify your email first !</h1>
+                                <h1 class="mb-0 h3">Mohon verifikasi email dahulu</h1>
                             </div>
                             <form action="{{route('verification.send')}}" method="post">
                                 @csrf
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Send Email Verification</button>
+                                    <button type="submit" class="btn btn-primary">Kirim</button>
                                 </div>
                             </form>
                             <form action="{{route('logout')}}" method="post">

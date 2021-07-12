@@ -18,9 +18,9 @@
 @include('layouts.alert')
 <div class="card mb-5">
     <div class="card-body">
-        <h5 class="h5 mb-4">General information</h5>
+        <h5 class="h5 mb-4">Informasi Umum</h5>
         <div class="mb-4">
-            <label for="name">Name</label>
+            <label for="name">Nama</label>
             <input type="text" name="name" class="form-control" placeholder="fullname" value="{{$user->name}}" readonly>
         </div>
         <div class="mb-4">
@@ -41,14 +41,14 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <h5 class="h5 mb-4">User Activity Log</h5>
+        <h5 class="h5 mb-4">Log Aktifitas User</h5>
         <div class="table-responsive py-4">
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
                     <tr>
                         <th>No</th>
-                        <th>Description</th>
-                        <th>Datetime</th>
+                        <th>Deskripsi</th>
+                        <th>Waktu</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,7 +56,7 @@
                     <tr>
                         <td>{{$loop->index+1}}</td>
                         <td>{{$log->description}}</td>
-                        <td>{{$log->created_at->format('M d, Y H:i')}} <span class="badge bg-primary">{{$log->created_at->diffForHumans()}}</span></td>
+                        <td>{{$log->created_at->isoFormat('dddd, DD-MM-YYYY HH:MM')}} <span class="badge bg-primary">{{$log->created_at->diffForHumans()}}</span></td>
                     </tr>
                     @endforeach
                 </tbody>

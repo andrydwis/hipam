@@ -19,7 +19,10 @@
 @include('layouts.alert')
 <div class="card">
     <div class="card-header d-flex justify-content-end">
-        <a href="{{route('usage.export', [$month, $year])}}" class="btn btn-outline-primary">Export Pemakaian</a>
+        <div>
+            <a href="{{route('usage.import', [$month, $year])}}" class="btn btn-outline-primary">Import Pemakaian</a>
+            <a href="{{route('usage.export', [$month, $year])}}" class="btn btn-outline-primary">Export Pemakaian</a>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive py-4">

@@ -49,7 +49,7 @@
             <div class="container">
                 <p class="text-center">
                     <a href="{{route('root.index')}}" class="d-flex align-items-center justify-content-center">
-                        Back to homepage
+                        Kembali
                     </a>
                 </p>
                 <div class="row justify-content-center form-bg-image">
@@ -57,17 +57,17 @@
                         <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             @if (session('status'))
                             <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-                                A reset password link has been sent
+                                Link reset password telah dikirim
                                 <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
                             </div>
                             @endif
                             <div class="text-center text-md-center mb-4 mt-md-0">
-                                <h1 class="mb-0 h3">Forgot Password</h1>
+                                <h1 class="mb-0 h3">Lupa Password</h1>
                             </div>
                             <form action="{{route('password.email')}}" method="post">
                                 @csrf
                                 <div class="mb-4">
-                                    <label for="email">Your Email</label>
+                                    <label for="email">Email</label>
                                     <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="example@gmail.com" value="{{old('email')}}" autofocus>
                                     @error('email')
                                     <div class="invalid-feedback">
@@ -76,7 +76,7 @@
                                     @enderror
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Send Reset Link</button>
+                                    <button type="submit" class="btn btn-primary">Kirim</button>
                                 </div>
                             </form>
                         </div>

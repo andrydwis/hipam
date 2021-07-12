@@ -34,7 +34,6 @@
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
-            @role('admin')
             <li class="nav-item">
                 <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-master-data">
                     <span>
@@ -51,24 +50,31 @@
                     <ul class="flex-column nav">
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('user.index')}}">
-                                <span class="sidebar-text"><i class="fas fa-user"></i> User</span>
+                                <span class="sidebar-icon">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <span class="sidebar-text">Admin</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('client.index')}}">
-                                <span class="sidebar-text"><i class="fas fa-user"></i> Pelanggan</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('usage.index')}}">
-                                <span class="sidebar-text"><i class="fas fa-fill-drip"></i> Pemakaian</span>
+                                <span class="sidebar-icon">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <span class="sidebar-text">Pelanggan</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
-            @endrole
-            @role('admin')
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('usage.index')}}">
+                    <span class="sidebar-icon">
+                        <i class="fas fa-fill-drip"></i>
+                    </span>
+                    <span class="sidebar-text">Pemakaian</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{route('bill.index')}}" class="nav-link">
                     <span class="sidebar-icon">
@@ -77,8 +83,6 @@
                     <span class="sidebar-text">Tagihan Pelanggan</span>
                 </a>
             </li>
-            @endrole
-            @role('admin')
             <li class="nav-item">
                 <a href="{{route('transaction.index')}}" class="nav-link">
                     <span class="sidebar-icon">
@@ -87,14 +91,13 @@
                     <span class="sidebar-text">Transaksi Pembayaran</span>
                 </a>
             </li>
-            @endrole
-            @role('admin')
+            @role('superadmin')
             <li class="nav-item">
                 <a href="{{route('activity-log.index')}}" class="nav-link">
                     <span class="sidebar-icon">
                         <i class="fas fa-clock"></i>
                     </span>
-                    <span class="sidebar-text">Activity Log</span>
+                    <span class="sidebar-text">Log Aktifitas</span>
                 </a>
             </li>
             @endrole

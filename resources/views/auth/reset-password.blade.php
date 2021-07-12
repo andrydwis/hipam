@@ -49,7 +49,7 @@
             <div class="container">
                 <p class="text-center">
                     <a href="{{route('root.index')}}" class="d-flex align-items-center justify-content-center">
-                        Back to homepage
+                        Kembali
                     </a>
                 </p>
                 <div class="row justify-content-center form-bg-image">
@@ -62,7 +62,7 @@
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $request->route('token') }}">
                                 <div class="mb-4">
-                                    <label for="email">Your Email</label>
+                                    <label for="email">Email</label>
                                     <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="example@gmail.com" value="{{$request->email}}" readonly>
                                     @error('email')
                                     <div class="invalid-feedback">
@@ -71,7 +71,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-4">
-                                    <label for="password">Your Password</label>
+                                    <label for="password">Password</label>
                                     <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="password">
                                     @error('password')
                                     <div class="invalid-feedback">
@@ -80,7 +80,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-4">
-                                    <label for="password">Password Confirmation</label>
+                                    <label for="password_confirmation">Konfirmasi Password</label>
                                     <input type="password" name="password_confirmation" class="form-control" placeholder="password confirmation">
                                 </div>
                                 <div class="d-grid">

@@ -18,18 +18,14 @@
                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
                         <a class="dropdown-item d-flex align-items-center" href="{{route('profile.show')}}">
                             <i class="fas fa-user-circle me-1"></i>
-                            Profile
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <i class="fas fa-cog me-1"></i>
-                            Settings
+                            Profil
                         </a>
                         <div role="separator" class="dropdown-divider my-1"></div>
                         <form action="{{route('logout')}}" method="post">
                             @csrf
                             <button type="submit" class="dropdown-item d-flex align-items-center">
                                 <i class="fas fa-sign-out-alt me-1"></i>
-                                Sign Out
+                                Logout
                             </button>
                         </form>
                     </div>

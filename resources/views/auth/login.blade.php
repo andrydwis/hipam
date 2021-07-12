@@ -49,19 +49,19 @@
             <div class="container">
                 <p class="text-center">
                     <a href="{{route('root.index')}}" class="d-flex align-items-center justify-content-center">
-                        Back to homepage
+                        Kembali
                     </a>
                 </p>
                 <div class="row justify-content-center form-bg-image" style="background-image: url({{asset('assets/img/illustrations/signin.svg')}});">
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             <div class="text-center text-md-center mb-4 mt-md-0">
-                                <h1 class="mb-0 h3">Sign in to our platform</h1>
+                                <h1 class="mb-0 h3">Login</h1>
                             </div>
                             <form action="{{route('login')}}" method="post">
                                 @csrf
                                 <div class="mb-4">
-                                    <label for="email">Your Email</label>
+                                    <label for="email">Email</label>
                                     <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="example@gmail.com" value="{{old('email')}}" autofocus>
                                     @error('email')
                                     <div class="invalid-feedback">
@@ -70,7 +70,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-4">
-                                    <label for="password">Your Password</label>
+                                    <label for="password">Password</label>
                                     <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="password">
                                     @error('password')
                                     <div class="invalid-feedback">
@@ -79,18 +79,12 @@
                                     @enderror
                                 </div>
                                 <div class="d-flex justify-content-end align-items-top mb-4">
-                                    <div><a href="{{route('password.request')}}" class="small text-right">Forgot password?</a></div>
+                                    <div><a href="{{route('password.request')}}" class="small text-right">Lupa password?</a></div>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Sign In</button>
+                                    <button type="submit" class="btn btn-primary">Login</button>
                                 </div>
                             </form>
-                            <div class="d-flex justify-content-center align-items-center mt-4">
-                                <span class="fw-normal">
-                                    Not registered?
-                                    <a href="{{route('register')}}" class="fw-bold">Create account</a>
-                                </span>
-                            </div>
                         </div>
                     </div>
                 </div>

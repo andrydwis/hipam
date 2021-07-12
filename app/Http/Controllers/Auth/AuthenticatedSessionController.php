@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
         activity()
             ->causedBy(Auth::user())
-            ->log('Successfully login to system');
+            ->log('Berhasil login ke sistem');
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -50,7 +50,7 @@ class AuthenticatedSessionController extends Controller
     {
         activity()
             ->causedBy(Auth::user())
-            ->log('Successfully logout from system');
+            ->log('Berhasil logout dari sistem');
 
         Auth::guard('web')->logout();
 

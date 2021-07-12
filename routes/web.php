@@ -22,25 +22,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 })->name('root.index');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:superadmin|admin'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
-    Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
-    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/user/create', [UserController::class, 'create'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('user.create');
+    Route::post('/user/create', [UserController::class, 'store'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('user.store');
+    Route::get('/user/{user}', [UserController::class, 'show'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('user.show');
+    Route::delete('/user/{user}', [UserController::class, 'destroy'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('user.destroy');
 
     Route::get('/client', [ClientController::class, 'index'])->name('client.index');
-    Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
-    Route::post('/client/create', [ClientController::class, 'store'])->name('client.store');
-    Route::get('/client/import', [ClientController::class, 'import'])->name('client.import');
-    Route::post('/client/import', [ClientController::class, 'importProcess'])->name('client.import-process');
-    Route::get('/client/export', [ClientController::class, 'export'])->name('client.export');
-    Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
-    Route::patch('/client/{client}/edit', [ClientController::class, 'update'])->name('client.update');
-    Route::delete('/client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+    Route::get('/client/create', [ClientController::class, 'create'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('client.create');
+    Route::post('/client/create', [ClientController::class, 'store'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('client.store');
+    Route::get('/client/import', [ClientController::class, 'import'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('client.import');
+    Route::post('/client/import', [ClientController::class, 'importProcess'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('client.import-process');
+    Route::get('/client/export', [ClientController::class, 'export'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('client.export');
+    Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('client.edit');
+    Route::patch('/client/{client}/edit', [ClientController::class, 'update'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('client.update');
+    Route::delete('/client/{client}', [ClientController::class, 'destroy'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('client.destroy');
 
     Route::get('/usage', [UsageController::class, 'index'])->name('usage.index');
     Route::get('/usage/{client}/{month}/{year}/create', [UsageController::class, 'create'])->name('usage.create');
@@ -48,6 +50,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/usage/{client}/{month}/{year}/edit', [UsageController::class, 'edit'])->name('usage.edit');
     Route::patch('/usage/{client}/{month}/{year}/edit', [UsageController::class, 'update'])->name('usage.update');
     Route::get('/usage/{month}/{year}', [UsageController::class, 'show'])->name('usage.show');
+    Route::get('/usage/{month}/{year}/import', [UsageController::class, 'import'])->name('usage.import');
+    Route::post('/usage/{month}/{year}/import', [UsageController::class, 'importProcess'])->name('usage.import-process');
     Route::get('/usage/{month}/{year}/export', [UsageController::class, 'export'])->name('usage.export');
 
     Route::get('/bill', [BillController::class, 'index'])->name('bill.index');
@@ -60,7 +64,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/transaction/{client}', [TransactionController::class, 'show'])->name('transaction.show');
     Route::get('/transaction/{client}/pay', [TransactionController::class, 'pay'])->name('transaction.pay');
 
-    Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log.index');
+    Route::get('/activity-log', [ActivityLogController::class, 'index'])->withoutMiddleware('role:admin')->name('activity-log.index');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

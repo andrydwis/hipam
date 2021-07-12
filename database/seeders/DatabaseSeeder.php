@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Role::create(['name' => 'superadmin']);
         Role::create(['name' => 'admin']);
-        Role::create(['name' => 'client']);
 
         $admin = User::create([
             'name' => 'admin',
@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => Carbon::now()
         ]);
 
-        $admin->assignRole('admin');
+        $admin->assignRole('superadmin');
     }
 }

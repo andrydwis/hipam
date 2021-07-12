@@ -54,7 +54,7 @@ class NewPasswordController extends Controller
 
                 activity()
                     ->causedBy($user)
-                    ->log('Successfully reset password');
+                    ->log('Berhasil reset password');
             }
         );
 

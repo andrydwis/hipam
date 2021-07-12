@@ -17,6 +17,7 @@
 </div>
 @include('layouts.alert')
 <div class="card">
+    @role('superadmin')
     <div class="card-header d-flex justify-content-between">
         <a href="{{route('client.create')}}" class="btn btn-primary">Tambah Pelanggan</a>
         <div>
@@ -24,6 +25,7 @@
             <a href="{{route('client.export')}}" class="btn btn-outline-primary">Export Pelanggan</a>
         </div>
     </div>
+    @endrole
     <div class="card-body">
         <div class="table-responsive py-4">
             <table class="table table-hover" id="datatable">
@@ -46,12 +48,14 @@
                         <td>{{$client->rt}}</td>
                         <td>{{$client->rw}}</td>
                         <td class="d-flex gap-1">
+                            @role('superadmin')
                             <a href="{{route('client.edit', [$client])}}" class="btn btn-primary">Edit</a>
                             <form action="{{route('client.destroy', [$client])}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-outline-primary">Hapus</button>
                             </form>
+                            @endrole
                         </td>
                     </tr>
                     @endforeach
