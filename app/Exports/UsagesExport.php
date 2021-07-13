@@ -25,7 +25,7 @@ class UsagesExport implements FromView, ShouldAutoSize
             'year' => $year,
             'clients' => Client::with(['usages' => function ($query) use ($month, $year) {
                 $query->where('month', $month)->where('year', $year);
-            }])->get()
+            }])->orderBy('client_id', 'asc')->get()
         ]);
     }
 }

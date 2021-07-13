@@ -12,7 +12,7 @@ class ClientsExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         return view('client.export', [
-            'clients' => Client::orderBy('name', 'asc')->get()
+            'clients' => Client::orderBy('client_id', 'asc')->get()
         ]);
     }
 }

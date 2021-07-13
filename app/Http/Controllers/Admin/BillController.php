@@ -63,7 +63,9 @@ class BillController extends Controller
         $data = [
             'month' => $month,
             'year' => $year,
-            'usages' => Usage::where('month', $month)->where('year', $year)->with(['client', 'bill'])->get()
+            'usages' => Usage::where('month', $month)->where('year', $year)->with(['client', 'bill'])->get()->sortBy(function ($query) {
+                return $query->client->client_id;
+            })
         ];
 
         return view('bill.show', $data);
