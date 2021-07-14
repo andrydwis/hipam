@@ -108,6 +108,7 @@ class UsageController extends Controller
         //
         $data = [
             'client' => $client,
+            'usage' => Usage::where('client_id', $client->id)->where('month', $month)->where('year', $year)->first(),
             'month' => $month,
             'year' => $year
         ];

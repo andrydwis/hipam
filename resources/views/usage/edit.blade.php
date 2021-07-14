@@ -64,14 +64,14 @@
             </div>
             <div class="mb-4">
                 <label for="meter_kubik">Meter Kubik</label>
-                <input type="number" step=".01" name="meter_kubik" class="form-control @error('meter_kubik') is-invalid @enderror" placeholder="jumlah pemakaian" value="{{old('meter_kubik') ?? $client->usages->first()->meter_cubic}}">
+                <input type="number" step=".01" name="meter_kubik" class="form-control @error('meter_kubik') is-invalid @enderror" placeholder="jumlah pemakaian" value="{{old('meter_kubik') ?? $usage->meter_cubic}}">
                 @error('meter_kubik')
                 <div class="invalid-feedback">
                     {{$message}}
                 </div>
                 @enderror
             </div>
-            <input type="hidden" name="usage_id" value="{{$client->usages->first()->id}}">
+            <input type="hidden" name="usage_id" value="{{$usage->id}}">
             <div class="mb-4">
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <button type="reset" class="btn btn-outline-primary">Reset</button>

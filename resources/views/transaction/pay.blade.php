@@ -67,7 +67,12 @@
                     </div>
                 </div>
                 <div class="d-grid mt-5">
-                    <button class="btn btn-primary">Bayar</button>
+                    <form action="{{route('transaction.pay-process', [$client])}}" method="post">
+                        @csrf
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Bayar</button>
+                        </div>
+                    </form>
                 </div>
                 @else
                 <div class="d-grid mt-5">

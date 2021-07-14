@@ -40,17 +40,19 @@
                         <td>{{$usage->month}}</td>
                         <td>{{$usage->year}}</td>
                         <td>{{$usage->meter_cubic}}</td>
-                        <td>{{$usage->bill->cost}}</td>
-                        <td>{{$usage->bill->subscription}}</td>
+                        <td>{{$usage->bill->cost ?? '-'}}</td>
+                        <td>{{$usage->bill->subscription ?? '-'}}</td>
                         <td>{{$usage->bill->fine ?? '-'}}</td>
-                        <td>{{$usage->bill->total}}</td>
+                        <td>{{$usage->bill->total ?? '-'}}</td>
                         <td>
+                            @if($usage->bill)
                             @if($usage->bill->status == 'unpaid')
                             <span class="badge bg-primary">belum membayar</span>
                             @elseif($usage->bill->status == 'late')
                             <span class="badge bg-danger">telat membayar</span>
                             @elseif($usage->bill->status == 'paid')
                             <span class="badge bg-success">sudah membayar</span>
+                            @endif
                             @endif
                         </td>
                     </tr>

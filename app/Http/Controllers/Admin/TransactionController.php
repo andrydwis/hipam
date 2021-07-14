@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use App\Models\Client;
 use App\Models\Usage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -41,5 +42,23 @@ class TransactionController extends Controller
         ];
 
         return view('transaction.pay', $data);
+    }
+
+    public function payProcess(Client $client)
+    {
+        $usages = Usage::where('client_id', $client->id)->get()->pluck('id');
+        $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
+
+        // $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['status' => 'paid']);
+
+        $data = [
+            'client' => $client,
+            'bills' => $bills,
+            'sumTotal' => 0,
+            'month' => Carbon::now()->isoFormat('MMMM'),
+            'year' => Carbon::now()->isoFormat('Y'),
+        ];
+
+        return view('transaction.print', $data);
     }
 }

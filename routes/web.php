@@ -63,6 +63,7 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin'])->group(function
     Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
     Route::get('/transaction/{client}', [TransactionController::class, 'show'])->name('transaction.show');
     Route::get('/transaction/{client}/pay', [TransactionController::class, 'pay'])->name('transaction.pay');
+    Route::post('/transaction/{client}/pay-process', [TransactionController::class, 'payProcess'])->name('transaction.pay-process');
 
     Route::get('/activity-log', [ActivityLogController::class, 'index'])->withoutMiddleware('role:admin')->name('activity-log.index');
 });
@@ -73,5 +74,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/reset-photo', [ProfileController::class, 'resetPhoto'])->name('profile.reset-photo');
 });
+
+Route::view('/test', 'transaction.print');
 
 require __DIR__ . '/auth.php';
