@@ -25,7 +25,7 @@
                         <th>No</th>
                         <th>Bulan</th>
                         <th>Tahun</th>
-                        <th>Meter Kubik</th>
+                        <th>Pemakaian</th>
                         <th>Tarif</th>
                         <th>Abonemen</th>
                         <th>Denda</th>
@@ -39,7 +39,7 @@
                         <td>{{$loop->index+1}}</td>
                         <td>{{$usage->month}}</td>
                         <td>{{$usage->year}}</td>
-                        <td>{{$usage->meter_cubic}}</td>
+                        <td>{{$usage->bill->meter_cubic}}</td>
                         <td>{{$usage->bill->cost ?? '-'}}</td>
                         <td>{{$usage->bill->subscription ?? '-'}}</td>
                         <td>{{$usage->bill->fine ?? '-'}}</td>

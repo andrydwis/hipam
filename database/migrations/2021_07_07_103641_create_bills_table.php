@@ -16,6 +16,7 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->foreignId('usage_id')->constrained('usages')->onDelete('cascade');
+            $table->double('meter_cubic');
             $table->double('subscription');
             $table->double('cost');
             $table->double('fine')->nullable();

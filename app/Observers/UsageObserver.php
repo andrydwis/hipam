@@ -47,6 +47,7 @@ class UsageObserver
 
             $bill = new Bill();
             $bill->usage_id = $usage->id;
+            $bill->meter = $meters;
             $bill->subscription = config('custom.subscription');
             $bill->cost = $meters * config('custom.cost');
             $bill->total = $bill->subscription + $bill->cost;
@@ -95,6 +96,7 @@ class UsageObserver
 
             $bill = Bill::where('usage_id', $usage->id)->first();
             $bill->usage_id = $usage->id;
+            $bill->meter = $meters;
             $bill->subscription = config('custom.subscription');
             $bill->cost = $meters * config('custom.cost');
             $bill->total = $bill->subscription + $bill->cost + ($bill->fine ?? 0);

@@ -11,6 +11,7 @@ class Bill extends Model
 
     protected $fillable = [
         'usage_id',
+        'meter_cubic',
         'subscription',
         'cost',
         'fine',

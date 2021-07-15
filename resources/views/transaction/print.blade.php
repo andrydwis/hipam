@@ -100,7 +100,7 @@
                         <p>: {{$client->rt}}</p>
                         <p>: {{$client->rw}}</p>
                         <p>: {{$month}}/{{$year}}</p>
-                        <p>: {{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}} m<sup>3</sup></p>
+                        <p>: {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></p>
                     </div>
                 </div>
                 <div class="text-center"><b>Pastikan Meter Air Anda Dapat Dibaca Secara Rutin Oleh Petugas</b></div>

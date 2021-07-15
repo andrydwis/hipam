@@ -49,7 +49,7 @@ class TransactionController extends Controller
         $usages = Usage::where('client_id', $client->id)->get()->pluck('id');
         $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
 
-        // $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['status' => 'paid']);
+        $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['status' => 'paid']);
 
         $data = [
             'client' => $client,
