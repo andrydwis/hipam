@@ -108,7 +108,7 @@ class BillController extends Controller
     public function showAll()
     {
         $data = [
-            'bills' => Bill::orderBy('created_at', 'desc')->with('usage.client')
+            'bills' => Bill::orderBy('created_at', 'desc')->with('usage.client')->get()
         ];
 
         return view('bill.all', $data);
