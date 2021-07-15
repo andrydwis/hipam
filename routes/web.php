@@ -45,6 +45,7 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin'])->group(function
     Route::delete('/client/{client}', [ClientController::class, 'destroy'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('client.destroy');
 
     Route::get('/usage', [UsageController::class, 'index'])->name('usage.index');
+    Route::get('/usage/all', [UsageController::class, 'showAll'])->name('usage.show-all');
     Route::get('/usage/{client}/{month}/{year}/create', [UsageController::class, 'create'])->name('usage.create');
     Route::post('/usage/{client}/{month}/{year}/create', [UsageController::class, 'store'])->name('usage.store');
     Route::get('/usage/{client}/{month}/{year}/edit', [UsageController::class, 'edit'])->name('usage.edit');
@@ -55,6 +56,7 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin'])->group(function
     Route::get('/usage/{month}/{year}/export', [UsageController::class, 'export'])->name('usage.export');
 
     Route::get('/bill', [BillController::class, 'index'])->name('bill.index');
+    Route::get('/bill/all', [BillController::class, 'showAll'])->name('bill.show-all');
     Route::patch('/bill/{bill}/accept-late', [BillController::class, 'acceptLate'])->name('bill.accept-late');
     Route::patch('/bill/{bill}/decline-late', [BillController::class, 'declineLate'])->name('bill.decline-late');
     Route::get('/bill/{month}/{year}', [BillController::class, 'show'])->name('bill.show');

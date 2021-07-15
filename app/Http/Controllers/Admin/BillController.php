@@ -105,6 +105,15 @@ class BillController extends Controller
         //
     }
 
+    public function showAll()
+    {
+        $data = [
+            'bills' => Bill::orderBy('created_at', 'desc')->with('usage.client')
+        ];
+
+        return view('bill.all', $data);
+    }
+
     public function acceptLate(Request $request, Bill $bill)
     {
         $bill->fine = config('custom.fine');

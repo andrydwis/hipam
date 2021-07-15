@@ -40,4 +40,15 @@
     @endif
     @endforeach
 </div>
+<div class="row">
+    <div class="col">
+        <a href="{{route('bill.show-all')}}">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <p class="card-text text-center">Lihat Semua Data</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 @endsection

@@ -155,6 +155,15 @@ class UsageController extends Controller
         //
     }
 
+    public function showAll()
+    {
+        $data = [
+            'usages' => Usage::orderBy('created_at', 'desc')->with('client')
+        ];
+
+        return view('usage.all', $data);
+    }
+
     public function import($month, $year)
     {
         //
