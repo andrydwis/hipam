@@ -39,7 +39,7 @@
                         <td>{{$loop->index+1}}</td>
                         <td>{{$usage->month}}</td>
                         <td>{{$usage->year}}</td>
-                        <td>{{$usage->bill->meter_cubic}}</td>
+                        <td>{{$usage->bill->meter_cubic ?? '-'}}</td>
                         <td>{{$usage->bill->cost ?? '-'}}</td>
                         <td>{{$usage->bill->subscription ?? '-'}}</td>
                         <td>{{$usage->bill->fine ?? '-'}}</td>
