@@ -48,14 +48,12 @@
                         <td>{{$bill->fine ?? '-'}}</td>
                         <td>{{$bill->total ?? '-'}}</td>
                         <td>
-                            @if($bill->usage->bill)
-                            @if($bill->usage->bill->status == 'unpaid')
+                            @if($bill->status == 'unpaid')
                             <span class="badge bg-primary">belum membayar</span>
-                            @elseif($usage->bill->status == 'late')
+                            @elseif($bill->status == 'late')
                             <span class="badge bg-danger">telat membayar</span>
-                            @elseif($usage->bill->status == 'paid')
+                            @elseif($bill->status == 'paid')
                             <span class="badge bg-success">sudah membayar</span>
-                            @endif
                             @endif
                         </td>
                         <td>{{$bill->usage->month}}</td>
