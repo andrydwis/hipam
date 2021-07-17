@@ -20,13 +20,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Primary Meta Tags -->
-    <title>Laravel Volt Template Starter</title>
+    <title>HIPPAM: Desa Klampok</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="title" content="Laravel Volt Template Starter">
+    <meta name="title" content="HIPPAM: Desa Klampok">
     <meta name="author" content="Andry">
-    <meta name="description" content="Laravel Volt Template Starter">
-    <meta name="keywords" content="laravel, bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, themesberg, themesberg dashboard, themesberg admin dashboard" />
-    <link rel="canonical" href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard">
+    <meta name="description" content="HIPPAM: Desa Klampok">
+    <meta name="keywords" content="HIPPAM: Desa Klampok" />
+    <link rel="canonical" href="HIPPAM: Desa Klampok">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="120x120" href="{{asset('assets/img/favicon/apple-touch-icon.png')}}">
