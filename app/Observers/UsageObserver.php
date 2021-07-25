@@ -53,6 +53,17 @@ class UsageObserver
             $bill->total = $bill->subscription + $bill->cost;
             $bill->status = 'unpaid';
             $bill->save();
+        } else {
+            $meters = $usage->meter_cubic;
+
+            $bill = new Bill();
+            $bill->usage_id = $usage->id;
+            $bill->meter_cubic = $meters;
+            $bill->subscription = config('custom.subscription');
+            $bill->cost = $meters * config('custom.cost');
+            $bill->total = $bill->subscription + $bill->cost;;
+            $bill->status = 'unpaid';
+            $bill->save();
         }
     }
 
@@ -100,6 +111,17 @@ class UsageObserver
             $bill->subscription = config('custom.subscription');
             $bill->cost = $meters * config('custom.cost');
             $bill->total = $bill->subscription + $bill->cost + ($bill->fine ?? 0);
+            $bill->save();
+        } else {
+            $meters = $usage->meter_cubic;
+
+            $bill = Bill::where('usage_id', $usage->id)->first();
+            $bill->usage_id = $usage->id;
+            $bill->meter_cubic = $meters;
+            $bill->subscription = config('custom.subscription');
+            $bill->cost = $meters * config('custom.cost');
+            $bill->total = $bill->subscription + $bill->cost;;
+            $bill->status = 'unpaid';
             $bill->save();
         }
     }

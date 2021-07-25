@@ -29,7 +29,6 @@
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
                     <tr>
-                        <th>No</th>
                         <th>Nomor Pelanggan</th>
                         <th>Nama</th>
                         <th>Meter Kubik</th>
@@ -39,7 +38,6 @@
                 <tbody>
                     @foreach($clients as $client)
                     <tr>
-                        <td>{{$loop->index+1}}</td>
                         <td>{{$client->client_id}}</td>
                         <td>{{$client->name}}</td>
                         <td>{{$client->usages->first()->meter_cubic ?? 'belum diisi'}}</td>

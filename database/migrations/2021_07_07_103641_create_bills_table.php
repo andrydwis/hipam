@@ -22,6 +22,7 @@ class CreateBillsTable extends Migration
             $table->double('fine')->nullable();
             $table->double('total');
             $table->enum('status', ['unpaid', 'late', 'paid']);
+            $table->dateTime('paid_at')->nullable();
             $table->timestamps();
         });
     }

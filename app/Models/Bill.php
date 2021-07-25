@@ -16,7 +16,12 @@ class Bill extends Model
         'cost',
         'fine',
         'total',
-        'status'
+        'status',
+        'paid_at'
+    ];
+
+    protected $casts = [
+        'paid_at' => 'datetime',
     ];
 
     public function usage()

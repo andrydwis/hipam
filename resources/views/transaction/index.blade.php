@@ -18,28 +18,38 @@
 @include('layouts.alert')
 <div class="card">
     <div class="card-body">
+        <form action="" method="get" class="d-flex flex-row">
+            <input type="text" class="form-control me-1" name="keyword" placeholder="Masukkan nomor atau nama pelanggan">
+            <button type="submit" class="btn btn-primary">Cari</button>
+        </form>
         <div class="table-responsive py-4">
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
                     <tr>
-                        <th>No</th>
                         <th>No Pelanggan</th>
                         <th>Nama</th>
                         <th>RT</th>
                         <th>RW</th>
+                        <th>Pemakaian Terakhir</th>
+                        <th>Tagihan Terakhir</th>
                         <th>Menu</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($clients as $client)
                     <tr>
-                        <td>{{$loop->index+1}}</td>
                         <td>{{$client->client_id}}</td>
                         <td>{{$client->name}}</td>
                         <td>{{$client->rt}}</td>
                         <td>{{$client->rw}}</td>
+                        <td>{{$client->usages->last()->bill->meter_cubic ?? '-'}}</td>
+                        <td>Rp. {{number_format($client->usages->last()->bill->total,2,',','.') ?? '-'}}</td>
                         <td class="d-flex gap-1">
-                            <a href="{{route('transaction.pay', [$client])}}" class="btn btn-primary">Bayar</a>
+                            <!-- <a href="{{route('transaction.pay', [$client])}}" class="btn btn-primary">Bayar</a> -->
+                            <form action="{{route('transaction.pay-process', [$client])}}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Bayar</button>
+                            </form>
                             <a href="{{route('transaction.show', [$client])}}" class="btn btn-outline-primary">Detail</a>
                         </td>
                     </tr>

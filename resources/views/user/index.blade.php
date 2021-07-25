@@ -27,7 +27,6 @@
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
                     <tr>
-                        <th>No</th>
                         <th>Nama</th>
                         <th>Role</th>
                         <th>Email</th>
@@ -37,7 +36,6 @@
                 <tbody>
                     @foreach($users as $user)
                     <tr>
-                        <td>{{$loop->index+1}}</td>
                         <td>{{$user->name}}</td>
                         <td><span class="badge bg-primary">{{$user->getRoleNames()->first()}}</span></td>
                         <td>{{$user->email}}</td>

@@ -11,11 +11,17 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = [
-            'clients' => Client::get()
-        ];
+        if ($request->keyword) {
+            $data = [
+                'clients' => Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->with('usages.bill')->get()
+            ];
+        }else{
+            $data = [
+                'clients' => []
+            ];
+        }
 
         return view('transaction.index', $data);
     }
@@ -49,7 +55,12 @@ class TransactionController extends Controller
         $usages = Usage::where('client_id', $client->id)->get()->pluck('id');
         $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
 
-        $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['status' => 'paid']);
+        //if no bills then return back
+        if ($bills->isEmpty()) {
+            return back()->with('error', 'Semua tagihan pelanggan sudah dibayar');
+        }
+
+        $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['status' => 'paid', 'paid_at' => Carbon::now()]);
 
         $data = [
             'client' => $client,

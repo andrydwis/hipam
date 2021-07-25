@@ -26,7 +26,6 @@
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
                     <tr>
-                        <th>No</th>
                         <th>Nomor Pelanggan</th>
                         <th>Nama</th>
                         <th>Pemakaian</th>
@@ -35,13 +34,13 @@
                         <th>Denda</th>
                         <th>Total</th>
                         <th>Status</th>
+                        <th>Dibayar Pada</th>
                         <th>Menu</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($usages as $usage)
                     <tr>
-                        <td>{{$loop->index+1}}</td>
                         <td>{{$usage->client->client_id}}</td>
                         <td>{{$usage->client->name}}</td>
                         <td>{{$usage->bill->meter_cubic ?? '-'}}</td>
@@ -58,6 +57,13 @@
                             @elseif($usage->bill->status == 'paid')
                             <span class="badge bg-success">sudah membayar</span>
                             @endif
+                            @endif
+                        </td>
+                        <td>
+                            @if($usage->bill->paid_at)
+                            {{$usage->bill->paid_at->isoFormat('dddd, DD-MM-YYYY HH:MM')}}
+                            @else
+                            {{'-'}}
                             @endif
                         </td>
                         <td>
