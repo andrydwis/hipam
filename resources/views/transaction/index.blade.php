@@ -43,7 +43,11 @@
                         <td>{{$client->rt}}</td>
                         <td>{{$client->rw}}</td>
                         <td>{{$client->usages->last()->bill->meter_cubic ?? '-'}}</td>
-                        <td>Rp. {{number_format($client->usages->last()->bill->total,2,',','.') ?? '-'}}</td>
+                        @if($client->usages->last())
+                        <td>Rp. {{number_format($client->usages->last()->bill->total,2,',','.')}}</td>
+                        @else
+                        <td>{{'-'}}</td>
+                        @endif
                         <td class="d-flex gap-1">
                             <!-- <a href="{{route('transaction.pay', [$client])}}" class="btn btn-primary">Bayar</a> -->
                             <form action="{{route('transaction.pay-process', [$client])}}" method="post">
