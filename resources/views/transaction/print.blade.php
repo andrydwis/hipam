@@ -56,56 +56,44 @@
     <div class="container-fluid mt-5">
         <div class="card">
             <div class="card-body">
-                <div class="text-center"><b>Bukti Pembayaran HIPPAM : Swadaya Desa Klampok</b></div>
-                <div class="row mx-5 my-5">
-                    <div class="col-3">
-                        <p>NO PELANGGAN</p>
-                        <p>HARGA AIR</p>
-                        <p>DENDA I</p>
-                        <p>DENDA II</p>
-                        <p>DENDA III</p>
-                        <p>TOTAL BAYAR</p>
-                    </div>
-                    <div class="col-3">
-                        <p>: {{$client->client_id}}</p>
-                        <p>: RP. {{number_format($bills->where('status', 'unpaid')->first()->total,2,',','.')}}</p>
-                        @if($bills->where('status', 'late')->first())
-                        <p>: RP. {{number_format($bills->where('status', 'late')->first()->total,2,',','.')}}</p>
-                        @else
-                        <p>: RP. 0</p>
-                        @endif
-                        @if($bills->where('status', 'late')->skip(1)->first())
-                        <p>: RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->total,2,',','.')}}</p>
-                        @else
-                        <p>: RP. 0</p>
-                        @endif
-                        @if($bills->where('status', 'late')->skip(2)->first())
-                        <p>: RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->total,2,',','.')}}</p>
-                        @else
-                        <p>: RP. 0</p>
-                        @endif
-                        @php
-                        $sumTotal = $bills->sum('total');
-                        @endphp
-                        <p>: RP. {{number_format($sumTotal,2,',','.')}}</p>
-                    </div>
-                    <div class="col-3">
-                        <p>NAMA</p>
-                        <p>RT</p>
-                        <p>RW</p>
-                        <p>BL/TH</p>
-                        <p>PEMAKAIAN</p>
-                    </div>
-                    <div class="col-3">
-                        <p>: {{$client->name}}</p>
-                        <p>: {{$client->rt}}</p>
-                        <p>: {{$client->rw}}</p>
-                        <p>: {{$month}}/{{$year}}</p>
-                        <p>: {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></p>
-                    </div>
-                </div>
-                <div class="text-center"><b>Pastikan Meter Air Anda Dapat Dibaca Secara Rutin Oleh Petugas</b></div>
-                <div class="text-center"><b>HIPPAM : SWADAYA DESA KLAMPOK MENYATAKAN STRUK INI SEBAGAI BUKTI PEMBAYARAN YANG SAH. MOHON DI SIMPAN (TERIMA KASIH)</b></div>
+                <div class="text-center"><b>HIPAM SWADAYA RW 2</b></div>
+                <div class="text-center"><b>Bukti Pembayaran Iuran Air</b></div>
+                <div class="text-center"><b>Bulan/Tahun : {{$month}}/{{$year}}</b></div>
+                <br>
+                <div class="text-start"><b>DATA PELANGGAN</b></div>
+                <div class="text-start">No/Nama/RT : {{$client->client_id}}/{{$client->name}}/RT.{{$client->rt}}</div>
+                <div class="text-start">Penggunaan : {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></div>
+                <br>
+                <div class="text-start"><b>RINCIAN</b></div>
+                <div class="text-start">Tagihan : ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
+                <div class="text-start">Abonemen : RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
+                <div class="text-start">Tunggakan : {{$bills->where('status', 'late')->count()}} kali</div>
+                <div class="text-start">Denda : </div>
+                @if($bills->where('status', 'late')->first())
+                <div class="text-start">I : RP. {{number_format($bills->where('status', 'late')->first()->total,2,',','.')}}</div>
+                @else
+                <div class="text-start">I : Tidak ada</div>
+                @endif
+                @if($bills->where('status', 'late')->skip(1)->first())
+                <div class="text-start">II : RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->total,2,',','.')}}</div>
+                @else
+                <div class="text-start">II : Tidak ada</div>
+                @endif
+                @if($bills->where('status', 'late')->skip(2)->first())
+                <div class="text-start">III : RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->total,2,',','.')}}</div>
+                @else
+                <div class="text-start">III : Tidak ada</div>
+                @endif
+                <br>
+                @php
+                $sumTotal = $bills->sum('total');
+                @endphp
+                <div class="text-start"><b>TOTAL : RP. {{number_format($sumTotal,2,',','.')}}</b></div>
+                <br>
+                <div class="text-end">Petugas</div>
+                <br>
+                <br>
+                <div class="text-end">{{auth()->user()->name}}</div>
             </div>
         </div>
         <a href="{{route('transaction.index')}}" class="btn btn-primary mt-5 no-print">Kembali</a>
