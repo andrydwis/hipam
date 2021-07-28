@@ -58,7 +58,7 @@
             <div class="card-body">
                 <div class="text-center"><b>HIPAM SWADAYA RW 2</b></div>
                 <div class="text-center"><b>Bukti Pembayaran Iuran Air</b></div>
-                <div class="text-center"><b>Bulan/Tahun : {{$month}}/{{$year}}</b></div>
+                <div class="text-center"><b>{{$day}} {{$month}} {{$year}}</b></div>
                 <br>
                 <div class="text-start"><b>DATA PELANGGAN</b></div>
                 <div class="text-start">No/Nama/RT : {{$client->client_id}}/{{$client->name}}/RT.{{$client->rt}}</div>
@@ -70,19 +70,13 @@
                 <div class="text-start">Tunggakan : {{$bills->where('status', 'late')->count()}} kali</div>
                 <div class="text-start">Denda : </div>
                 @if($bills->where('status', 'late')->first())
-                <div class="text-start">I : RP. {{number_format($bills->where('status', 'late')->first()->total,2,',','.')}}</div>
-                @else
-                <div class="text-start">I : Tidak ada</div>
+                <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
                 @endif
                 @if($bills->where('status', 'late')->skip(1)->first())
-                <div class="text-start">II : RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->total,2,',','.')}}</div>
-                @else
-                <div class="text-start">II : Tidak ada</div>
+                <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
                 @endif
                 @if($bills->where('status', 'late')->skip(2)->first())
-                <div class="text-start">III : RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->total,2,',','.')}}</div>
-                @else
-                <div class="text-start">III : Tidak ada</div>
+                <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
                 @endif
                 <br>
                 @php

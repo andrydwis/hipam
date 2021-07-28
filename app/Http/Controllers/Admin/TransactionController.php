@@ -60,12 +60,13 @@ class TransactionController extends Controller
             return back()->with('error', 'Semua tagihan pelanggan sudah dibayar');
         }
 
-        $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['status' => 'paid', 'paid_at' => Carbon::now()]);
+        // $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['status' => 'paid', 'paid_at' => Carbon::now()]);
 
         $data = [
             'client' => $client,
             'bills' => $bills,
             'sumTotal' => 0,
+            'day' => Carbon::now()->isoFormat('D'),
             'month' => Carbon::now()->isoFormat('MMMM'),
             'year' => Carbon::now()->isoFormat('Y'),
         ];
