@@ -17,29 +17,29 @@ class UsageObserver
     {
         //
         if ($usage->month == 'Januari') {
-            $last = Usage::where('month', 'Desember')->where('year', $usage->year - 1)->first();
+            $last = Usage::where('month', 'Desember')->where('year', $usage->year - 1)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Februari') {
-            $last = Usage::where('month', 'Januari')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Januari')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Maret') {
-            $last = Usage::where('month', 'Februari')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Februari')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'April') {
-            $last = Usage::where('month', 'Maret')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Maret')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Mei') {
-            $last = Usage::where('month', 'April')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'April')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Juni') {
-            $last = Usage::where('month', 'Mei')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Mei')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Juli') {
-            $last = Usage::where('month', 'Juni')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Juni')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Agustus') {
-            $last = Usage::where('month', 'Juli')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Juli')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'September') {
-            $last = Usage::where('month', 'Agustus')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Agustus')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Oktober') {
-            $last = Usage::where('month', 'September')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'September')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'November') {
-            $last = Usage::where('month', 'Oktober')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Oktober')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Desember') {
-            $last = Usage::where('month', 'November')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'November')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         }
 
         if ($last) {
@@ -77,29 +77,29 @@ class UsageObserver
     {
         //
         if ($usage->month == 'Januari') {
-            $last = Usage::where('month', 'Desember')->where('year', $usage->year - 1)->first();
+            $last = Usage::where('month', 'Desember')->where('year', $usage->year - 1)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Februari') {
-            $last = Usage::where('month', 'Januari')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Januari')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Maret') {
-            $last = Usage::where('month', 'Februari')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Februari')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'April') {
-            $last = Usage::where('month', 'Maret')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Maret')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Mei') {
-            $last = Usage::where('month', 'April')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'April')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Juni') {
-            $last = Usage::where('month', 'Mei')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Mei')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Juli') {
-            $last = Usage::where('month', 'Juni')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Juni')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Agustus') {
-            $last = Usage::where('month', 'Juli')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Juli')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'September') {
-            $last = Usage::where('month', 'Agustus')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Agustus')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Oktober') {
-            $last = Usage::where('month', 'September')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'September')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'November') {
-            $last = Usage::where('month', 'Oktober')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'Oktober')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         } elseif ($usage->month == 'Desember') {
-            $last = Usage::where('month', 'November')->where('year', $usage->year)->first();
+            $last = Usage::where('month', 'November')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         }
 
         if ($last) {

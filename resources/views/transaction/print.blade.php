@@ -68,8 +68,8 @@
                 <div class="text-start">Tagihan : ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
                 <div class="text-start">Abonemen : RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
                 <div class="text-start">Tunggakan : {{$bills->where('status', 'late')->count()}} kali</div>
-                <div class="text-start">Denda : </div>
                 @if($bills->where('status', 'late')->first())
+                <div class="text-start">Denda : </div>
                 <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
                 @endif
                 @if($bills->where('status', 'late')->skip(1)->first())
