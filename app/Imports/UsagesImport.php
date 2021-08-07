@@ -26,12 +26,14 @@ class UsagesImport implements ToModel, WithValidation, WithHeadingRow
     {
         $client = Client::where('client_id', $row['nomor_pelanggan'])->first();
 
-        return new Usage([
-            'client_id' => $client->id,
-            'meter_cubic' => $row['meter_kubik'],
-            'month' => $this->month,
-            'year' => $this->year
-        ]);
+        if ($client) {
+            return new Usage([
+                'client_id' => $client->id,
+                'meter_cubic' => $row['meter_kubik'],
+                'month' => $this->month,
+                'year' => $this->year
+            ]);
+        }
     }
 
     public function rules(): array

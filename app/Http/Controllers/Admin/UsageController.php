@@ -192,7 +192,7 @@ class UsageController extends Controller
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();
 
-            return redirect()->route('usage.import')->with('failures', $failures);
+            return redirect()->route('usage.import', [$month, $year])->with('failures', $failures);
         }
 
         return redirect()->route('usage.index');
