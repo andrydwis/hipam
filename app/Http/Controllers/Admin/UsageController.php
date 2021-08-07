@@ -195,7 +195,7 @@ class UsageController extends Controller
             return redirect()->route('usage.import', [$month, $year])->with('failures', $failures);
         }
 
-        return redirect()->route('usage.index');
+        return redirect()->route('usage.import', [$month, $year]);
     }
 
     public function export($month, $year)
