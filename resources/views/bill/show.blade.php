@@ -61,7 +61,7 @@
                         </td>
                         <td>
                             @if($usage->bill->paid_at)
-                            {{$usage->bill->paid_at->isoFormat('dddd, DD-MM-YYYY HH:MM')}}
+                            {{$usage->bill->paid_at->isoFormat('dddd, DD-MM-YYYY hh:mm')}}
                             @else
                             {{'-'}}
                             @endif
