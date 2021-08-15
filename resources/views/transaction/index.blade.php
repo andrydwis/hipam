@@ -61,6 +61,9 @@
                 </tbody>
             </table>
         </div>
+        @if($clients)
+        {{$clients->appends(request()->query())->links('vendor.pagination.bootstrap-4')}}
+        @endif
     </div>
 </div>
 @endsection
@@ -79,7 +82,8 @@
                 "url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Indonesian.json"
             },
             "searching": false,
-            "lengthChange": false
+            "paging": false,
+            "lengthChange": false,
         });
     });
 </script>

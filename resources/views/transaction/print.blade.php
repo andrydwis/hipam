@@ -90,7 +90,7 @@
                 <div class="text-end">{{auth()->user()->name}}</div>
             </div>
         </div>
-        <a href="{{route('transaction.index')}}" class="btn btn-primary mt-5 no-print">Kembali</a>
+        <a href="{{session('previousUrl')}}" class="btn btn-primary mt-5 no-print">Kembali</a>
         <button onclick="window.print()" class="btn btn-primary mt-5 no-print">Print</button>
     </div>
     <!-- Core -->

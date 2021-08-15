@@ -100,7 +100,7 @@ class UsageController extends Controller
                 'year' => $year,
                 'clients' => Client::with(['usages' => function ($query) use ($month, $year) {
                     $query->where('month', $month)->where('year', $year)->orderBy('client_id', 'asc');
-                }])->paginate(10)
+                }])->paginate(2)
             ];
         }
         
@@ -123,6 +123,8 @@ class UsageController extends Controller
             'month' => $month,
             'year' => $year
         ];
+
+        session()->flash('previousUrl', url()->previous());
 
         return view('usage.edit', $data);
     }
@@ -152,7 +154,8 @@ class UsageController extends Controller
 
         session()->flash('success', 'Berhasil mengedit pemakaian pelanggan');
 
-        return redirect()->route('usage.show', [$month, $year]);
+        // return redirect()->route('usage.show', [$month, $year]);
+        return redirect(session()->get('previousUrl'));
     }
 
     /**

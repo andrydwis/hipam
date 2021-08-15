@@ -15,7 +15,7 @@ class TransactionController extends Controller
     {
         if ($request->keyword) {
             $data = [
-                'clients' => Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->with('usages.bill')->get()
+                'clients' => Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->with('usages.bill')->paginate(1)
             ];
         }else{
             $data = [
@@ -70,6 +70,8 @@ class TransactionController extends Controller
             'month' => Carbon::now()->isoFormat('MMMM'),
             'year' => Carbon::now()->isoFormat('Y'),
         ];
+
+        session()->flash('previousUrl', url()->previous());
 
         return view('transaction.print', $data);
     }
