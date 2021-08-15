@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\BillsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
+use App\Models\Client;
 use App\Models\Usage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -57,16 +58,22 @@ class BillController extends Controller
      * @param  \App\Models\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function show($month, $year)
+    public function show(Request $request, $month, $year)
     {
-        //
-        $data = [
-            'month' => $month,
-            'year' => $year,
-            'usages' => Usage::where('month', $month)->where('year', $year)->with(['client', 'bill'])->get()->sortBy(function ($query) {
-                return $query->client->client_id;
-            })
-        ];
+        if ($request->keyword) {
+            $client = Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->pluck('id');
+            $data = [
+                'month' => $month,
+                'year' => $year,
+                'usages' => Usage::where('month', $month)->where('year', $year)->whereIn('client_id', $client)->with(['client', 'bill'])->orderBy('client_id', 'asc')->paginate(10)
+            ];
+        } else {
+            $data = [
+                'month' => $month,
+                'year' => $year,
+                'usages' => Usage::where('month', $month)->where('year', $year)->with(['client', 'bill'])->orderBy('client_id', 'asc')->paginate(10)
+            ];
+        }
 
         return view('bill.show', $data);
     }

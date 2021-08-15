@@ -83,16 +83,27 @@ class UsageController extends Controller
      * @param  \App\Models\Usage  $usage
      * @return \Illuminate\Http\Response
      */
-    public function show($month, $year)
+    public function show(Request $request, $month, $year)
     {
         //
-        $data = [
-            'month' => $month,
-            'year' => $year,
-            'clients' => Client::with(['usages' => function ($query) use ($month, $year) {
-                $query->where('month', $month)->where('year', $year)->orderBy('client_id', 'asc');
-            }])->get()
-        ];
+        if ($request->keyword) {
+            $data = [
+                'month' => $month,
+                'year' => $year,
+                'clients' => Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->with(['usages' => function ($query) use ($month, $year) {
+                    $query->where('month', $month)->where('year', $year)->orderBy('client_id', 'asc');
+                }])->paginate(10)
+            ];
+        }else{
+            $data = [
+                'month' => $month,
+                'year' => $year,
+                'clients' => Client::with(['usages' => function ($query) use ($month, $year) {
+                    $query->where('month', $month)->where('year', $year)->orderBy('client_id', 'asc');
+                }])->paginate(10)
+            ];
+        }
+        
 
         return view('usage.show', $data);
     }

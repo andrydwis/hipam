@@ -22,6 +22,10 @@
         <a href="{{route('bill.export', [$month, $year])}}" class="btn btn-outline-primary">Export Tagihan</a>
     </div>
     <div class="card-body">
+        <form action="" method="get" class="d-flex flex-row">
+            <input type="text" class="form-control me-1" name="keyword" placeholder="Masukkan nomor atau nama pelanggan">
+            <button type="submit" class="btn btn-primary">Cari</button>
+        </form>
         <div class="table-responsive py-4">
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
@@ -61,7 +65,7 @@
                         </td>
                         <td>
                             @if($usage->bill->paid_at)
-                            {{$usage->bill->paid_at->isoFormat('dddd, DD-MM-YYYY hh:mm')}}
+                            {{$usage->bill->paid_at->isoFormat('dddd, DD-MM-YYYY hh:mm A')}}
                             @else
                             {{'-'}}
                             @endif
@@ -88,6 +92,7 @@
                 </tbody>
             </table>
         </div>
+        {{$usages->links('vendor.pagination.bootstrap-4')}}
     </div>
 </div>
 @endsection
@@ -104,7 +109,10 @@
         $('#datatable').DataTable({
             "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Indonesian.json"
-            }
+            },
+            "searching": false,
+            "paging": false,
+            "lengthChange": false,
         });
     });
 </script>

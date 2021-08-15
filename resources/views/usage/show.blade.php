@@ -25,6 +25,10 @@
         </div>
     </div>
     <div class="card-body">
+        <form action="" method="get" class="d-flex flex-row">
+            <input type="text" class="form-control me-1" name="keyword" placeholder="Masukkan nomor atau nama pelanggan">
+            <button type="submit" class="btn btn-primary">Cari</button>
+        </form>
         <div class="table-responsive py-4">
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
@@ -53,6 +57,7 @@
                 </tbody>
             </table>
         </div>
+        {{$clients->links('vendor.pagination.bootstrap-4')}}
     </div>
 </div>
 @endsection
@@ -69,7 +74,10 @@
         $('#datatable').DataTable({
             "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Indonesian.json"
-            }
+            },
+            "searching": false,
+            "paging": false,
+            "lengthChange": false,
         });
     });
 </script>
