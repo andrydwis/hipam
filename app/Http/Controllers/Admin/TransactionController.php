@@ -15,7 +15,7 @@ class TransactionController extends Controller
     {
         if ($request->keyword) {
             $data = [
-                'clients' => Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->with('usages.bill')->paginate(1)
+                'clients' => Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->with('usages.bill')->paginate(10)
             ];
         }else{
             $data = [
