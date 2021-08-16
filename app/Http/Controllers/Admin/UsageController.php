@@ -100,7 +100,7 @@ class UsageController extends Controller
                 'year' => $year,
                 'clients' => Client::with(['usages' => function ($query) use ($month, $year) {
                     $query->where('month', $month)->where('year', $year)->orderBy('client_id', 'asc');
-                }])->paginate(2)
+                }])->paginate(10)
             ];
         }
         
