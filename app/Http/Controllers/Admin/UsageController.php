@@ -167,6 +167,15 @@ class UsageController extends Controller
     public function destroy(Usage $usage)
     {
         //
+        $usage->delete();
+
+        activity()
+            ->causedBy(Auth::user())
+            ->log('Berhasil menghapus pemakaian pelanggan');
+
+        session()->flash('success', 'Berhasil menghapus pemakaian pelanggan');
+
+        return back();
     }
 
     public function showAll()

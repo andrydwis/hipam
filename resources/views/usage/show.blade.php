@@ -47,7 +47,14 @@
                         <td>{{$client->usages->first()->meter_cubic ?? 'belum diisi'}}</td>
                         <td>
                             @if($client->usages->first())
-                            <a href="{{route('usage.edit', [$client, $month, $year])}}" class="btn btn-outline-primary">Edit</a>
+                            <div class="d-flex flex-inline gap-2">
+                                <a href="{{route('usage.edit', [$client, $month, $year])}}" class="btn btn-outline-primary">Edit</a>
+                                <form action="{{route('usage.destroy', [$client->usages->first()])}}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-outline-danger">Hapus</button>
+                                </form>
+                            </div>
                             @else
                             <a href="{{route('usage.create', [$client, $month, $year])}}" class="btn btn-primary">Tambah</a>
                             @endif
