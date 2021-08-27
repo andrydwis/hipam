@@ -35,7 +35,7 @@
                         <td>{{$log->causer->name}}</td>
                         <td><span class="badge bg-primary">{{$log->causer->getRoleNames()->first()}}</span></td>
                         <td>{{$log->description}}</td>
-                        <td>{{$log->created_at->isoFormat('dddd, DD-MM-YYYY HH:MM')}} <span class="badge bg-primary">{{$log->created_at->diffForHumans()}}</span></td>
+                        <td>{{$log->created_at->isoFormat('dddd, DD-MM-YYYY hh:mm A')}} <span class="badge bg-primary">{{$log->created_at->diffForHumans()}}</span></td>
                     </tr>
                     @endforeach
                 </tbody>

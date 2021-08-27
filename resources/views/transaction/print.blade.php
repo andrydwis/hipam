@@ -47,6 +47,19 @@
                 display: none !important;
             }
         }
+
+        .tab {
+            padding-left: 20px;
+        }
+
+        hr {
+            border-color: #000000;
+            border-style: solid;
+            border-width: 2px 0 0;
+            clear: both;
+            margin: 0 0 0px;
+            height: 0;
+        }
     </style>
 
     @yield('customCSS')
@@ -61,30 +74,39 @@
                 <div class="text-center"><b>{{$day}} {{$month}} {{$year}}</b></div>
                 <br>
                 <div class="text-start"><b>DATA PELANGGAN</b></div>
-                <div class="text-start">No/Nama/RT : {{$client->client_id}}/{{$client->name}}/RT.{{$client->rt}}</div>
-                <div class="text-start">Penggunaan : {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></div>
+                <div class="text-start">No/Nama/RT <span class="tab"> : {{$client->client_id}}/{{$client->name}}/RT.{{$client->rt}}/RW.{{$client->rw}}</div>
+                <div class="text-start">Penggunaan <span class="tab"> : {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></div>
                 <br>
                 <div class="text-start"><b>RINCIAN</b></div>
-                <div class="text-start">Tagihan : ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
-                <div class="text-start">Abonemen : RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
-                <div class="text-start">Tunggakan : {{$bills->where('status', 'late')->count()}} kali</div>
+                <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) <span class="tab"> = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
+                <div class="text-start">Abonemen <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
+                <div class="text-start">Tunggakan <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = {{$bills->where('status', 'late')->count()}} kali</div>
                 @if($bills->where('status', 'late')->first())
-                <div class="text-start">Denda : </div>
-                <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
-                @endif
-                @if($bills->where('status', 'late')->skip(1)->first())
-                <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
-                @endif
-                @if($bills->where('status', 'late')->skip(2)->first())
-                <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
-                @endif
+                <div class="text-start">Denda</div>
+                <ul>
+                    <li>
+                        <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
+                    </li>
+                    @endif
+                    @if($bills->where('status', 'late')->skip(1)->first())
+                    <li>
+                        <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
+                    </li>
+                    @endif
+                    @if($bills->where('status', 'late')->skip(2)->first())
+                    <li>
+                        <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
+                    </li>
+                    @endif
+                </ul>
                 <br>
                 @php
                 $sumTotal = $bills->sum('total');
                 @endphp
-                <div class="text-start"><b>TOTAL : RP. {{number_format($sumTotal,2,',','.')}}</b></div>
+                <hr class="mb-3">
+                <div class="text-start"><b>TOTAL <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> RP. {{number_format($sumTotal,2,',','.')}}</b></div>
                 <br>
-                <div class="text-end">Petugas</div>
+                <div class="text-end"><b>Petugas</b></div>
                 <br>
                 <br>
                 <div class="text-end">{{auth()->user()->name}}</div>
