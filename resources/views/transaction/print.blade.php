@@ -99,9 +99,9 @@
                 <div class="text-start">Penggunaan <span class="tab"> : {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></div>
                 <br>
                 <div class="text-start">RINCIAN</div>
-                <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) <span class="tab"> = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
-                <div class="text-start">Abonemen <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
-                <div class="text-start">Tunggakan <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = {{$bills->where('status', 'late')->count()}} kali</div>
+                <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
+                <div class="text-start">Abonemen <span class="tab"><span class="tab"><span class="tab"> = RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
+                <div class="text-start">Tunggakan <span class="tab"><span class="tab"><span class="tab"> = {{$bills->where('status', 'late')->count()}} kali</div>
                 @if($bills->where('status', 'late')->first())
                 <div class="text-start">Denda</div>
                 <ul>
@@ -124,7 +124,7 @@
                 @php
                 $sumTotal = $bills->sum('total');
                 @endphp
-                <div class="text-start">TOTAL <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> RP. {{number_format($sumTotal,2,',','.')}}</div>
+                <div class="text-start">TOTAL <span class="tab"><span class="tab"><span class="tab"><span class="tab"> RP. {{number_format($sumTotal,2,',','.')}}</div>
             </div>
             <div class="col">
                 <div class="text-center">HIPAM SWADAYA RW 2</div>
@@ -136,9 +136,9 @@
                 <div class="text-start">Penggunaan <span class="tab"> : {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></div>
                 <br>
                 <div class="text-start">RINCIAN</div>
-                <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) <span class="tab"> = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
-                <div class="text-start">Abonemen <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
-                <div class="text-start">Tunggakan <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = {{$bills->where('status', 'late')->count()}} kali</div>
+                <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
+                <div class="text-start">Abonemen <span class="tab"><span class="tab"><span class="tab"> = RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
+                <div class="text-start">Tunggakan <span class="tab"><span class="tab"><span class="tab"> = {{$bills->where('status', 'late')->count()}} kali</div>
                 @if($bills->where('status', 'late')->first())
                 <div class="text-start">Denda</div>
                 <ul>
@@ -161,7 +161,7 @@
                 @php
                 $sumTotal = $bills->sum('total');
                 @endphp
-                <div class="text-start">TOTAL <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> RP. {{number_format($sumTotal,2,',','.')}}</div>
+                <div class="text-start">TOTAL <span class="tab"><span class="tab"><span class="tab"><span class="tab"> RP. {{number_format($sumTotal,2,',','.')}}</div>
             </div>
         </div>
 
