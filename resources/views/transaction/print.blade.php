@@ -70,7 +70,7 @@
 
         .print {
             font-size: 9px;
-            font-family: dot;
+            font-family: sans-serif;
         }
 
         .tab {
@@ -87,18 +87,18 @@
 </head>
 
 <body>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid">
         <div class="row print">
             <div class="col col-small">
-                <div class="text-center"><b>HIPAM SWADAYA RW 2</b></div>
-                <div class="text-center"><b>Bukti Pembayaran Iuran Air</b></div>
-                <div class="text-center"><b>{{$day}} {{$month}} {{$year}}</b></div>
+                <div class="text-center">HIPAM SWADAYA RW 2</div>
+                <div class="text-center">Bukti Pembayaran Iuran Air</div>
+                <div class="text-center">{{$day}} {{$month}} {{$year}}</div>
                 <br>
-                <div class="text-start"><b>DATA PELANGGAN</b></div>
+                <div class="text-start">DATA PELANGGAN</div>
                 <div class="text-start">No/Nama/RT <span class="tab"> : {{$client->client_id}}/{{$client->name}}/RT.{{$client->rt}}/RW.{{$client->rw}}</div>
                 <div class="text-start">Penggunaan <span class="tab"> : {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></div>
                 <br>
-                <div class="text-start"><b>RINCIAN</b></div>
+                <div class="text-start">RINCIAN</div>
                 <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) <span class="tab"> = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
                 <div class="text-start">Abonemen <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
                 <div class="text-start">Tunggakan <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = {{$bills->where('status', 'late')->count()}} kali</div>
@@ -124,29 +124,18 @@
                 @php
                 $sumTotal = $bills->sum('total');
                 @endphp
-                <div class="text-start"><b>TOTAL <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> RP. {{number_format($sumTotal,2,',','.')}}</b></div>
-                <br>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="text-start"></div>
-                    <div>
-                        <div class="text-end"><b>Petugas</b></div>
-                        <br>
-                        <br>
-                        <div class="text-end">{{auth()->user()->name}}</div>
-                    </div>
-                </div>
-
+                <div class="text-start">TOTAL <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> RP. {{number_format($sumTotal,2,',','.')}}</div>
             </div>
             <div class="col">
-                <div class="text-center"><b>HIPAM SWADAYA RW 2</b></div>
-                <div class="text-center"><b>Bukti Pembayaran Iuran Air</b></div>
-                <div class="text-center"><b>{{$day}} {{$month}} {{$year}}</b></div>
+                <div class="text-center">HIPAM SWADAYA RW 2</div>
+                <div class="text-center">Bukti Pembayaran Iuran Air</div>
+                <div class="text-center">{{$day}} {{$month}} {{$year}}</div>
                 <br>
-                <div class="text-start"><b>DATA PELANGGAN</b></div>
+                <div class="text-start">DATA PELANGGAN</div>
                 <div class="text-start">No/Nama/RT <span class="tab"> : {{$client->client_id}}/{{$client->name}}/RT.{{$client->rt}}/RW.{{$client->rw}}</div>
                 <div class="text-start">Penggunaan <span class="tab"> : {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></div>
                 <br>
-                <div class="text-start"><b>RINCIAN</b></div>
+                <div class="text-start">RINCIAN</div>
                 <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}}) <span class="tab"> = RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
                 <div class="text-start">Abonemen <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
                 <div class="text-start">Tunggakan <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> = {{$bills->where('status', 'late')->count()}} kali</div>
@@ -172,17 +161,7 @@
                 @php
                 $sumTotal = $bills->sum('total');
                 @endphp
-                <div class="text-start"><b>TOTAL <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> RP. {{number_format($sumTotal,2,',','.')}}</b></div>
-                <br>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="text-start"></div>
-                    <div>
-                        <div class="text-end"><b>Petugas</b></div>
-                        <br>
-                        <br>
-                        <div class="text-end">{{auth()->user()->name}}</div>
-                    </div>
-                </div>
+                <div class="text-start">TOTAL <span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"><span class="tab"> RP. {{number_format($sumTotal,2,',','.')}}</div>
             </div>
         </div>
 
