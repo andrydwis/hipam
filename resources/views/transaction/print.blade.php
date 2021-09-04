@@ -69,7 +69,7 @@
         }
 
         .print {
-            font-size: 9px !important;
+            font-size: 10px !important;
             font-family: sans-serif !important;
         }
 
@@ -83,7 +83,7 @@
         }
 
         li {
-            font-size: 9px !important;
+            font-size: 10px !important;
             font-family: sans-serif !important;
         }
     </style>
