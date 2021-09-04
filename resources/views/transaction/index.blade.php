@@ -44,7 +44,15 @@
                         <td>{{$client->rw}}</td>
                         <td>{{$client->usages->last()->bill->meter_cubic ?? '-'}}</td>
                         @if($client->usages->last())
-                        <td>Rp. {{number_format($client->usages->last()->bill->total,2,',','.')}}</td>
+                        @php
+                        $last_bill = 0;
+                        foreach($client->usages as $usage) {
+                            if($usage->bill->status != 'paid') {
+                                $last_bill += $usage->bill->total;
+                            }
+                        }
+                        @endphp
+                        <td>Rp. {{number_format($last_bill,2,',','.')}}</td>
                         @else
                         <td>{{'-'}}</td>
                         @endif

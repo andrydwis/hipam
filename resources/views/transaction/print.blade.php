@@ -69,8 +69,8 @@
         }
 
         .print {
-            font-size: 9px;
-            font-family: sans-serif;
+            font-size: 9px !important;
+            font-family: sans-serif !important;
         }
 
         .tab {
@@ -80,6 +80,11 @@
         .box {
             border: 3px solid #000000;
             padding: 10px;
+        }
+
+        li {
+            font-size: 9px !important;
+            font-family: sans-serif !important;
         }
     </style>
 
@@ -141,7 +146,7 @@
                 <div class="text-start">Tunggakan <span class="tab"><span class="tab"><span class="tab"> = {{$bills->where('status', 'late')->count()}} kali</div>
                 @if($bills->where('status', 'late')->first())
                 <div class="text-start">Denda</div>
-                <ul>
+                <ul >
                     <li>
                         <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}} : RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}} + {{number_format(config('custom.fine'),2,',','.')}}</div>
                     </li>
