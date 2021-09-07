@@ -129,7 +129,7 @@
                         <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}})</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start">= RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
+                        <div class="text-start">= Rp. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -137,7 +137,7 @@
                         <div class="text-start">Abonemen</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start">= RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
+                        <div class="text-start">= Rp. {{number_format(config('custom.subscription'),2,',','.')}}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -160,7 +160,7 @@
                         <div class="text-start">Denda</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start">= {{number_format($late * config('custom.fine'),2,',','.')}}</div>
+                        <div class="text-start">= Rp. {{number_format($late * config('custom.fine'),2,',','.')}}</div>
                     </div>
                 </div>
                 <ul class="list-unstyled m-0 p-0">
@@ -170,7 +170,7 @@
                                 <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
@@ -182,7 +182,7 @@
                                 <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
@@ -194,7 +194,7 @@
                                 <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
@@ -209,7 +209,7 @@
                         <div class="text-start fw-bolder">TOTAL</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start fw-bolder">= RP. {{number_format($sumTotal,2,',','.')}}</div>
+                        <div class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between mt-2">
@@ -257,7 +257,7 @@
                         <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}})</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start">= RP. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
+                        <div class="text-start">= Rp. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -265,7 +265,7 @@
                         <div class="text-start">Abonemen</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start">= RP. {{number_format(config('custom.subscription'),2,',','.')}}</div>
+                        <div class="text-start">= Rp. {{number_format(config('custom.subscription'),2,',','.')}}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -288,7 +288,7 @@
                         <div class="text-start">Denda</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start">= {{number_format($late * config('custom.fine'),2,',','.')}}</div>
+                        <div class="text-start">= Rp. {{number_format($late * config('custom.fine'),2,',','.')}}</div>
                     </div>
                 </div>
                 <ul class="list-unstyled m-0 p-0">
@@ -298,7 +298,7 @@
                                 <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
@@ -310,7 +310,7 @@
                                 <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
@@ -322,7 +322,7 @@
                                 <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
@@ -337,7 +337,7 @@
                         <div class="text-start fw-bolder">TOTAL</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start fw-bolder">= RP. {{number_format($sumTotal,2,',','.')}}</div>
+                        <div class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between mt-2">
