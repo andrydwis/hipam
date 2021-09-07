@@ -163,38 +163,38 @@
                         <div class="text-start">= {{number_format($late * config('custom.fine'),2,',','.')}}</div>
                     </div>
                 </div>
-                <ul>
-                    <li class="m-0 p-0">
+                <ul class="list-unstyled m-0 p-0">
+                    <li>
                         <div class="row">
                             <div class="col-5">
                                 <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">: RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
                     @endif
                     @if($bills->where('status', 'late')->skip(1)->first())
-                    <li class="m-0 p-0">
+                    <li>
                         <div class="row">
                             <div class="col-5">
                                 <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">: RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
                     @endif
                     @if($bills->where('status', 'late')->skip(2)->first())
-                    <li class="m-0 p-0">
+                    <li>
                         <div class="row">
                             <div class="col-5">
                                 <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">: RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
@@ -291,38 +291,38 @@
                         <div class="text-start">= {{number_format($late * config('custom.fine'),2,',','.')}}</div>
                     </div>
                 </div>
-                <ul>
-                    <li class="m-0 p-0">
+                <ul class="list-unstyled m-0 p-0">
+                    <li>
                         <div class="row">
                             <div class="col-5">
                                 <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">: RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
                     @endif
                     @if($bills->where('status', 'late')->skip(1)->first())
-                    <li class="m-0 p-0">
+                    <li>
                         <div class="row">
                             <div class="col-5">
                                 <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">: RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
                     @endif
                     @if($bills->where('status', 'late')->skip(2)->first())
-                    <li class="m-0 p-0">
+                    <li>
                         <div class="row">
                             <div class="col-5">
                                 <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">: RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= RP. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
