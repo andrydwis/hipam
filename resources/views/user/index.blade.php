@@ -5,13 +5,13 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Admin</li>
+            <li class="breadcrumb-item active">User</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Daftar Admin</h1>
-            <p class="mb-0">Menampilkan daftar semua admin pada sistem</p>
+            <h1 class="h4">Daftar User</h1>
+            <p class="mb-0">Menampilkan daftar semua user pada sistem</p>
         </div>
     </div>
 </div>
@@ -19,7 +19,7 @@
 <div class="card">
     @role('superadmin')
     <div class="card-header">
-        <a href="{{route('user.create')}}" class="btn btn-primary">Tambah Admin</a>
+        <a href="{{route('user.create')}}" class="btn btn-primary">Tambah User</a>
     </div>
     @endrole
     <div class="card-body">

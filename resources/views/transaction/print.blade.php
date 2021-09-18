@@ -351,7 +351,6 @@
             </div>
         </div>
 
-        <a href="{{session('previousUrl')}}" class="btn btn-primary mt-5 no-print">Kembali</a>
         <button onclick="window.print()" class="btn btn-primary mt-5 no-print">Print</button>
     </div>
     <!-- Core -->

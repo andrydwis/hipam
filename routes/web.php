@@ -27,7 +27,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified', 'role:superadmin|admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('user.create');
     Route::post('/user/create', [UserController::class, 'store'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('user.store');

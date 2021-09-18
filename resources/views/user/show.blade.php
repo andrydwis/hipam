@@ -5,14 +5,14 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('user.index')}}">Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{route('user.index')}}">User</a></li>
             <li class="breadcrumb-item active">Detail</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
             <h1 class="h4">Detail</h1>
-            <p class="mb-0">Menampilkan detail dan log aktifitas admin</p>
+            <p class="mb-0">Menampilkan detail dan log aktifitas user</p>
         </div>
     </div>
 </div>

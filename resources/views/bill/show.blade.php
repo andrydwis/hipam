@@ -92,7 +92,7 @@
                 </tbody>
             </table>
         </div>
-        {{$usages->links('vendor.pagination.bootstrap-4')}}
+        {{$usages->onEachSide(1)->links('vendor.pagination.bootstrap-4')}}
     </div>
 </div>
 @endsection

@@ -12,22 +12,12 @@ class DashboardController extends Controller
     //
     public function index()
     {
-        $role = Auth::user()->getRoleNames()->first();
-        if ($role == 'superadmin') {
-            return $this->admin();
-        } elseif ($role == 'admin') {
-            return $this->admin();
-        }
+        return $this->admin();
     }
 
     public function admin()
     {
-        $data = [
-            'users' => User::get()->count(),
-            'logs' => Activity::get()->count()
-        ];
-
-        return view('dashboard.admin', $data);
+        return view('dashboard.admin');
     }
 
     public function client()

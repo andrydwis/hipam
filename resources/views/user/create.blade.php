@@ -5,14 +5,14 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('user.index')}}">Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{route('user.index')}}">User</a></li>
             <li class="breadcrumb-item active">Tambah</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Tambah Admin</h1>
-            <p class="mb-0">Menambah admin ke dalam sistem</p>
+            <h1 class="h4">Tambah User</h1>
+            <p class="mb-0">Menambah user ke dalam sistem</p>
         </div>
     </div>
 </div>
@@ -38,6 +38,15 @@
                     {{$message}}
                 </div>
                 @enderror
+            </div>
+            <div class="mb-4">
+                <label for="role">Role</label>
+                <select name="role" class="form-control @error('role') is-invalid @enderror">
+                    <option value="" @if(old('role') == null) selected @endif  disabled>Pilih Role</option>
+                    <option value="superadmin" @if(old('role') == 'superadmin') selected @endif>Super Admin</option>
+                    <option value="admin" @if(old('role') == 'admin') selected @endif>Admin</option>
+                    <option value="officer" @if(old('role') == 'officer') selected @endif>Petugas</option>
+                </select>
             </div>
             <div class="mb-4">
                 <label for="password">Password</label>

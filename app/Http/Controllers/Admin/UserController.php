@@ -61,11 +61,11 @@ class UserController extends Controller
             'email_verified_at' => Carbon::now()
         ]);
 
-        $user->assignRole('admin');
+        $user->assignRole($request->role);
 
         activity()
             ->causedBy(Auth::user())
-            ->log('Berhasil menambah admin');
+            ->log('Berhasil menambah ' . $user->name . ' ke dalam sistem');
 
         return redirect()->route('user.index');
     }

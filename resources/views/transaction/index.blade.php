@@ -70,7 +70,7 @@
             </table>
         </div>
         @if($clients)
-        {{$clients->appends(request()->query())->links('vendor.pagination.bootstrap-4')}}
+        {{$clients->onEachSide(1)->appends(request()->query())->links('vendor.pagination.bootstrap-4')}}
         @endif
     </div>
 </div>
