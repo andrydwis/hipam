@@ -104,7 +104,6 @@ class UsageController extends Controller
             ];
         }
         
-
         return view('usage.show', $data);
     }
 
@@ -154,7 +153,6 @@ class UsageController extends Controller
 
         session()->flash('success', 'Berhasil mengedit pemakaian pelanggan');
 
-        // return redirect()->route('usage.show', [$month, $year]);
         return redirect(session()->get('previousUrl'));
     }
 

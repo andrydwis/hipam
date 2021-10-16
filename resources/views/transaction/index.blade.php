@@ -57,7 +57,6 @@
                         <td>{{'-'}}</td>
                         @endif
                         <td class="d-flex gap-1">
-                            <!-- <a href="{{route('transaction.pay', [$client])}}" class="btn btn-primary">Bayar</a> -->
                             <form action="{{route('transaction.pay-process', [$client])}}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Bayar</button>
