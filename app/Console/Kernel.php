@@ -31,9 +31,9 @@ class Kernel extends ConsoleKernel
 
             //Pengecekan apakah cronjob berhasil atau tidak
             //Mencatat info log 
-            Log::info('Cronjob berhasil dijalankan');
-        })->everyTwoMinutes();
-        // $schedule->command('set:late')->lastDayOfMonth('24:00');
+            Log::info('Set auto telat dijalankan');
+        })->dailyAt('23:00');
+        $schedule->command('set:late')->lastDayOfMonth('23:00');
     }
 
     /**
