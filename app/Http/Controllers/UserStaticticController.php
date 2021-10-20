@@ -24,7 +24,7 @@ class UserStaticticController extends Controller
 
     public function show(Client $client)
     {
-        $usages = Usage::where('client_id', $client->id)->with('bill')->get();
+        $usages = Usage::where('client_id', $client->id)->with('bill')->orderBy('id', 'desc')->get();
         $bills = Bill::whereIn('usage_id', $usages->pluck('id'))->where('status', '!=', 'paid')->with('usage')->orderBy('id', 'desc')->get();
 
         $data = [
