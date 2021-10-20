@@ -5,6 +5,7 @@
                 <li class="nav-item dropdown ms-lg-3">
                     <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button" data-bs-toggle="dropdown">
                         <div class="media d-flex align-items-center">
+                            @auth
                             @if(auth()->user()->getMedia('images')->first())
                             <img class="avatar rounded-circle" alt="Image placeholder" src="{{auth()->user()->getMedia('images')->first()->getUrl('thumb')}}" />
                             @else
@@ -13,6 +14,7 @@
                             <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                                 <span class="mb-0 font-small fw-bold text-gray-900">{{auth()->user()->name}}</span>
                             </div>
+                            @endauth
                         </div>
                     </a>
                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">

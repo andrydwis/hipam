@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UsageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\UserStaticticController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('login');
 })->name('root.index');
+
+Route::get('/user-statistic', [UserStaticticController::class, 'index'])->name('user-statistic.index');
+Route::get('/user-statistic/{client}', [UserStaticticController::class, 'show'])->name('user-statistic.show');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 

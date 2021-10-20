@@ -47,11 +47,9 @@
         <div class="mb-5"></div>
         <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
             <div class="container">
-                <p class="text-center">
-                    <a href="{{route('root.index')}}" class="d-flex align-items-center justify-content-center">
-                        Kembali
-                    </a>
-                </p>
+                <div class="d-flex justify-content-center mb-5">
+                    <a href="{{route('user-statistic.index')}}" class="btn btn-primary">Statistik Pelanggan</a>
+                </div>
                 <div class="row justify-content-center form-bg-image" style="background-image: url({{asset('assets/img/illustrations/signin.svg')}});">
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
