@@ -12,7 +12,7 @@ class UserStaticticController extends Controller
     //
     public function index(Request $request)
     {
-        $clients = Client::whereRaw('"client_id"::text ilike %' . $request->keyword . '%')->orWhere('name', 'ilike', '%' . $request->keyword . '%')->with('usages.bill')->paginate(10);
+        $clients = Client::whereRaw('cast(client_id as text) ilike %' . $request->keyword . '%')->orWhere('name', 'ilike', '%' . $request->keyword . '%')->with('usages.bill')->paginate(10);
 
         $data = [
             'keyword' => $request->keyword,
