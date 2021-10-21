@@ -27,6 +27,7 @@ Route::get('/', function () {
 })->name('root.index');
 
 Route::get('/user-statistic', [UserStaticticController::class, 'index'])->name('user-statistic.index');
+Route::post('/user-statistic/search', [UserStaticticController::class, 'search'])->name('user-statistic.search');
 Route::get('/user-statistic/{client}', [UserStaticticController::class, 'show'])->name('user-statistic.show');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

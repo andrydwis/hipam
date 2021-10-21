@@ -10,16 +10,26 @@ use Illuminate\Http\Request;
 class UserStaticticController extends Controller
 {
     //
-    public function index(Request $request)
+    public function index()
     {
-        $clients = Client::where('name', 'ilike', '%' . $request->keyword . '%')->orWhereRaw("cast(client_id as TEXT) ilike '%".$request->keyword."%'")->with('usages.bill')->paginate(10);
+        return view('user-statistic.index');
+    }
 
-        $data = [
-            'keyword' => $request->keyword,
-            'clients' => $clients,
-        ];
+    public function search(Request $request)
+    {
+        $request->validate([
+            'nomor_pelanggan' => ['required'],
+            'nama' => ['required'],
+        ]);
 
-        return view('user-statistic.index', $data);
+        $client = Client::where('client_id', $request->nomor_pelanggan)->Where('name', $request->nama)->first();
+
+        if($client){
+            return redirect()->route('user-statistic.show', $client);
+        }else{
+            session()->flash('error', 'Data Pelanggan Tidak Ditemukan');
+            return redirect()->back();
+        }
     }
 
     public function show(Client $client)
