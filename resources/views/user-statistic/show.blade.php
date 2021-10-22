@@ -159,56 +159,6 @@
     </div>
 </div>
 @endif
-<div class="card mt-5">
-    <div class="card-body">
-        <div class="table-responsive py-4">
-            <table class="table table-hover" id="datatable">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Tahun</th>
-                        <th>Bulan</th>
-                        <th>Meter Kubik</th>
-                        <th>Pemakaian</th>
-                        <th>Tarif</th>
-                        <th>Abonemen</th>
-                        <th>Denda</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($usages as $usage)
-                    <tr>
-                        <td>{{$usage->year}}</td>
-                        <td>{{$usage->month}}</td>
-                        <td>{{$usage->meter_cubic}} m <sup>3</sup></td>
-                        <td>{{$usage->bill->meter_cubic}} m <sup>3</sup></td>
-                        <td>Rp. {{number_format((config('custom.cost')),2,',','.')}}</td>
-                        <td>Rp. {{number_format((config('custom.subscription')),2,',','.')}}</td>
-                        <td>
-                            @if($usage->bill->fine)
-                            Rp. {{number_format(($usage->bill->fine),2,',','.')}}
-                            @else
-                            {{'-'}}
-                            @endif
-                        </td>
-                        <td>Rp. {{number_format(($usage->bill->total),2,',','.')}}</td>
-                        <td>
-                            @if($usage->bill->status == 'unpaid')
-                            <span class="badge rounded-pill bg-primary">Belum Lunas</span>
-                            @elseif($usage->bill->status == 'late')
-                            <span class="badge rounded-pill bg-danger">Terlambat</span>
-                            @else
-                            <span class="badge rounded-pill bg-success">Lunas</span>
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('customCSS')
