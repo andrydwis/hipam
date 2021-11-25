@@ -92,18 +92,18 @@ class UsageController extends Controller
                 'year' => $year,
                 'clients' => Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->with(['usages' => function ($query) use ($month, $year) {
                     $query->where('month', $month)->where('year', $year)->orderBy('client_id', 'asc');
-                }])->paginate($request->page_size ?? 10)
+                }])->paginate($request->page_size ?? 10)->withQueryString()
             ];
-        }else{
+        } else {
             $data = [
                 'month' => $month,
                 'year' => $year,
                 'clients' => Client::with(['usages' => function ($query) use ($month, $year) {
                     $query->where('month', $month)->where('year', $year)->orderBy('client_id', 'asc');
-                }])->paginate($request->page_size ?? 10)
+                }])->paginate($request->page_size ?? 10)->withQueryString()
             ];
         }
-        
+
         return view('usage.show', $data);
     }
 
