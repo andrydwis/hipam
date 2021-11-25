@@ -20,20 +20,20 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <div>
-            <select class="form-select" id="page-size" onChange="changePageSize()">
+            <select class="form-select" id="page-size" onchange="changePageSize()">
                 <option value="10" selected>10</option>
                 <option value="50">50</option>
                 <option value="100">100</option>
             </select>
         </div>
         <div class="d-flex gap-3">
-            <select class="form-select" id="month" onChange="changeDate()" style="width: 175px;">
+            <select class="form-select" id="month" onchange="changeDate()" style="width: 175px;">
                 <option disabled>Pilih Bulan</option>
                 @foreach($months as $month)
                 <option value="{{$month}}" @if($month==$monthNow){{'selected'}}@endif>{{$month}}</option>
                 @endforeach
             </select>
-            <select class="form-select" id="year" onChange="changeDate()" style="width: 175px;">
+            <select class="form-select" id="year" onchange="changeDate()" style="width: 175px;">
                 <option disabled>Pilih Tahun</option>
                 @foreach($years as $year)
                 <option value="{{$year}}" @if($year==$yearNow){{'selected'}}@endif>{{$year}}</option>
@@ -42,10 +42,10 @@
         </div>
     </div>
     <div class="card-body">
-        <!-- <form action="" method="get" class="d-flex flex-row">
+        <form action="" method="get" class="d-flex flex-row">
             <input type="text" class="form-control me-1" name="keyword" placeholder="Masukkan nomor atau nama pelanggan">
             <button type="submit" class="btn btn-primary">Cari</button>
-        </form> -->
+        </form>
         <div class="table-responsive py-4">
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">

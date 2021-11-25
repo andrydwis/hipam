@@ -184,9 +184,17 @@ class UsageController extends Controller
         $yearNow = Carbon::now()->isoFormat('Y');
 
         if ($request->month && $request->year) {
-            $usages = Usage::where('month', $request->month)->where('year', $request->year)->orderBy('created_at', 'desc')->with('client')->paginate($request->page_size ?? 10)->withQueryString();
+            $usages = Usage::where('month', $request->month)->where('year', $request->year);
         } else {
-            $usages = Usage::where('month', $monthNow)->where('year', $yearNow)->orderBy('created_at', 'desc')->with('client')->paginate($request->page_size ?? 10)->withQueryString();
+            $usages = Usage::where('month', $monthNow)->where('year', $yearNow);
+        }
+
+        if ($request->keyword) {
+            $usages = $usages->whereHas('client', function ($query) use ($request) {
+                return $query->where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%');
+            })->orderBy('created_at', 'desc')->paginate($request->page_size ?? 10)->withQueryString();
+        } else {
+            $usages = $usages->with('client')->orderBy('created_at', 'desc')->paginate($request->page_size ?? 10)->withQueryString();
         }
 
         $data = [
