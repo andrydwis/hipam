@@ -102,16 +102,6 @@
                 </a>
             </li>
             @endif
-            @if(auth()->user()->getRoleNames()->first() == 'superadmin')
-            <li class="nav-item">
-                <a href="{{route('activity-log.index')}}" class="nav-link">
-                    <span class="sidebar-icon">
-                        <i class="fas fa-clock"></i>
-                    </span>
-                    <span class="sidebar-text">Log Aktifitas</span>
-                </a>
-            </li>
-            @endif
             @endauth
         </ul>
     </div>

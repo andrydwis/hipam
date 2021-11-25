@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('user-statistic.index');
 })->name('root.index');
 
 Route::get('/user-statistic', [UserStaticticController::class, 'index'])->name('user-statistic.index');
@@ -73,7 +73,7 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer'])->group(
     Route::get('/transaction/{client}/pay', [TransactionController::class, 'pay'])->name('transaction.pay');
     Route::post('/transaction/{client}/pay-process', [TransactionController::class, 'payProcess'])->name('transaction.pay-process');
 
-    Route::get('/activity-log', [ActivityLogController::class, 'index'])->withoutMiddleware('role:admin')->name('activity-log.index');
+    // Route::get('/activity-log', [ActivityLogController::class, 'index'])->withoutMiddleware('role:admin')->name('activity-log.index');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

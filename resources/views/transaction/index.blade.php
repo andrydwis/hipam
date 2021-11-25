@@ -42,17 +42,21 @@
                         <td>{{$client->name}}</td>
                         <td>{{$client->rt}}</td>
                         <td>{{$client->rw}}</td>
-                        <td>{{$client->usages->last()->bill->meter_cubic ?? '-'}}</td>
+                        <td>{{$client->usages->last()->bill->meter_cubic ?? '-'}} m<sup>3</sup></td>
                         @if($client->usages->last())
                         @php
                         $last_bill = 0;
                         foreach($client->usages as $usage) {
-                            if($usage->bill->status != 'paid') {
-                                $last_bill += $usage->bill->total;
-                            }
+                        if($usage->bill->status != 'paid') {
+                        $last_bill += $usage->bill->total;
+                        }
                         }
                         @endphp
+                        @if($last_bill > 0)
                         <td>Rp. {{number_format($last_bill,2,',','.')}}</td>
+                        @else
+                        <td><span class="badge bg-success">LUNAS</span></td>
+                        @endif
                         @else
                         <td>{{'-'}}</td>
                         @endif

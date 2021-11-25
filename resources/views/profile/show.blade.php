@@ -39,7 +39,7 @@
         </div>
     </div>
 </div>
-<div class="card">
+<!-- <div class="card">
     <div class="card-body">
         <h5 class="h5 mb-4">Log Aktifitas User</h5>
         <div class="table-responsive py-4">
@@ -63,7 +63,7 @@
             </table>
         </div>
     </div>
-</div>
+</div> -->
 @endsection
 
 @section('customCSS')
@@ -71,7 +71,7 @@
 @endsection
 
 @section('customJS')
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -82,5 +82,5 @@
             }
         });
     });
-</script>
+</script> -->
 @endsection
