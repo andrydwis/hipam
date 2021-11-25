@@ -18,7 +18,6 @@
 </div>
 @include('layouts.alert')
 <div class="card">
-
     <div class="card-header d-flex justify-content-between">
         <div>
             <select class="form-select" id="page-size" onChange="changePageSize()">
@@ -94,7 +93,7 @@
         let pageSize = url.searchParams.get('page_size');
         if (pageSize) {
             document.getElementById("page-size").value = pageSize;
-        }else{
+        } else {
             document.getElementById("page-size").value = 10;
         }
     }

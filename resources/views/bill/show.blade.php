@@ -18,7 +18,14 @@
 </div>
 @include('layouts.alert')
 <div class="card">
-    <div class="card-header d-flex justify-content-end">
+    <div class="card-header d-flex justify-content-between">
+        <div>
+            <select class="form-select" id="page-size" onChange="changePageSize()">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
         <a href="{{route('bill.export', [$month, $year])}}" class="btn btn-outline-primary">Export Tagihan</a>
     </div>
     <div class="card-body">
@@ -102,7 +109,25 @@
 @endsection
 
 @section('customJS')
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+    changePageSize = () => {
+        let pageSize = document.getElementById("page-size").value
+        let url = new URL(window.location.href);
+        url.searchParams.set('page_size', pageSize);
+        window.location.href = url;
+    }
+    setSelectedPageSize = () => {
+        let url = new URL(window.location.href);
+        let pageSize = url.searchParams.get('page_size');
+        if (pageSize) {
+            document.getElementById("page-size").value = pageSize;
+        } else {
+            document.getElementById("page-size").value = 10;
+        }
+    }
+    window.onload = setSelectedPageSize;
+</script>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -115,5 +140,5 @@
             "lengthChange": false,
         });
     });
-</script>
+</script> -->
 @endsection

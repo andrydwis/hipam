@@ -65,13 +65,13 @@ class BillController extends Controller
             $data = [
                 'month' => $month,
                 'year' => $year,
-                'usages' => Usage::where('month', $month)->where('year', $year)->whereIn('client_id', $client)->with(['client', 'bill'])->orderBy('client_id', 'asc')->paginate(10)
+                'usages' => Usage::where('month', $month)->where('year', $year)->whereIn('client_id', $client)->with(['client', 'bill'])->orderBy('client_id', 'asc')->paginate($request->page_size ?? 10)
             ];
         } else {
             $data = [
                 'month' => $month,
                 'year' => $year,
-                'usages' => Usage::where('month', $month)->where('year', $year)->with(['client', 'bill'])->orderBy('client_id', 'asc')->paginate(10)
+                'usages' => Usage::where('month', $month)->where('year', $year)->with(['client', 'bill'])->orderBy('client_id', 'asc')->paginate($request->page_size ?? 10)
             ];
         }
 
