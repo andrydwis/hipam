@@ -179,7 +179,7 @@ class UsageController extends Controller
     public function showAll(Request $request)
     {
         $months = collect(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
-        $years = collect(range(Carbon::now()->year - 2, Carbon::now()->year + 2));
+        $years = Usage::select('year')->groupBy('year')->pluck('year');
         $monthNow = Carbon::now()->isoFormat('MMMM');
         $yearNow = Carbon::now()->isoFormat('Y');
 

@@ -55,10 +55,10 @@
                         <td>{{$usage->client->client_id}}</td>
                         <td>{{$usage->client->name}}</td>
                         <td>{{$usage->bill->meter_cubic ?? '-'}}</td>
-                        <td>{{$usage->bill->cost ?? '-'}}</td>
-                        <td>{{$usage->bill->subscription ?? '-'}}</td>
-                        <td>{{$usage->bill->fine ?? '-'}}</td>
-                        <td>{{$usage->bill->total ?? '-'}}</td>
+                        <td>Rp. {{number_format($usage->bill->cost,2,',','.') ?? '-'}}</td>
+                        <td>Rp. {{number_format($usage->bill->subscription,2,',','.') ?? '-'}}</td>
+                        <td>Rp. {{number_format($usage->bill->fine,2,',','.') ?? '-'}}</td>
+                        <td>Rp. {{number_format($usage->bill->total,2,',','.') ?? '-'}}</td>
                         <td>
                             @if($usage->bill)
                             @if($usage->bill->status == 'unpaid')

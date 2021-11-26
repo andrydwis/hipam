@@ -112,10 +112,33 @@ class BillController extends Controller
         //
     }
 
-    public function showAll()
+    public function showAll(Request $request)
     {
+        $months = collect(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
+        $years = Usage::select('year')->groupBy('year')->pluck('year');
+        $monthNow = Carbon::now()->isoFormat('MMMM');
+        $yearNow = Carbon::now()->isoFormat('Y');
+
+        if ($request->month && $request->year) {
+            $usages = Usage::where('month', $request->month)->where('year', $request->year);
+        } else {
+            $usages = Usage::where('month', $monthNow)->where('year', $yearNow);
+        }
+
+        if ($request->keyword) {
+            $usages = $usages->whereHas('client', function ($query) use ($request) {
+                return $query->where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%');
+            })->with('bill')->orderBy('created_at', 'desc')->paginate($request->page_size ?? 10)->withQueryString();
+        } else {
+            $usages = $usages->with(['client', 'bill'])->orderBy('created_at', 'desc')->paginate($request->page_size ?? 10)->withQueryString();
+        }
+
         $data = [
-            'bills' => Bill::orderBy('created_at', 'desc')->with('usage.client')->get()
+            'months' => $months,
+            'years' => $years,
+            'monthNow' => $request->month ?? $monthNow,
+            'yearNow' => $request->year ?? $yearNow,
+            'usages' => $usages,
         ];
 
         return view('bill.all', $data);
