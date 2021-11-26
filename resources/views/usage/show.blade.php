@@ -51,7 +51,11 @@
                     <tr>
                         <td>{{$client->client_id}}</td>
                         <td>{{$client->name}}</td>
-                        <td>{{$client->usages->first()->meter_cubic ?? 'belum diisi'}}</td>
+                        @if($client->usages->first())
+                        <td>{{$client->usages->first()->meter_cubic}} m<sup>3</sup></td>
+                        @else
+                        <td>belum diisi</td>
+                        @endif
                         <td>
                             @if($client->usages->first())
                             <div class="d-flex flex-inline gap-2">
