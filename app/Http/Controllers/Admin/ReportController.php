@@ -23,7 +23,7 @@ class ReportController extends Controller
             $endDate = Carbon::now();
         }
         $bills = Bill::where('status', 'paid')->whereDate('paid_at', '>=', $startDate)->whereDate('paid_at', '<=', $endDate)->orderBy('paid_at', 'desc')->with('usage.client')->paginate($request->page_size ?? 10)->withQueryString();
-        $total = $bills->sum('total');
+        $total = Bill::where('status', 'paid')->whereDate('paid_at', '>=', $startDate)->whereDate('paid_at', '<=', $endDate)->orderBy('paid_at', 'desc')->sum('total');
 
         $data = [
             'request' => $request,
