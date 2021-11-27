@@ -18,22 +18,53 @@
 @include('layouts.alert')
 <div class="card mb-3">
     <div class="card-body">
+        @if($type == 'date')
         <div class="d-flex align-items-center gap-3">
             <label for="start_date" class="form-label">Mulai</label>
             <input type="date" class="form-control" id="start_date" name="start_date" value="{{$start_date->isoFormat('YYYY-MM-DD')}}" onchange="changeStartDate()">
             <label for="end_date" class="form-label">Sampai</label>
             <input type="date" class="form-control" id="end_date" name="end_date" value="{{$end_date->isoFormat('YYYY-MM-DD')}}" onchange="changeEndDate()">
         </div>
+        @else
+        <div class="d-flex align-items-center gap-3">
+            <label for="month" class="form-label">Bulan</label>
+            <select class="form-select" id="month" name="month" onchange="changeMonth()">
+                @foreach($months as $month_filter)
+                <option value="{{$month_filter['month']}}" @if($month_filter['month']==$month){{'selected'}}@endif>{{$month_filter['name']}}</option>
+                @endforeach
+            </select>
+            <label for="year" class="form-label">Tahun</label>
+            <select class="form-select" id="year" name="year" onchange="changeYear()">
+                @foreach($years as $year_filter)
+                <option value="{{$year_filter}}" @if($year_filter==$year){{'selected'}}@endif>{{$year_filter}}</option>
+                @endforeach
+            </select>
+        </div>
+        @endif
     </div>
 </div>
 <div class="card">
-    <div class="card-header d-flex justify-content-between">
-        <div>
-            <select class="form-select" id="page-size" onchange="changePageSize()">
-                <option value="10" selected>10</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
+    <div class="card-header d-flex flex-column justify-content-between">
+        <div class="d-flex align-items-center me-auto gap-3">
+            <p class="mb-0">Filter</p>
+            <select class="form-select" id="type" onchange="changeType()">
+                <option selected>Pilih Tipe Filter</option>
+                <option @if($type=='date' ){{'selected'}}@endif value="date">Tanggal</option>
+                <option @if($type=='month' ){{'selected'}}@endif value="month">Bulan</option>
             </select>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <select class="form-select" id="page-size" onchange="changePageSize()">
+                    <option value="10" selected>10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            @if($type == 'date')
+            <a href="{{route('report.income-export', [$start_date, $end_date])}}" class="btn btn-outline-primary">Export Pendapatan</a>
+            @endif
         </div>
     </div>
     <div class="card-body">
@@ -88,6 +119,12 @@
         url.searchParams.set('page_size', pageSize);
         window.location.href = url;
     }
+    changeType = () => {
+        let type = document.getElementById("type").value
+        let url = new URL(window.location.href);
+        url.searchParams.set('type', type);
+        window.location.href = url;
+    }
     changeStartDate = () => {
         let startDate = document.getElementById("start_date").value
         let url = new URL(window.location.href);
@@ -98,6 +135,18 @@
         let endDate = document.getElementById("end_date").value
         let url = new URL(window.location.href);
         url.searchParams.set('end_date', endDate);
+        window.location.href = url;
+    }
+    changeMonth = () => {
+        let month = document.getElementById("month").value
+        let url = new URL(window.location.href);
+        url.searchParams.set('month', month);
+        window.location.href = url;
+    }
+    changeYear = () => {
+        let year = document.getElementById("year").value
+        let url = new URL(window.location.href);
+        url.searchParams.set('year', year);
         window.location.href = url;
     }
     setSelectedPageSize = () => {
