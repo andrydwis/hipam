@@ -65,7 +65,9 @@
                 </select>
             </div>
             @if($type == 'date')
-            <a href="{{route('report.income-export', [$start_date, $end_date])}}" class="btn btn-outline-primary">Export Pendapatan</a>
+            <a href="{{route('report.income-export', ['type' => $type, 'start_date' => $start_date->format('Y-m-d'), 'end_date' => $end_date->format('Y-m-d')])}}" class="btn btn-outline-primary">Export Pendapatan</a>
+            @elseif($type == 'month')
+            <a href="{{route('report.income-export', ['type' => $type, 'month' => $month, 'year' => $year])}}" class="btn btn-outline-primary">Export Pendapatan</a>
             @endif
         </div>
     </div>

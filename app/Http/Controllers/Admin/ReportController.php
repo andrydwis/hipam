@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\IncomeFilterByDateExport;
+use App\Exports\IncomeFilterByMonthExport;
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -13,7 +16,7 @@ class ReportController extends Controller
     public function income(Request $request)
     {
         $type = $request->type ?? 'date';
-        
+
         if ($type == 'date') {
             if ($request->start_date) {
                 $startDate = Carbon::createFromFormat('Y-m-d', $request->start_date);
@@ -79,15 +82,34 @@ class ReportController extends Controller
 
     public function incomeExport(Request $request)
     {
-        if ($request->start_date) {
-            $startDate = Carbon::createFromFormat('Y-m-d', $request->start_date);
-        } else {
-            $startDate = Carbon::now()->subMonth()->startOfMonth();
-        }
-        if ($request->end_date) {
-            $endDate = Carbon::createFromFormat('Y-m-d', $request->end_date);
-        } else {
-            $endDate = Carbon::now();
+        $type = $request->type ?? 'date';
+
+        if ($type == 'date') {
+            if ($request->start_date) {
+                $startDate = Carbon::createFromFormat('Y-m-d', $request->start_date);
+            } else {
+                $startDate = Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d');
+            }
+            if ($request->end_date) {
+                $endDate = Carbon::createFromFormat('Y-m-d', $request->end_date);
+            } else {
+                $endDate = Carbon::now()->format('Y-m-d');
+            }
+
+            return Excel::download(new IncomeFilterByDateExport($startDate, $endDate), 'laporan-pendapatan-' . $startDate . '_' . $endDate . '.xlsx');
+        } elseif ($type == 'month') {
+            if ($request->month) {
+                $month = $request->month;
+            } else {
+                $month = Carbon::now()->format('m');
+            }
+            if ($request->year) {
+                $year = $request->year;
+            } else {
+                $year = Carbon::now()->format('Y');
+            }
+
+            return Excel::download(new IncomeFilterByMonthExport($month, $year), 'laporan-pendapatan-' . $month . '-' . $year . '.xlsx');
         }
     }
 }
