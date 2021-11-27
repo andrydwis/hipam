@@ -13,12 +13,12 @@
                 </div>
                 <div class="d-block">
                     @auth
-                    <h2 class="h5 mb-3">Hi, {{auth()->user()->name}}</h2>
+                    <h2 class="h5 mb-3">Halo, {{auth()->user()->name}}</h2>
                     @endauth
                     <form action="{{route('logout')}}" method="post">
                         @csrf
                         <button type="submit" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
-                            Sign Out
+                            Logout
                         </button>
                     </form>
                 </div>
@@ -100,6 +100,49 @@
                     </span>
                     <span class="sidebar-text">Transaksi Pembayaran</span>
                 </a>
+            </li>
+            @endif
+            @if(auth()->user()->getRoleNames()->first() == 'superadmin')
+            <li class="nav-item">
+                <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-report-data">
+                    <span>
+                        <span class="sidebar-icon">
+                            <i class="far fa-file-alt"></i>
+                        </span>
+                        <span class="sidebar-text">Laporan</span>
+                    </span>
+                    <span class="link-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                </span>
+                <div class="multi-level collapse" role="list" id="submenu-report-data">
+                    <ul class="flex-column nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('report.income')}}">
+                                <span class="sidebar-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </span>
+                                <span class="sidebar-text">Pendapatan</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('client.index')}}">
+                                <span class="sidebar-icon">
+                                    <i class="fas fa-weight-hanging"></i>
+                                </span>
+                                <span class="sidebar-text">Tunggakan</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('client.index')}}">
+                                <span class="sidebar-icon">
+                                    <i class="fas fa-cut"></i>
+                                </span>
+                                <span class="sidebar-text">Pemutusan</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             @endif
             @endauth

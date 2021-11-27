@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UsageController;
 use App\Http\Controllers\DashboardController;
@@ -72,6 +73,8 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer'])->group(
     Route::get('/transaction/{client}', [TransactionController::class, 'show'])->name('transaction.show');
     Route::get('/transaction/{client}/pay', [TransactionController::class, 'pay'])->name('transaction.pay');
     Route::post('/transaction/{client}/pay-process', [TransactionController::class, 'payProcess'])->name('transaction.pay-process');
+
+    Route::get('/report/income', [ReportController::class, 'income'])->name('report.income');
 
     // Route::get('/activity-log', [ActivityLogController::class, 'index'])->withoutMiddleware('role:admin')->name('activity-log.index');
 });
