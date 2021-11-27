@@ -29,12 +29,14 @@
         <div class="d-flex align-items-center gap-3">
             <label for="month" class="form-label">Bulan</label>
             <select class="form-select" id="month" name="month" onchange="changeMonth()">
+                <option disabled>Pilih Bulan</option>
                 @foreach($months as $month_filter)
                 <option value="{{$month_filter['month']}}" @if($month_filter['month']==$month){{'selected'}}@endif>{{$month_filter['name']}}</option>
                 @endforeach
             </select>
             <label for="year" class="form-label">Tahun</label>
             <select class="form-select" id="year" name="year" onchange="changeYear()">
+                <option disabled>Pilih Tahun</option>
                 @foreach($years as $year_filter)
                 <option value="{{$year_filter}}" @if($year_filter==$year){{'selected'}}@endif>{{$year_filter}}</option>
                 @endforeach
@@ -48,7 +50,7 @@
         <div class="d-flex align-items-center me-auto gap-3">
             <p class="mb-0">Filter</p>
             <select class="form-select" id="type" onchange="changeType()">
-                <option selected>Pilih Tipe Filter</option>
+                <option disabled>Pilih Tipe Filter</option>
                 <option @if($type=='date' ){{'selected'}}@endif value="date">Tanggal</option>
                 <option @if($type=='month' ){{'selected'}}@endif value="month">Bulan</option>
             </select>
