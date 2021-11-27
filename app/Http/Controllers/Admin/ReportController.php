@@ -54,7 +54,7 @@ class ReportController extends Controller
                     'year' => $year,
                 ];
             });
-            $years = Bill::selectRaw('EXTRACT(YEAR FROM paid_at) as year')
+            $years = Bill::selectRaw('EXTRACT(YEAR FROM paid_at) AS year')
                 ->where('status', 'paid')
                 ->groupBy('year')
                 ->orderBy('year', 'desc')
