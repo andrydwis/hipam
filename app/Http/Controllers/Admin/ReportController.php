@@ -96,7 +96,7 @@ class ReportController extends Controller
                 $endDate = Carbon::now()->format('Y-m-d');
             }
 
-            return Excel::download(new IncomeFilterByDateExport($startDate, $endDate), 'laporan-pendapatan-' . $startDate . '_' . $endDate . '.xlsx');
+            return Excel::download(new IncomeFilterByDateExport($startDate, $endDate), 'laporan-pendapatan-' . $startDate->format('Y-m-d') . '_' . $endDate->format('Y-m-d') . '.xlsx');
         } elseif ($type == 'month') {
             if ($request->month) {
                 $month = $request->month;
