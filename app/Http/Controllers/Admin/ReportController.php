@@ -15,7 +15,7 @@ class ReportController extends Controller
         if ($request->start_date) {
             $startDate = Carbon::createFromFormat('Y-m-d', $request->start_date);
         } else {
-            $startDate = Carbon::now()->subDays(30);
+            $startDate = Carbon::now()->subMonth()->startOfMonth();
         }
         if($request->end_date){
             $endDate = Carbon::createFromFormat('Y-m-d', $request->end_date);
