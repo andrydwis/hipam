@@ -1,4 +1,12 @@
 <table>
+    <tbody>
+        <tr>
+            <td>Total Pendapatan: </td>
+            <td>Rp. {{number_format($total,2,',','.')}}</td>
+        </tr>
+    </tbody>
+</table>
+<table>
     <thead>
         <tr>
             <th>Nomor Pelanggan</th>
@@ -22,13 +30,5 @@
             <td>{{$bill->paid_at->isoFormat('dddd, DD-MM-YYYY hh:mm A')}}</td>
         </tr>
         @endforeach
-    </tbody>
-</table>
-<table>
-    <tbody>
-        <tr>
-            <td>Total Pendapatan: </td>
-            <td>Rp. {{number_format($total,2,',','.')}}</td>
-        </tr>
     </tbody>
 </table>

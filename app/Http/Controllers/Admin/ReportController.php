@@ -88,12 +88,12 @@ class ReportController extends Controller
             if ($request->start_date) {
                 $startDate = Carbon::createFromFormat('Y-m-d', $request->start_date);
             } else {
-                $startDate = Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d');
+                $startDate = Carbon::now()->subMonth()->startOfMonth();
             }
             if ($request->end_date) {
                 $endDate = Carbon::createFromFormat('Y-m-d', $request->end_date);
             } else {
-                $endDate = Carbon::now()->format('Y-m-d');
+                $endDate = Carbon::now();
             }
 
             return Excel::download(new IncomeFilterByDateExport($startDate, $endDate), 'laporan-pendapatan-' . $startDate->format('Y-m-d') . '_' . $endDate->format('Y-m-d') . '.xlsx');
