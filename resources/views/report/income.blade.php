@@ -16,8 +16,29 @@
     </div>
 </div>
 @include('layouts.alert')
-<div class="card mb-3">
-    <div class="card-body">
+<div class="card">
+    <div class="card-header d-flex flex-column justify-content-between">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center me-auto gap-3">
+                <p class="mb-0">Filter</p>
+                <select class="form-select" id="type" onchange="changeType()">
+                    <option disabled>Pilih Tipe Filter</option>
+                    <option @if($type=='date' ){{'selected'}}@endif value="date">Tanggal</option>
+                    <option @if($type=='month' ){{'selected'}}@endif value="month">Bulan</option>
+                </select>
+                <select class="form-select" id="page-size" onchange="changePageSize()">
+                    <option value="10" selected>10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            @if($type == 'date')
+            <a href="{{route('report.income-export', ['type' => $type, 'start_date' => $start_date->format('Y-m-d'), 'end_date' => $end_date->format('Y-m-d')])}}" class="btn btn-outline-primary">Export Pendapatan</a>
+            @elseif($type == 'month')
+            <a href="{{route('report.income-export', ['type' => $type, 'month' => $month, 'year' => $year])}}" class="btn btn-outline-primary">Export Pendapatan</a>
+            @endif
+        </div>
+        <hr>
         @if($type == 'date')
         <div class="d-flex align-items-center gap-3">
             <label for="start_date" class="form-label">Mulai</label>
@@ -43,33 +64,6 @@
             </select>
         </div>
         @endif
-    </div>
-</div>
-<div class="card">
-    <div class="card-header d-flex flex-column justify-content-between">
-        <div class="d-flex align-items-center me-auto gap-3">
-            <p class="mb-0">Filter</p>
-            <select class="form-select" id="type" onchange="changeType()">
-                <option disabled>Pilih Tipe Filter</option>
-                <option @if($type=='date' ){{'selected'}}@endif value="date">Tanggal</option>
-                <option @if($type=='month' ){{'selected'}}@endif value="month">Bulan</option>
-            </select>
-        </div>
-        <hr>
-        <div class="d-flex justify-content-between">
-            <div class="d-flex">
-                <select class="form-select" id="page-size" onchange="changePageSize()">
-                    <option value="10" selected>10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-            </div>
-            @if($type == 'date')
-            <a href="{{route('report.income-export', ['type' => $type, 'start_date' => $start_date->format('Y-m-d'), 'end_date' => $end_date->format('Y-m-d')])}}" class="btn btn-outline-primary">Export Pendapatan</a>
-            @elseif($type == 'month')
-            <a href="{{route('report.income-export', ['type' => $type, 'month' => $month, 'year' => $year])}}" class="btn btn-outline-primary">Export Pendapatan</a>
-            @endif
-        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive py-4">

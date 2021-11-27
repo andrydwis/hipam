@@ -126,7 +126,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('client.index')}}">
+                            <a class="nav-link" href="#">
                                 <span class="sidebar-icon">
                                     <i class="fas fa-weight-hanging"></i>
                                 </span>
@@ -134,7 +134,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('client.index')}}">
+                            <a class="nav-link" href="#">
                                 <span class="sidebar-icon">
                                     <i class="fas fa-cut"></i>
                                 </span>
