@@ -12,7 +12,11 @@ class UserStaticticController extends Controller
     //
     public function index()
     {
-        return view('user-statistic.index');
+        $data = [
+            'clients' => Client::all(),
+        ];
+        
+        return view('user-statistic.index', $data);
     }
 
     public function search(Request $request)

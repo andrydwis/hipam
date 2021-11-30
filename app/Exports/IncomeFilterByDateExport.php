@@ -25,6 +25,6 @@ class IncomeFilterByDateExport implements FromView, ShouldAutoSize
             'total' => $total,
         ];
 
-        return view('report.export.income-filter-by-date', $data);
+        return view('report.export.income', $data);
     }
 }

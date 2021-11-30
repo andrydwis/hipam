@@ -102,7 +102,7 @@
                 </a>
             </li>
             @endif
-            @if(auth()->user()->getRoleNames()->first() == 'superadmin')
+            @if(auth()->user()->getRoleNames()->first() == 'superadmin' || auth()->user()->getRoleNames()->first() == 'admin')
             <li class="nav-item">
                 <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-report-data">
                     <span>

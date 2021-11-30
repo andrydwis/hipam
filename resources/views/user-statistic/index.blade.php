@@ -31,7 +31,12 @@
             </div>
             <div class="mb-4">
                 <label for="nama">Nama</label>
-                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" placeholder="nama pelanggan" value="{{old('nama')}}">
+                <select id="select2" name="nama" class="form-select @error('nama') is-invalid @enderror" name="state">
+                    <option selected disabled>Pilih Nama Pelanggan</option>
+                    @foreach($clients as $client)
+                    <option {{old('nama') == $client->name ? 'selected' : ''}} value="{{$client->name}}">{{$client->name}}</option>
+                    @endforeach
+                </select>
                 @error('nama')
                 <div class="invalid-feedback">
                     {{$message}}
@@ -45,4 +50,18 @@
         </form>
     </div>
 </div>
+@endsection
+
+@section('customCSS')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@nedsection
+
+@section('customJS')
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#select2').select2();
+    });
+</script>
 @endsection
