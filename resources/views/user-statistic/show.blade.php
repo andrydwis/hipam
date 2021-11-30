@@ -17,10 +17,10 @@
 </div>
 @if($bills->isNotEmpty())
 <div class="card">
-    <div class="card-body">
+    <div class="card-body" style="font-size: 0.5rem">
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <p class="fw-bolder">BILLING IURAN AIR</p>
-            <p class="fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</p>
+            <p class="fw-bolder" style="font-size: 0.5rem">BILLING IURAN AIR</p>
+            <p class="fw-bolder" style="font-size: 0.5rem">HIPAM SWADAYA RW.02 DESA KLAMPOK</p>
         </div>
         <br>
         <div class="row">
