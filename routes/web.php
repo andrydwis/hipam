@@ -75,7 +75,9 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer'])->group(
     Route::post('/transaction/{client}/pay-process', [TransactionController::class, 'payProcess'])->name('transaction.pay-process');
 
     Route::get('/report/income', [ReportController::class, 'income'])->name('report.income');
+    Route::get('/report/arrears', [ReportController::class, 'arrears'])->name('report.arrears');
     Route::get('/report/income/export', [ReportController::class, 'incomeExport'])->name('report.income-export');
+    Route::get('/report/arrears/export', [ReportController::class, 'arrearsExport'])->name('report.arrears-export');
 
     // Route::get('/activity-log', [ActivityLogController::class, 'index'])->withoutMiddleware('role:admin')->name('activity-log.index');
 });

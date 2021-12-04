@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ArrearsExport;
 use App\Exports\IncomeFilterByDateExport;
 use App\Exports\IncomeFilterByMonthExport;
 use App\Http\Controllers\Controller;
@@ -57,8 +58,7 @@ class ReportController extends Controller
                     'year' => $year,
                 ];
             });
-            $years = Bill::selectRaw('EXTRACT(YEAR FROM paid_at) AS year')
-                ->where('status', 'paid')
+            $years = Bill::selectRaw('EXTRACT(YEAR FROM created_at) AS year')
                 ->groupBy('year')
                 ->orderBy('year', 'desc')
                 ->pluck('year');
@@ -78,6 +78,45 @@ class ReportController extends Controller
         }
 
         return view('report.income', $data);
+    }
+
+    public function arrears(Request $request)
+    {
+        if ($request->month) {
+            $month = $request->month;
+        } else {
+            $month = Carbon::now()->format('m');
+        }
+        if ($request->year) {
+            $year = $request->year;
+        } else {
+            $year = Carbon::now()->format('Y');
+        }
+        $months = collect(range(1, 12))->map(function ($month) use ($year) {
+            return [
+                'name' => Carbon::createFromDate($year, $month)->isoFormat('MMMM'),
+                'month' => $month,
+                'year' => $year,
+            ];
+        });
+        $years = Bill::selectRaw('EXTRACT(YEAR FROM created_at) AS year')
+            ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+        $bills = Bill::where('fine', '!=', null)->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->with('usage.client')->paginate($request->page_size ?? 10)->withQueryString();
+        $total = Bill::where('fine', '!=', null)->where('status', 'late')->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->sum('total');
+
+        $data = [
+            'request' => $request,
+            'bills' => $bills,
+            'total' => $total,
+            'month' => $month,
+            'months' => $months,
+            'year' => $year,
+            'years' => $years,
+        ];
+
+        return view('report.arrears', $data);
     }
 
     public function incomeExport(Request $request)
@@ -111,5 +150,21 @@ class ReportController extends Controller
 
             return Excel::download(new IncomeFilterByMonthExport($month, $year), 'laporan-pendapatan-' . $month . '-' . $year . '.xlsx');
         }
+    }
+
+    public function arrearsExport(Request $request)
+    {
+        if ($request->month) {
+            $month = $request->month;
+        } else {
+            $month = Carbon::now()->format('m');
+        }
+        if ($request->year) {
+            $year = $request->year;
+        } else {
+            $year = Carbon::now()->format('Y');
+        }
+
+        return Excel::download(new ArrearsExport($month, $year), 'laporan-tunggakan-' . $month . '-' . $year . '.xlsx');
     }
 }

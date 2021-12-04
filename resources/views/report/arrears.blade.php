@@ -5,13 +5,13 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item">Laporan Pendapatan</li>
+            <li class="breadcrumb-item">Laporan Tunggakan</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Laporan Pendapatan</h1>
-            <p class="mb-0">Menampilkan laporan pendapatan pelanggan sesuai tanggal</p>
+            <h1 class="h4">Laporan Tunggakan</h1>
+            <p class="mb-0">Menampilkan laporan tunggakan dari pelanggan sesuai bulan dari tahun tersebut</p>
         </div>
     </div>
 </div>
@@ -20,33 +20,15 @@
     <div class="card-header d-flex flex-column justify-content-between">
         <div class="d-flex justify-content-between">
             <div class="d-flex align-items-center me-auto gap-3">
-                <p class="mb-0">Filter</p>
-                <select class="form-select" id="type" onchange="changeType()">
-                    <option disabled>Pilih Tipe Filter</option>
-                    <option @if($type=='date' ){{'selected'}}@endif value="date">Tanggal</option>
-                    <option @if($type=='month' ){{'selected'}}@endif value="month">Bulan</option>
-                </select>
                 <select class="form-select" id="page-size" onchange="changePageSize()">
                     <option value="10" selected>10</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
             </div>
-            @if($type == 'date')
-            <a href="{{route('report.income-export', ['type' => $type, 'start_date' => $start_date->format('Y-m-d'), 'end_date' => $end_date->format('Y-m-d')])}}" class="btn btn-outline-primary">Export Pendapatan</a>
-            @elseif($type == 'month')
-            <a href="{{route('report.income-export', ['type' => $type, 'month' => $month, 'year' => $year])}}" class="btn btn-outline-primary">Export Pendapatan</a>
-            @endif
+            <a href="{{route('report.arrears-export', ['month' => $month, 'year' => $year])}}" class="btn btn-outline-primary">Export Pendapatan</a>
         </div>
         <hr>
-        @if($type == 'date')
-        <div class="d-flex align-items-center gap-3">
-            <label for="start_date" class="form-label">Mulai</label>
-            <input type="date" class="form-control" id="start_date" name="start_date" value="{{$start_date->isoFormat('YYYY-MM-DD')}}" onchange="changeStartDate()">
-            <label for="end_date" class="form-label">Sampai</label>
-            <input type="date" class="form-control" id="end_date" name="end_date" value="{{$end_date->isoFormat('YYYY-MM-DD')}}" onchange="changeEndDate()">
-        </div>
-        @else
         <div class="d-flex align-items-center gap-3">
             <label for="month" class="form-label">Bulan</label>
             <select class="form-select" id="month" name="month" onchange="changeMonth()">
@@ -63,7 +45,6 @@
                 @endforeach
             </select>
         </div>
-        @endif
     </div>
     <div class="card-body">
         <div class="table-responsive py-4">
@@ -74,9 +55,9 @@
                         <th>Nama</th>
                         <th>RT</th>
                         <th>RW</th>
-                        <th>Pemakaian Terakhir</th>
+                        <th>Total Tunggakan</th>
                         <th>Tagihan Terakhir</th>
-                        <th>Waktu Bayar</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,19 +67,19 @@
                         <td>{{$bill->usage->client->name}}</td>
                         <td>{{$bill->usage->client->rt}}</td>
                         <td>{{$bill->usage->client->rw}}</td>
-                        <td>{{$bill->meter_cubic}} m<sup>3</sup></td>
+                        <td>{{$bill->allArrears()}} Bulan</td>
                         <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
-                        <td>{{$bill->paid_at->isoFormat('dddd, DD-MM-YYYY hh:mm A')}}</td>
+                        <td>{{$bill->status == 'late' ? 'Belum Dibayar' : 'Sudah DIbayar'}}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-        {{$bills->onEachSide(1)->links('vendor.pagination.bootstrap-4')}}
+
     </div>
     <div class="card-footer">
         <div class="d-flex justify-content-between">
-            <p class="mb-0">Total Pendapatan</p>
+            <p class="mb-0">Total Kesuluruhan Tunggakan</p>
             <h4 class="font-weight-bold mb-0">Rp. {{number_format($total,2,',','.')}}</h4>
         </div>
     </div>
@@ -115,24 +96,6 @@
         let pageSize = document.getElementById("page-size").value
         let url = new URL(window.location.href);
         url.searchParams.set('page_size', pageSize);
-        window.location.href = url;
-    }
-    changeType = () => {
-        let type = document.getElementById("type").value
-        let url = new URL(window.location.href);
-        url.searchParams.set('type', type);
-        window.location.href = url;
-    }
-    changeStartDate = () => {
-        let startDate = document.getElementById("start_date").value
-        let url = new URL(window.location.href);
-        url.searchParams.set('start_date', startDate);
-        window.location.href = url;
-    }
-    changeEndDate = () => {
-        let endDate = document.getElementById("end_date").value
-        let url = new URL(window.location.href);
-        url.searchParams.set('end_date', endDate);
         window.location.href = url;
     }
     changeMonth = () => {

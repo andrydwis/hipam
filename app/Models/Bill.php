@@ -28,4 +28,12 @@ class Bill extends Model
     {
         return $this->belongsTo(Usage::class);
     }
+
+    public function allArrears()
+    {
+        $currentBillCreatedAt = $this->created_at;
+        $arrearsCount = Bill::where('created_at', '<=', $currentBillCreatedAt)->where('status', 'late')->get()->count();
+
+        return $arrearsCount;
+    }
 }
