@@ -33,7 +33,7 @@ class Bill extends Model
     {
         $currentBillCreatedAt = $this->created_at;
         $arrearsCount = Bill::where('created_at', '<=', $currentBillCreatedAt)->where('status', 'late')->whereHas('usage', function ($query) use ($client_id) {
-            return $query->where('id', $client_id);
+            return $query->where('client_id', $client_id);
         })->get()->count();
 
         return $arrearsCount;
