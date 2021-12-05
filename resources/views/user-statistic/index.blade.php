@@ -54,7 +54,7 @@
 
 @section('customCSS')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@nedsection
+@endsection
 
 @section('customJS')
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
