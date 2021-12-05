@@ -67,7 +67,7 @@
                         <td>{{$bill->usage->client->name}}</td>
                         <td>{{$bill->usage->client->rt}}</td>
                         <td>{{$bill->usage->client->rw}}</td>
-                        <td>{{$bill->allArrears()}} Bulan</td>
+                        <td>{{$bill->allArrears($bill->usage->client->id)}} Bulan</td>
                         <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
                         <td>
                             <a href="{{route('report.disconnection.print-warning', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 1</a>
