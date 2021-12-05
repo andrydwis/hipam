@@ -5,13 +5,13 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item">Laporan Tunggakan</li>
+            <li class="breadcrumb-item">Laporan Pemutusan</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Laporan Tunggakan</h1>
-            <p class="mb-0">Menampilkan laporan tunggakan dari pelanggan sesuai bulan dari tahun tersebut</p>
+            <h1 class="h4">Laporan Pemutusan</h1>
+            <p class="mb-0">Menampilkan laporan pemutusan dari pelanggan sesuai bulan dari tahun tersebut</p>
         </div>
     </div>
 </div>
@@ -26,7 +26,7 @@
                     <option value="100">100</option>
                 </select>
             </div>
-            <a href="{{route('report.arrears-export', ['month' => $month, 'year' => $year])}}" class="btn btn-outline-primary">Export Tunggakan</a>
+            <a href="{{route('report.arrears-export', ['month' => $month, 'year' => $year])}}" class="btn btn-outline-primary">Export Pendapatan</a>
         </div>
         <hr>
         <div class="d-flex align-items-center gap-3">
@@ -57,7 +57,7 @@
                         <th>RW</th>
                         <th>Total Tunggakan</th>
                         <th>Tagihan Terakhir</th>
-                        <th>Status</th>
+                        <th>Print Peringatan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,7 +69,10 @@
                         <td>{{$bill->usage->client->rw}}</td>
                         <td>{{$bill->allArrears()}} Bulan</td>
                         <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
-                        <td>{{$bill->status == 'late' ? 'Belum Dibayar' : 'Sudah DIbayar'}}</td>
+                        <td>
+                            <a href="{{route('report.disconnection.print-warning', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 1</a>
+                            <button class="btn btn-primary">Peringatan 2</button>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

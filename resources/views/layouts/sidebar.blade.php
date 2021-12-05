@@ -134,7 +134,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{route('report.disconnection')}}">
                                 <span class="sidebar-icon">
                                     <i class="fas fa-cut"></i>
                                 </span>

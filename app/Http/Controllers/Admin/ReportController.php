@@ -7,6 +7,8 @@ use App\Exports\IncomeFilterByDateExport;
 use App\Exports\IncomeFilterByMonthExport;
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
+use App\Models\Client;
+use App\Models\Usage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -117,6 +119,58 @@ class ReportController extends Controller
         ];
 
         return view('report.arrears', $data);
+    }
+
+    public function disconnection(Request $request)
+    {
+        if ($request->month) {
+            $month = $request->month;
+        } else {
+            $month = Carbon::now()->format('m');
+        }
+        if ($request->year) {
+            $year = $request->year;
+        } else {
+            $year = Carbon::now()->format('Y');
+        }
+        $months = collect(range(1, 12))->map(function ($month) use ($year) {
+            return [
+                'name' => Carbon::createFromDate($year, $month)->isoFormat('MMMM'),
+                'month' => $month,
+                'year' => $year,
+            ];
+        });
+        $years = Bill::selectRaw('EXTRACT(YEAR FROM created_at) AS year')
+            ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+        $bills = Bill::where('fine', '!=', null)->where('status', 'late')->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->with('usage.client')->paginate($request->page_size ?? 10)->withQueryString();
+        $total = Bill::where('fine', '!=', null)->where('status', 'late')->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->sum('total');
+
+        $data = [
+            'request' => $request,
+            'bills' => $bills,
+            'total' => $total,
+            'month' => $month,
+            'months' => $months,
+            'year' => $year,
+            'years' => $years,
+        ];
+
+        return view('report.disconnection', $data);
+    }
+
+    public function printWarning(Request $request, Client $client)
+    {
+        $usages = Usage::where('client_id', $client->id)->get()->pluck('id');
+        $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
+
+        $data = [
+            'client' => $client,
+            'bills' => $bills,
+        ];
+
+        return view('report.print.warning', $data);
     }
 
     public function incomeExport(Request $request)
