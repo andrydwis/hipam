@@ -78,7 +78,7 @@
                 </tbody>
             </table>
         </div>
-
+        {{$bills->onEachSide(1)->links('vendor.pagination.bootstrap-4')}}
     </div>
     <div class="card-footer">
         <div class="d-flex justify-content-between">
