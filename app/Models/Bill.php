@@ -29,10 +29,12 @@ class Bill extends Model
         return $this->belongsTo(Usage::class);
     }
 
-    public function allArrears()
+    public function allArrears($client_id)
     {
         $currentBillCreatedAt = $this->created_at;
-        $arrearsCount = Bill::where('created_at', '<=', $currentBillCreatedAt)->where('status', 'late')->get()->count();
+        $arrearsCount = Bill::where('created_at', '<=', $currentBillCreatedAt)->where('status', 'late')->whereHas('usage', function ($query) use ($client_id) {
+            return $query->where('id', $client_id);
+        })->get()->count();
 
         return $arrearsCount;
     }

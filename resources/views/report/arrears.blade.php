@@ -67,7 +67,7 @@
                         <td>{{$bill->usage->client->name}}</td>
                         <td>{{$bill->usage->client->rt}}</td>
                         <td>{{$bill->usage->client->rw}}</td>
-                        <td>{{$bill->allArrears()}} Bulan</td>
+                        <td>{{$bill->allArrears($bill->usage->client->id)}} Bulan</td>
                         <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
                         <td>{{$bill->status == 'late' ? 'Belum Dibayar' : 'Sudah DIbayar'}}</td>
                     </tr>
