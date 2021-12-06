@@ -206,7 +206,7 @@
                 <div class="text-center">
                     Cek tagihan anda di
                     <br>
-                    <span class="fw-bolder">https://hipamklampok.com/user-statistic</span>
+                    <span class="fw-bolder">https://hipamklampok.com</span>
                 </div>
             </div>
         </div>
