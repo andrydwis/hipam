@@ -164,10 +164,12 @@ class ReportController extends Controller
     {
         $usages = Usage::where('client_id', $client->id)->get()->pluck('id');
         $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
+        $date = Carbon::now()->isoFormat('DD MMMM YYYY');
 
         $data = [
             'client' => $client,
             'bills' => $bills,
+            'date' => $date,
         ];
 
         return view('report.print.warning', $data);

@@ -97,6 +97,11 @@
                 <div class="text-center fw-bolder">SURAT PERINGATAN TERLAMBAT 3 BULAN</div>
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
                 <hr>
+                <div class="d-flex justify-content-between">
+                    <div>No: xx-xx-xxxxx</div>
+                    <div>Klampok, {{$date}}</div>
+                </div>
+                <br>
                 <div class="text-start">
                     Kepada YTH, <span class="fw-bolder">{{$client->client_id}} - {{$client->name}} - RT {{$client->rt}} RW {{$client->rw}}</span>
                 </div>

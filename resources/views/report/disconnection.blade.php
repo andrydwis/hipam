@@ -26,7 +26,6 @@
                     <option value="100">100</option>
                 </select>
             </div>
-            <a href="{{route('report.arrears-export', ['month' => $month, 'year' => $year])}}" class="btn btn-outline-primary">Export Pendapatan</a>
         </div>
         <hr>
         <div class="d-flex align-items-center gap-3">
