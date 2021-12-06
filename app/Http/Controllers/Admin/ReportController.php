@@ -105,7 +105,7 @@ class ReportController extends Controller
             ->groupBy('year')
             ->orderBy('year', 'desc')
             ->pluck('year');
-        $bills = Bill::where('fine', '!=', null)->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->with('usage.client')->paginate($request->page_size ?? 10)->withQueryString();
+        $bills = Bill::where('fine', '!=', null)->where('status', 'late')->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->with('usage.client')->paginate($request->page_size ?? 10)->withQueryString();
         $total = Bill::where('fine', '!=', null)->where('status', 'late')->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->sum('total');
 
         $data = [
@@ -144,8 +144,17 @@ class ReportController extends Controller
             ->groupBy('year')
             ->orderBy('year', 'desc')
             ->pluck('year');
-        $bills = Bill::where('fine', '!=', null)->where('status', 'late')->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->with('usage.client')->paginate($request->page_size ?? 10)->withQueryString();
-        $total = Bill::where('fine', '!=', null)->where('status', 'late')->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->sum('total');
+        $bills = Bill::where('fine', '!=', null)->where('status', 'late')->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->with('usage.client')->get();
+
+        //filter bills where 3 months arrears
+        $bills = $bills->filter(function ($bill) {
+            if($bill->allArrears($bill->usage->client->id) < 3)
+            {
+                return false;
+            }
+        });
+        $total = $bills->sum('total');
+        $bills = $bills->paginate($request->page_size ?? 10)->withQueryString();
 
         $data = [
             'request' => $request,
