@@ -148,9 +148,9 @@ class ReportController extends Controller
 
         //filter bills where 3 months arrears
         $bills = $bills->filter(function ($bill) {
-            if($bill->allArrears($bill->usage->client->id) < 3)
+            if($bill->allArrears($bill->usage->client->id) >= 3)
             {
-                return false;
+                return $bill;
             }
         });
         $total = $bills->sum('total');
