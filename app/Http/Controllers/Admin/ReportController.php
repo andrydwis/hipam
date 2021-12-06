@@ -146,7 +146,7 @@ class ReportController extends Controller
             ->pluck('year');
         $bills = Bill::where('fine', '!=', null)->where('status', 'late')->whereMonth('created_at', $month)->whereYear('created_at', $year)->orderBy('created_at', 'desc')->with('usage.client')->get();
 
-        //filter bills where 3 months arrears
+        //filter bills where min 3 months arrears
         $bills = $bills->filter(function ($bill) {
             if($bill->allArrears($bill->usage->client->id) >= 3)
             {

@@ -2,19 +2,16 @@
     <div class="sidebar-inner px-4 pt-3">
         <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
             <div class="d-flex align-items-center">
+                @auth
                 <div class="avatar-lg me-4">
-                    @auth
                     @if(auth()->user()->getMedia('images')->first())
                     <img src="{{auth()->user()->getMedia('images')->first()->getUrl('thumb')}}" class="card-img-top rounded-circle border-white" alt="User" />
                     @else
                     <img src="https://ui-avatars.com/api/?name={{auth()->user()->name}}" class="card-img-top rounded-circle border-white" alt="User" />
                     @endif
-                    @endauth
                 </div>
                 <div class="d-block">
-                    @auth
                     <h2 class="h5 mb-3">Halo, {{auth()->user()->name}}</h2>
-                    @endauth
                     <form action="{{route('logout')}}" method="post">
                         @csrf
                         <button type="submit" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
@@ -22,6 +19,7 @@
                         </button>
                     </form>
                 </div>
+                @endauth
             </div>
             <div class="collapse-close d-md-none">
                 <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
