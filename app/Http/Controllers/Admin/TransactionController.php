@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Usage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -17,7 +18,7 @@ class TransactionController extends Controller
             $data = [
                 'clients' => Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->with('usages.bill')->paginate(10)
             ];
-        }else{
+        } else {
             $data = [
                 'clients' => []
             ];
@@ -60,7 +61,7 @@ class TransactionController extends Controller
             return back()->with('error', 'Semua tagihan pelanggan sudah dibayar');
         }
 
-        $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['status' => 'paid', 'paid_at' => Carbon::now()]);
+        $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['admin_id' => Auth::user()->id, 'status' => 'paid', 'paid_at' => Carbon::now()]);
 
         $data = [
             'client' => $client,

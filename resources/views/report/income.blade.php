@@ -64,6 +64,11 @@
             </select>
         </div>
         @endif
+        <hr>
+        <div class="d-flex align-items-center justify-content-between">
+            <p class="mb-0">Total Pendapatan</p>
+            <h4 class="font-weight-bold mb-0">Rp. {{number_format($total,2,',','.')}}</h4>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive py-4">
@@ -74,9 +79,12 @@
                         <th>Nama</th>
                         <th>RT</th>
                         <th>RW</th>
+                        <th>Pemakaian Awal</th>
                         <th>Pemakaian Terakhir</th>
-                        <th>Tagihan Terakhir</th>
+                        <th>Dibayar</th>
                         <th>Waktu Bayar</th>
+                        <th>Keterangan</th>
+                        <th>Penerima</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,21 +94,18 @@
                         <td>{{$bill->usage->client->name}}</td>
                         <td>{{$bill->usage->client->rt}}</td>
                         <td>{{$bill->usage->client->rw}}</td>
-                        <td>{{$bill->meter_cubic}} m<sup>3</sup></td>
-                        <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
+                        <td>{{$bill->usage->meter_cubic-$bill->meter_cubic}} m<sup>3</sup></td>
+                        <td>{{$bill->usage->meter_cubic}} m<sup>3</sup></td>
+                        <td>Rp. {{number_format($bill->total,2,',','.')}}</td> 
                         <td>{{$bill->paid_at->isoFormat('dddd, DD-MM-YYYY hh:mm A')}}</td>
+                        <td>{{$bill->fine ? 'Telat Membayar' : '-'}}</td>
+                        <td>{{$bill->admin ? $bill->admin->name : '-'}}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
         {{$bills->onEachSide(1)->links('vendor.pagination.bootstrap-4')}}
-    </div>
-    <div class="card-footer">
-        <div class="d-flex justify-content-between">
-            <p class="mb-0">Total Pendapatan</p>
-            <h4 class="font-weight-bold mb-0">Rp. {{number_format($total,2,',','.')}}</h4>
-        </div>
     </div>
 </div>
 @endsection

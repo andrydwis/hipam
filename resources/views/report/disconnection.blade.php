@@ -44,6 +44,11 @@
                 @endforeach
             </select>
         </div>
+        <hr>
+        <div class="d-flex align-items-center justify-content-between">
+            <p class="mb-0">Total Peringatan Pemutusan</p>
+            <h4 class="font-weight-bold mb-0">{{$bills->total()}} Orang</h4>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive py-4">
@@ -70,7 +75,7 @@
                         <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
                         <td>
                             <a href="{{route('report.disconnection.print-warning', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 1</a>
-                            <button class="btn btn-primary">Peringatan 2</button>
+                            <a href="{{route('report.disconnection.print-disconnection', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 2</a>
                         </td>
                     </tr>
                     @endforeach
@@ -78,12 +83,6 @@
             </table>
         </div>
         {{$bills->onEachSide(1)->links('vendor.pagination.bootstrap-4')}}
-    </div>
-    <div class="card-footer">
-        <div class="d-flex justify-content-between">
-            <p class="mb-0">Total Kesuluruhan Tunggakan</p>
-            <h4 class="font-weight-bold mb-0">Rp. {{number_format($total,2,',','.')}}</h4>
-        </div>
     </div>
 </div>
 @endsection

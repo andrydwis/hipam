@@ -29,6 +29,11 @@ class Bill extends Model
         return $this->belongsTo(Usage::class);
     }
 
+    public function admin()
+    {
+        return $this->belongsTo(User::class, 'admin_id', 'id');
+    }
+
     public function allArrears($client_id)
     {
         $currentBillCreatedAt = $this->created_at;

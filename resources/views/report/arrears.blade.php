@@ -45,6 +45,11 @@
                 @endforeach
             </select>
         </div>
+        <hr>
+        <div class="d-flex align-items-center justify-content-between">
+            <p class="mb-0">Total Kesuluruhan Tunggakan</p>
+            <h4 class="font-weight-bold mb-0">Rp. {{number_format($total,2,',','.')}}</h4>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive py-4">
@@ -76,12 +81,6 @@
             </table>
         </div>
         {{$bills->onEachSide(1)->links('vendor.pagination.bootstrap-4')}}
-    </div>
-    <div class="card-footer">
-        <div class="d-flex justify-content-between">
-            <p class="mb-0">Total Kesuluruhan Tunggakan</p>
-            <h4 class="font-weight-bold mb-0">Rp. {{number_format($total,2,',','.')}}</h4>
-        </div>
     </div>
 </div>
 @endsection

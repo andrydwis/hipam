@@ -94,7 +94,7 @@
     <div class="container-fluid">
         <div class="row print">
             <div class="col-6 p-2" style="border-right: 0.5px dashed">
-                <div class="text-center fw-bolder">SURAT PERINGATAN TERLAMBAT 3 BULAN</div>
+                <div class="text-center fw-bolder">SURAT PERINGATAN PEMUTUSAN SEMENTARA</div>
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
                 <hr>
                 <div class="d-flex justify-content-between">
@@ -108,7 +108,7 @@
                 <br>
                 <div class="text-start">
                     <span class="fw-bolder">Teguran keterlambatan 3 bulan</span> yang belum diselesaikan, maka dilakukan <span class="fw-bolder">PEMUTUSAN SEMENTARA oleh Petugas</span>.
-                    Mohon dibayarkan langsung di kasir HIPAM.
+                    Untuk penyambungan mohon menyelesaikan pembayaran serta membayar denda Rp. 100.000,00 (seratus ribu rupiah) dan membuat surat bermaterai.
                 </div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>
@@ -187,9 +187,17 @@
                         </div>
                     </li>
                     @endif
+                    <div class="row">
+                    <div class="col-5">
+                        <div class="text-start">Denda Terlambat</div>
+                    </div>
+                    <div class="col-7">
+                        <div class="text-start">= Rp. {{number_format($fine,2,',','.')}}</div>
+                    </div>
+                </div>
                 </ul>
                 @php
-                $sumTotal = $bills->sum('total');
+                $sumTotal = $bills->sum('total')+$fine;
                 @endphp
                 <hr>
                 <div class="row">
@@ -206,20 +214,18 @@
                 </div>
                 <br>
                 <br>
-                <div class="text-end">
-                    TTD KETUA
-                </div>
-                <br>
-                <br>
-                <hr>
-                <div class="text-center">
-                    Cek tagihan anda di
-                    <br>
-                    <span class="fw-bolder">https://hipamklampok.com</span>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        PENGGUNA
+                        <br>
+                        <br>
+                        [materai]
+                    </div>
+                    <div>TTD KETUA</div>
                 </div>
             </div>
             <div class="col-6 p-2">
-                <div class="text-center fw-bolder">SURAT PERINGATAN TERLAMBAT 3 BULAN</div>
+                <div class="text-center fw-bolder">SURAT PERINGATAN PEMUTUSAN SEMENTARA</div>
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
                 <hr>
                 <div class="d-flex justify-content-between">
@@ -233,7 +239,7 @@
                 <br>
                 <div class="text-start">
                     <span class="fw-bolder">Teguran keterlambatan 3 bulan</span> yang belum diselesaikan, maka dilakukan <span class="fw-bolder">PEMUTUSAN SEMENTARA oleh Petugas</span>.
-                    Mohon dibayarkan langsung di kasir HIPAM.
+                    Untuk penyambungan mohon menyelesaikan pembayaran serta membayar denda Rp. 100.000,00 (seratus ribu rupiah) dan membuat surat bermaterai.
                 </div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>
@@ -312,9 +318,17 @@
                         </div>
                     </li>
                     @endif
+                    <div class="row">
+                    <div class="col-5">
+                        <div class="text-start">Denda Terlambat</div>
+                    </div>
+                    <div class="col-7">
+                        <div class="text-start">= Rp. {{number_format($fine,2,',','.')}}</div>
+                    </div>
+                </div>
                 </ul>
                 @php
-                $sumTotal = $bills->sum('total');
+                $sumTotal = $bills->sum('total')+$fine;
                 @endphp
                 <hr>
                 <div class="row">
@@ -331,16 +345,14 @@
                 </div>
                 <br>
                 <br>
-                <div class="text-end">
-                    TTD KETUA
-                </div>
-                <br>
-                <br>
-                <hr>
-                <div class="text-center">
-                    Cek tagihan anda di
-                    <br>
-                    <span class="fw-bolder">https://hipamklampok.com</span>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        PENGGUNA
+                        <br>
+                        <br>
+                        [materai]
+                    </div>
+                    <div>TTD KETUA</div>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Bill;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -23,6 +24,8 @@ class IncomeFilterByMonthExport implements FromView, ShouldAutoSize
         $data = [
             'bills' => $bills,
             'total' => $total,
+            'date' => Carbon::createFromFormat('m Y', $this->month . ' ' . $this->year)->isoFormat('MMMM YYYY'),
+            'now' => Carbon::now()->isoFormat('dddd, DD MMMM YYYY, h:mm:ss A'),
         ];
 
         return view('report.export.income', $data);
