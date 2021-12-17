@@ -131,4 +131,18 @@
     }
     window.onload = setSelectedPageSize;
 </script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#datatable').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Indonesian.json"
+            },
+            "searching": false,
+            "lengthChange": false,
+            "paging": false
+        });
+    });
+</script>
 @endsection
