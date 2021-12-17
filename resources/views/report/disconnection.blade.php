@@ -78,13 +78,13 @@
                         <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
                         <td>
                             @if($month_of_arrears == 3)
-                            <a href="{{route('report.disconnection.print-warning', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 1</a>
+                            <a href="{{route('report.disconnection.print-warning', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary" style="background-color: green;">Peringatan 1</a>
                             @elseif($month_of_arrears == 4)
-                            <a href="{{route('report.disconnection.print-warning-2', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 2</a>
+                            <a href="{{route('report.disconnection.print-warning-2', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary" style="background-color: yellow;">Peringatan 2</a>
                             @elseif($month_of_arrears >= 5)
-                            <a href="{{route('report.disconnection.print-disconnection', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 3</a>
+                            <a href="{{route('report.disconnection.print-disconnection', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary" style="background-color: red;">Peringatan 3</a>
                             @endif
-                            <a href="{{route('transaction.show', [$bill->usage->client->client_id])}}" target="_blank" class="btn btn-primary">Detail</a>
+                            <a href="{{route('transaction.show', [$bill->usage->client->client_id])}}" target="_blank" class="btn btn-outline-primary">Detail</a>
                         </td>
                     </tr>
                     @endforeach
