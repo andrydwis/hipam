@@ -148,8 +148,7 @@ class ReportController extends Controller
 
         //filter bills where min 3 months arrears
         $bills = $bills->filter(function ($bill) {
-            if($bill->allArrears($bill->usage->client->id) >= 3)
-            {
+            if ($bill->allArrears($bill->usage->client->id) >= 3) {
                 return $bill;
             }
         });

@@ -47,13 +47,13 @@
         </div>
         <hr>
         <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex">
-                <p class="mb-0 mx-3">Total Kesuluruhan Tunggakan</p>
-                <p class="mb-0 mx-3">Total Orang Menunggak</p>
+            <div class="d-flex gap-3">
+                <p class="mb-0">Total Kesuluruhan Tunggakan</p>
+                <p class="mb-0">Total Orang Menunggak</p>
             </div>
-            <div class="d-flex">
-                <h4 class="font-weight-bold mb-0 mx-3">Rp. {{number_format($total,2,',','.')}}</h4>
-                <h4 class="font-weight-bold mb-0 mx-3">{{$bills->count()}} Orang</h4>
+            <div class="d-flex gap-3">
+                <h4 class="font-weight-bold mb-0">Rp. {{number_format($total,2,',','.')}}</h4>
+                <h4 class="font-weight-bold mb-0">{{$bills->count()}} Orang</h4>
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
             <table class="table table-hover" id="datatable">
                 <thead class="thead-light">
                     <tr>
-                        <th>Nomor Pelanggan</th>
+                        <th>Nomor Pelanggan</i></th>
                         <th>Nama</th>
                         <th>RT</th>
                         <th>RW</th>
@@ -97,6 +97,11 @@
 
 @section('customJS')
 <script>
+    sortByClientId = (direction) => {
+        let url = new URL(window.location.href);
+        url.searchParams.set('sort_client_id', direction);
+        window.location.href = url;
+    }
     changePageSize = () => {
         let pageSize = document.getElementById("page-size").value
         let url = new URL(window.location.href);
@@ -125,5 +130,20 @@
         }
     }
     window.onload = setSelectedPageSize;
+</script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#datatable').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Indonesian.json"
+            },
+            "searching": false,
+            "lengthChange": false,
+            "paging": false
+        });
+    });
 </script>
 @endsection
