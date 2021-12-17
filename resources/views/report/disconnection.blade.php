@@ -80,7 +80,7 @@
                             @if($month_of_arrears == 3)
                             <a href="{{route('report.disconnection.print-warning', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary" style="background-color: green;">Peringatan 1</a>
                             @elseif($month_of_arrears == 4)
-                            <a href="{{route('report.disconnection.print-warning-2', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary" style="background-color: yellow;">Peringatan 2</a>
+                            <a href="{{route('report.disconnection.print-warning-2', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary" style="background-color: yellow; color: black;">Peringatan 2</a>
                             @elseif($month_of_arrears >= 5)
                             <a href="{{route('report.disconnection.print-disconnection', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary" style="background-color: red;">Peringatan 3</a>
                             @endif
