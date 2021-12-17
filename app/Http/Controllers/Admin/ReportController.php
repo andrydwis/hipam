@@ -186,6 +186,23 @@ class ReportController extends Controller
         return view('report.print.warning', $data);
     }
 
+    public function printWarning2(Request $request, Client $client)
+    {
+        $usages = Usage::where('client_id', $client->id)->get()->pluck('id');
+        $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
+        $date = Carbon::now()->isoFormat('DD MMMM YYYY');
+        $expected_at = Carbon::now()->endOfMonth()->isoFormat('DD MMMM YYYY');
+
+        $data = [
+            'client' => $client,
+            'bills' => $bills,
+            'date' => $date,
+            'expected_at' => $expected_at,
+        ];
+
+        return view('report.print.warning-2', $data);
+    }
+
     public function printDisconnection(Request $request, Client $client)
     {
         $usages = Usage::where('client_id', $client->id)->get()->pluck('id');

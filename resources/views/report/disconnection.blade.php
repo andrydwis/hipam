@@ -60,22 +60,31 @@
                         <th>RT</th>
                         <th>RW</th>
                         <th>Total Tunggakan</th>
-                        <th>Tagihan Terakhir</th>
+                        <th>Total Tagihan</th>
                         <th>Print Peringatan</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($bills as $bill)
+                    @php
+                    $month_of_arrears = $bill->allArrears($bill->usage->client->id);
+                    @endphp
                     <tr>
                         <td>{{$bill->usage->client->client_id}}</td>
                         <td>{{$bill->usage->client->name}}</td>
                         <td>{{$bill->usage->client->rt}}</td>
                         <td>{{$bill->usage->client->rw}}</td>
-                        <td>{{$bill->allArrears($bill->usage->client->id)}} Bulan</td>
+                        <td>{{$month_of_arrears}} Bulan</td>
                         <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
                         <td>
+                            @if($month_of_arrears == 3)
                             <a href="{{route('report.disconnection.print-warning', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 1</a>
-                            <a href="{{route('report.disconnection.print-disconnection', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 2</a>
+                            @elseif($month_of_arrears == 4)
+                            <a href="{{route('report.disconnection.print-warning-2', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 2</a>
+                            @elseif($month_of_arrears >= 5)
+                            <a href="{{route('report.disconnection.print-disconnection', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary">Peringatan 3</a>
+                            @endif
+                            <a href="{{route('transaction.show', [$bill->usage->client->client_id])}}" target="_blank" class="btn btn-primary">Detail</a>
                         </td>
                     </tr>
                     @endforeach

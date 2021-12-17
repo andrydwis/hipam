@@ -93,10 +93,10 @@
 <body>
     <div class="container-fluid">
         <div class="row print">
-            <div class="col-6 p-2" style="border-right: 0.5px dashed">
-                <div class="text-center fw-bolder">SURAT PERINGATAN PEMUTUSAN SEMENTARA</div>
+            <div class="col-6 p-3" style="border-right: 0.5px dashed">
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
-                <hr>
+                <hr class="m-0">
+                <div class="text-center fw-bolder mb-3">SURAT PEMUTUSAN</div>
                 <div class="d-flex justify-content-between">
                     <div>No:</div>
                     <div>Klampok, {{$date}}</div>
@@ -188,13 +188,13 @@
                     </li>
                     @endif
                     <div class="row">
-                    <div class="col-5">
-                        <div class="text-start">Denda Terlambat</div>
+                        <div class="col-5">
+                            <div class="text-start">Denda Terlambat</div>
+                        </div>
+                        <div class="col-7">
+                            <div class="text-start">= Rp. {{number_format($fine,2,',','.')}}</div>
+                        </div>
                     </div>
-                    <div class="col-7">
-                        <div class="text-start">= Rp. {{number_format($fine,2,',','.')}}</div>
-                    </div>
-                </div>
                 </ul>
                 @php
                 $sumTotal = $bills->sum('total')+$fine;
@@ -224,10 +224,10 @@
                     <div>TTD KETUA</div>
                 </div>
             </div>
-            <div class="col-6 p-2">
-                <div class="text-center fw-bolder">SURAT PERINGATAN PEMUTUSAN SEMENTARA</div>
+            <div class="col-6 p-3">
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
-                <hr>
+                <hr class="m-0">
+                <div class="text-center fw-bolder mb-3">SURAT PEMUTUSAN</div>
                 <div class="d-flex justify-content-between">
                     <div>No:</div>
                     <div>Klampok, {{$date}}</div>
@@ -319,13 +319,13 @@
                     </li>
                     @endif
                     <div class="row">
-                    <div class="col-5">
-                        <div class="text-start">Denda Terlambat</div>
+                        <div class="col-5">
+                            <div class="text-start">Denda Terlambat</div>
+                        </div>
+                        <div class="col-7">
+                            <div class="text-start">= Rp. {{number_format($fine,2,',','.')}}</div>
+                        </div>
                     </div>
-                    <div class="col-7">
-                        <div class="text-start">= Rp. {{number_format($fine,2,',','.')}}</div>
-                    </div>
-                </div>
                 </ul>
                 @php
                 $sumTotal = $bills->sum('total')+$fine;

@@ -78,6 +78,7 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer'])->group(
     Route::get('/report/arrears', [ReportController::class, 'arrears'])->name('report.arrears');
     Route::get('/report/disconnection', [ReportController::class, 'disconnection'])->name('report.disconnection');
     Route::get('/report/disconnection/print-warning/{client}', [ReportController::class, 'printWarning'])->name('report.disconnection.print-warning');
+    Route::get('/report/disconnection/print-warning-2/{client}', [ReportController::class, 'printWarning2'])->name('report.disconnection.print-warning-2');
     Route::get('/report/disconnection/print-disconnection/{client}', [ReportController::class, 'printDisconnection'])->name('report.disconnection.print-disconnection');
     Route::get('/report/income/export', [ReportController::class, 'incomeExport'])->name('report.income-export');
     Route::get('/report/arrears/export', [ReportController::class, 'arrearsExport'])->name('report.arrears-export');

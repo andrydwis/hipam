@@ -96,7 +96,7 @@
             <div class="col-6 p-3" style="border-right: 0.5px dashed">
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
                 <hr class="m-0">
-                <div class="text-center fw-bolder mb-3">SURAT PERINGATAN TERLAMBAT 3 BULAN</div>
+                <div class="text-center fw-bolder mb-3">SURAT PERINGATAN PEMUTUSAN</div>
                 <div class="d-flex justify-content-between">
                     <div>No:</div>
                     <div>Klampok, {{$date}}</div>
@@ -108,7 +108,7 @@
                 <br>
                 <div class="text-start">
                     <span class="fw-bolder">Teguran keterlambatan 3 bulan</span> yang belum diselesaikan, maka dilakukan <span class="fw-bolder">PEMUTUSAN SEMENTARA oleh Petugas</span>.
-                    Mohon dibayarkan langsung di kasir HIPAM.
+                    Untuk penyambungan mohon untuk menyelesaikan untuk menghindari pembayaran denda Rp. 100.000,00 (seratus ribu rupiah) dan membuat surat bermaterai.
                 </div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>
@@ -221,7 +221,7 @@
             <div class="col-6 p-3">
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
                 <hr class="m-0">
-                <div class="text-center fw-bolder mb-3">SURAT PERINGATAN TERLAMBAT 3 BULAN</div>
+                <div class="text-center fw-bolder mb-3">SURAT PERINGATAN PEMUTUSAN</div>
                 <div class="d-flex justify-content-between">
                     <div>No:</div>
                     <div>Klampok, {{$date}}</div>
@@ -233,7 +233,7 @@
                 <br>
                 <div class="text-start">
                     <span class="fw-bolder">Teguran keterlambatan 3 bulan</span> yang belum diselesaikan, maka dilakukan <span class="fw-bolder">PEMUTUSAN SEMENTARA oleh Petugas</span>.
-                    Mohon dibayarkan langsung di kasir HIPAM.
+                    Untuk penyambungan mohon untuk menyelesaikan untuk menghindari pembayaran denda Rp. 100.000,00 (seratus ribu rupiah) dan membuat surat bermaterai.
                 </div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>

@@ -47,8 +47,14 @@
         </div>
         <hr>
         <div class="d-flex align-items-center justify-content-between">
-            <p class="mb-0">Total Kesuluruhan Tunggakan</p>
-            <h4 class="font-weight-bold mb-0">Rp. {{number_format($total,2,',','.')}}</h4>
+            <div class="d-flex">
+                <p class="mb-0 mx-3">Total Kesuluruhan Tunggakan</p>
+                <p class="mb-0 mx-3">Total Orang Menunggak</p>
+            </div>
+            <div class="d-flex">
+                <h4 class="font-weight-bold mb-0 mx-3">Rp. {{number_format($total,2,',','.')}}</h4>
+                <h4 class="font-weight-bold mb-0 mx-3">{{$bills->count()}} Orang</h4>
+            </div>
         </div>
     </div>
     <div class="card-body">
