@@ -98,7 +98,7 @@
                 <hr class="m-0">
                 <div class="text-center fw-bolder mb-3">SURAT PEMUTUSAN</div>
                 <div class="d-flex justify-content-between">
-                    <div>No:</div>
+                    <div class="fw-bolder">No: {{$number}}</div>
                     <div>Klampok, {{$date}}</div>
                 </div>
                 <br>
@@ -229,7 +229,7 @@
                 <hr class="m-0">
                 <div class="text-center fw-bolder mb-3">SURAT PEMUTUSAN</div>
                 <div class="d-flex justify-content-between">
-                    <div>No:</div>
+                    <div class="fw-bolder">No: {{$number}}</div>
                     <div>Klampok, {{$date}}</div>
                 </div>
                 <br>

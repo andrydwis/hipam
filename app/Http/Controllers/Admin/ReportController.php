@@ -8,6 +8,7 @@ use App\Exports\IncomeFilterByMonthExport;
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use App\Models\Client;
+use App\Models\RefferenceNumber;
 use App\Models\Usage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -175,7 +176,26 @@ class ReportController extends Controller
         $date = Carbon::now()->isoFormat('DD MMMM YYYY');
         $expected_at = Carbon::now()->endOfMonth()->isoFormat('DD MMMM YYYY');
 
+        //set refferece number
+        $month = Carbon::now()->format('m');
+        $year = Carbon::now()->format('Y');
+        $type = 'PR1';
+        $latestNumber = RefferenceNumber::where('month', $month)->where('year', $year)->where('type', $type)->latest()->first();
+        if($latestNumber){
+            $number = $latestNumber->number + 1;
+        }else{
+            $number = 1;
+        }
+        $refferenceNumber = $number . '/' . $type . '/' . $month . '/' . $year;
+        $saved = RefferenceNumber::create([
+            'number' => $number,
+            'month' => $month,
+            'year' => $year,
+            'type' => $type,
+        ]);
+
         $data = [
+            'number' => $refferenceNumber,
             'client' => $client,
             'bills' => $bills,
             'date' => $date,
@@ -192,7 +212,26 @@ class ReportController extends Controller
         $date = Carbon::now()->isoFormat('DD MMMM YYYY');
         $expected_at = Carbon::now()->endOfMonth()->isoFormat('DD MMMM YYYY');
 
+        //set refferece number
+        $month = Carbon::now()->format('m');
+        $year = Carbon::now()->format('Y');
+        $type = 'PR2';
+        $latestNumber = RefferenceNumber::where('month', $month)->where('year', $year)->where('type', $type)->latest()->first();
+        if($latestNumber){
+            $number = $latestNumber->number + 1;
+        }else{
+            $number = 1;
+        }
+        $refferenceNumber = $number . '/' . $type . '/' . $month . '/' . $year;
+        $saved = RefferenceNumber::create([
+            'number' => $number,
+            'month' => $month,
+            'year' => $year,
+            'type' => $type,
+        ]);
+
         $data = [
+            'number' => $refferenceNumber,
             'client' => $client,
             'bills' => $bills,
             'date' => $date,
@@ -210,7 +249,26 @@ class ReportController extends Controller
         $expected_at = Carbon::now()->endOfMonth()->isoFormat('DD MMMM YYYY');
         $fine = 100000;
 
+        //set refferece number
+        $month = Carbon::now()->format('m');
+        $year = Carbon::now()->format('Y');
+        $type = 'PR3';
+        $latestNumber = RefferenceNumber::where('month', $month)->where('year', $year)->where('type', $type)->latest()->first();
+        if($latestNumber){
+            $number = $latestNumber->number + 1;
+        }else{
+            $number = 1;
+        }
+        $refferenceNumber = $number . '/' . $type . '/' . $month . '/' . $year;
+        $saved = RefferenceNumber::create([
+            'number' => $number,
+            'month' => $month,
+            'year' => $year,
+            'type' => $type,
+        ]);
+
         $data = [
+            'number' => $refferenceNumber,
             'client' => $client,
             'bills' => $bills,
             'date' => $date,
