@@ -93,6 +93,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile/reset-photo', [ProfileController::class, 'resetPhoto'])->name('profile.reset-photo');
 });
 
-Route::view('/test', 'transaction.print');
+Route::get('/test', [DashboardController::class, 'test']);
 
 require __DIR__ . '/auth.php';

@@ -54,7 +54,7 @@
                     <tr>
                         <td>{{$usage->client->client_id}}</td>
                         <td>{{$usage->client->name}}</td>
-                        <td>{{$usage->bill->meter_cubic ?? '-'}}</td>
+                        <td>{{$usage->bill->meter_cubic ?? '-'}} m<sup>3</sup></td>
                         <td>Rp. {{number_format($usage->bill->cost,2,',','.') ?? '-'}}</td>
                         <td>Rp. {{number_format($usage->bill->subscription,2,',','.') ?? '-'}}</td>
                         <td>Rp. {{number_format($usage->bill->fine,2,',','.') ?? '-'}}</td>

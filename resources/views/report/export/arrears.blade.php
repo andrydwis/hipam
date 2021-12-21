@@ -37,7 +37,7 @@
             <th>RT</th>
             <th>RW</th>
             <th>Total Tunggakan</th>
-            <th>Tagihan Terakhir</th>
+            <th>Total Tagihan</th>
             <th>Status</th>
         </tr>
     </thead>
