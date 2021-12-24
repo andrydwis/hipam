@@ -39,10 +39,37 @@ class UsageController extends Controller
     public function create(Client $client, $month, $year)
     {
         //
+        if ($month == 'Januari') {
+            $last = Usage::where('month', 'Desember')->where('year', $year - 1)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Februari') {
+            $last = Usage::where('month', 'Januari')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Maret') {
+            $last = Usage::where('month', 'Februari')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'April') {
+            $last = Usage::where('month', 'Maret')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Mei') {
+            $last = Usage::where('month', 'April')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Juni') {
+            $last = Usage::where('month', 'Mei')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Juli') {
+            $last = Usage::where('month', 'Juni')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Agustus') {
+            $last = Usage::where('month', 'Juli')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'September') {
+            $last = Usage::where('month', 'Agustus')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Oktober') {
+            $last = Usage::where('month', 'September')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'November') {
+            $last = Usage::where('month', 'Oktober')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Desember') {
+            $last = Usage::where('month', 'November')->where('year', $year)->where('client_id', $client->id)->first();
+        }
+
         $data = [
             'client' => $client,
             'month' => $month,
-            'year' => $year
+            'year' => $year,
+            'last' => $last
         ];
 
         return view('usage.create', $data);
@@ -60,6 +87,39 @@ class UsageController extends Controller
         $request->validate([
             'meter_kubik' => ['required', 'numeric', 'min:0']
         ]);
+
+        if ($month == 'Januari') {
+            $last = Usage::where('month', 'Desember')->where('year', $year - 1)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Februari') {
+            $last = Usage::where('month', 'Januari')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Maret') {
+            $last = Usage::where('month', 'Februari')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'April') {
+            $last = Usage::where('month', 'Maret')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Mei') {
+            $last = Usage::where('month', 'April')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Juni') {
+            $last = Usage::where('month', 'Mei')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Juli') {
+            $last = Usage::where('month', 'Juni')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Agustus') {
+            $last = Usage::where('month', 'Juli')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'September') {
+            $last = Usage::where('month', 'Agustus')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Oktober') {
+            $last = Usage::where('month', 'September')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'November') {
+            $last = Usage::where('month', 'Oktober')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Desember') {
+            $last = Usage::where('month', 'November')->where('year', $year)->where('client_id', $client->id)->first();
+        }
+
+        if ($last) {
+            if ($request->meter_kubik - $last->meter_cubic < 0) {
+                return redirect()->back()->with('error', 'Inputan meteran air harus lebih banyak. Jika muncul peringatan ini berarti inputan Anda salah memasukkan
+                atau meteran pada pelanggan rusak. Silahkan cek kembali.');
+            }
+        }
 
         $usage =  new Usage();
         $usage->client_id = $client->id;
@@ -116,11 +176,38 @@ class UsageController extends Controller
     public function edit(Client $client, $month, $year)
     {
         //
+        if ($month == 'Januari') {
+            $last = Usage::where('month', 'Desember')->where('year', $year - 1)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Februari') {
+            $last = Usage::where('month', 'Januari')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Maret') {
+            $last = Usage::where('month', 'Februari')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'April') {
+            $last = Usage::where('month', 'Maret')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Mei') {
+            $last = Usage::where('month', 'April')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Juni') {
+            $last = Usage::where('month', 'Mei')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Juli') {
+            $last = Usage::where('month', 'Juni')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Agustus') {
+            $last = Usage::where('month', 'Juli')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'September') {
+            $last = Usage::where('month', 'Agustus')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Oktober') {
+            $last = Usage::where('month', 'September')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'November') {
+            $last = Usage::where('month', 'Oktober')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Desember') {
+            $last = Usage::where('month', 'November')->where('year', $year)->where('client_id', $client->id)->first();
+        }
+
         $data = [
             'client' => $client,
             'usage' => Usage::where('client_id', $client->id)->where('month', $month)->where('year', $year)->first(),
             'month' => $month,
-            'year' => $year
+            'year' => $year,
+            'last' => $last
         ];
 
         session()->flash('previousUrl', url()->previous());
@@ -141,6 +228,39 @@ class UsageController extends Controller
         $request->validate([
             'meter_kubik' => ['required', 'numeric', 'min:0']
         ]);
+
+        if ($month == 'Januari') {
+            $last = Usage::where('month', 'Desember')->where('year', $year - 1)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Februari') {
+            $last = Usage::where('month', 'Januari')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Maret') {
+            $last = Usage::where('month', 'Februari')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'April') {
+            $last = Usage::where('month', 'Maret')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Mei') {
+            $last = Usage::where('month', 'April')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Juni') {
+            $last = Usage::where('month', 'Mei')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Juli') {
+            $last = Usage::where('month', 'Juni')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Agustus') {
+            $last = Usage::where('month', 'Juli')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'September') {
+            $last = Usage::where('month', 'Agustus')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Oktober') {
+            $last = Usage::where('month', 'September')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'November') {
+            $last = Usage::where('month', 'Oktober')->where('year', $year)->where('client_id', $client->id)->first();
+        } elseif ($month == 'Desember') {
+            $last = Usage::where('month', 'November')->where('year', $year)->where('client_id', $client->id)->first();
+        }
+
+        if ($last) {
+            if ($request->meter_kubik - $last->meter_cubic < 0) {
+                return redirect()->back()->with('error', 'Inputan meteran air harus lebih banyak. Jika muncul peringatan ini berarti inputan Anda salah memasukkan
+                atau meteran pada pelanggan rusak. Silahkan cek kembali.');
+            }
+        }
 
         $usage = Usage::find($request->usage_id);
         $usage->client_id = $client->id;

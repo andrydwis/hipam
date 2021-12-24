@@ -62,8 +62,14 @@
                     </div>
                 </div>
             </div>
+            @if($last)
             <div class="mb-4">
-                <label for="meter_kubik">Meter Kubik</label>
+                <label for="meter_kubik">Pemakaian Bulan {{$last->month}} {{$last->year}}</label>
+                <input type="number" step=".01" class="form-control" placeholder="jumlah pemakaian" value="{{$last->meter_cubic}}" disabled>
+            </div>
+            @endif
+            <div class="mb-4">
+                <label for="meter_kubik">Pemakaian Bulan {{$month}} {{$year}}</label> 
                 <input type="number" step=".01" name="meter_kubik" class="form-control @error('meter_kubik') is-invalid @enderror" placeholder="jumlah pemakaian" value="{{old('meter_kubik') ?? $usage->meter_cubic}}">
                 @error('meter_kubik')
                 <div class="invalid-feedback">
@@ -72,6 +78,9 @@
                 @enderror
             </div>
             <input type="hidden" name="usage_id" value="{{$usage->id}}">
+            <div class="mb-4">
+                @include('layouts.alert')
+            </div>
             <div class="mb-4">
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <button type="reset" class="btn btn-outline-primary">Reset</button>
