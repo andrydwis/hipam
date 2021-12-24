@@ -79,7 +79,15 @@
                         <td>{{$bill->usage->client->rt}}</td>
                         <td>{{$bill->usage->client->rw}}</td>
                         <td>{{$bill->allArrears($bill->usage->client->id)}} Bulan</td>
-                        <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
+                        @php
+                        $last_bill = 0;
+                        foreach($bill->usage->client->usages as $usage) {
+                        if($usage->bill->status != 'paid') {
+                        $last_bill += $usage->bill->total;
+                        }
+                        }
+                        @endphp
+                        <td>Rp. {{number_format($last_bill,2,',','.')}}</td>
                         <td>{{$bill->status == 'late' ? 'Belum Dibayar' : 'Sudah DIbayar'}}</td>
                     </tr>
                     @endforeach

@@ -75,7 +75,18 @@
                         <td>{{$bill->usage->client->rt}}</td>
                         <td>{{$bill->usage->client->rw}}</td>
                         <td>{{$month_of_arrears}} Bulan</td>
-                        <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
+                        @php
+                        $last_bill = 0;
+                        foreach($bill->usage->client->usages as $usage) {
+                        if($usage->bill->status != 'paid') {
+                        $last_bill += $usage->bill->total;
+                        }
+                        }
+                        if($month_of_arrears >= 5) {
+                        $last_bill += 100000;
+                        }
+                        @endphp
+                        <td>Rp. {{number_format($last_bill,2,',','.')}}</td>
                         <td>
                             @if($month_of_arrears == 3)
                             <a href="{{route('report.disconnection.print-warning', [$bill->usage->client->id])}}" target="_blank" class="btn btn-primary" style="background-color: green;">Peringatan 1</a>
