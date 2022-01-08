@@ -30,10 +30,4 @@ class DashboardController extends Controller
     {
         return view('dashboard.client');
     }
-
-    public function test()
-    {
-
-        dd($response->getBody()->getContents());
-    }
 }
