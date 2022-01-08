@@ -65,6 +65,9 @@
             <div class="mb-4">
                 <label for="meter_kubik">Pemakaian Bulan {{$last->month}} {{$last->year}}</label>
                 <input type="number" step=".01" class="form-control" placeholder="jumlah pemakaian" value="{{$last->meter_cubic}}" disabled>
+                <a href="{{route('usage.reset', $last)}}" class="btn btn-primary mt-1">
+                    Ganti Meter
+                </a>
             </div>
             @endif
             <div class="mb-4">

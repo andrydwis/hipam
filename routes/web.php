@@ -53,6 +53,7 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer'])->group(
     Route::get('/usage', [UsageController::class, 'index'])->name('usage.index');
     Route::get('/usage/all', [UsageController::class, 'showAll'])->name('usage.show-all');
     Route::delete('/usage/{usage}', [UsageController::class, 'destroy'])->name('usage.destroy');
+    Route::get('/usage/reset/{usage}', [UsageController::class, 'reset'])->name('usage.reset');
     Route::get('/usage/{client}/{month}/{year}/create', [UsageController::class, 'create'])->name('usage.create');
     Route::post('/usage/{client}/{month}/{year}/create', [UsageController::class, 'store'])->name('usage.store');
     Route::get('/usage/{client}/{month}/{year}/edit', [UsageController::class, 'edit'])->name('usage.edit');

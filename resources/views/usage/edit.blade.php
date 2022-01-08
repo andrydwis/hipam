@@ -66,10 +66,13 @@
             <div class="mb-4">
                 <label for="meter_kubik">Pemakaian Bulan {{$last->month}} {{$last->year}}</label>
                 <input type="number" step=".01" class="form-control" placeholder="jumlah pemakaian" value="{{$last->meter_cubic}}" disabled>
+                <a href="{{route('usage.reset', $last)}}" class="btn btn-primary mt-1">
+                    Ganti Meter
+                </a>
             </div>
             @endif
             <div class="mb-4">
-                <label for="meter_kubik">Pemakaian Bulan {{$month}} {{$year}}</label> 
+                <label for="meter_kubik">Pemakaian Bulan {{$month}} {{$year}}</label>
                 <input type="number" step=".01" name="meter_kubik" class="form-control @error('meter_kubik') is-invalid @enderror" placeholder="jumlah pemakaian" value="{{old('meter_kubik') ?? $usage->meter_cubic}}">
                 @error('meter_kubik')
                 <div class="invalid-feedback">

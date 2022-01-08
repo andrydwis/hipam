@@ -296,6 +296,17 @@ class UsageController extends Controller
         return back();
     }
 
+    public function reset(Usage $usage)
+    {
+        $usage->meter_cubic = 0;
+        $usage->change_meter = true;
+        $usage->save();
+
+        session()->flash('success', 'Berhasil mereset pemakaian pelanggan');
+
+        return back();
+    }
+
     public function showAll(Request $request)
     {
         $months = collect(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
