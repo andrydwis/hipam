@@ -42,7 +42,7 @@ class UsageObserver
             $last = Usage::where('month', 'November')->where('year', $usage->year)->where('client_id', $usage->client_id)->first();
         }
 
-        if ($last && $usage->change_meter != true) {
+        if ($last) {
             $meters = $usage->meter_cubic - $last->meter_cubic;
 
             $bill = new Bill();
@@ -53,9 +53,7 @@ class UsageObserver
             $bill->total = $bill->subscription + $bill->cost;
             $bill->status = 'unpaid';
             $bill->save();
-        } elseif ($last && $usage->change_meter == true) {
-            return null;
-        } elseif (!$last) {
+        } else {
             $meters = $usage->meter_cubic;
 
             $bill = new Bill();
@@ -116,7 +114,7 @@ class UsageObserver
             $bill->save();
         } elseif ($last && $usage->change_meter == true) {
             return null;
-        } elseif (!$last) {
+        } elseif (!$last && $usage->change_meter != true) {
             $meters = $usage->meter_cubic;
 
             $bill = Bill::where('usage_id', $usage->id)->first();

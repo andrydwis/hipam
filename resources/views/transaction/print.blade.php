@@ -94,34 +94,12 @@
     <div class="container-fluid">
         <div class="row print">
             <div class="col" style="border-right: 0.5px dashed">
-                <div class="text-center">STRUK BUKTI PEMBAYARAN IURAN AIR</div>
-                <div class="text-center">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
-                <div class="text-center fw-bolder">{{$month}} {{$year}}</div>
-                <br>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="text-start fw-bolder">No. Pelanggan </div>
-                    </div>
-                    <div class="col-8">
-                        <div class="text-start fw-bolder">: {{$client->client_id}}</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="text-start">Nama/RT/RW</div>
-                    </div>
-                    <div class="col-8">
-                        <div class="text-start">: {{$client->name}}/RT.{{$client->rt}}/RW.{{$client->rw}}</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="text-start">Penggunaan</div>
-                    </div>
-                    <div class="col-8">
-                        <div class="text-start">: {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
-                    </div>
-                </div>
+                <div class="text-center fw-bolder">STRUK BUKTI PEMBAYARAN IURAN AIR</div>
+                <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
+                <div class="text-center fw-bolder text-uppercase">{{$month}} - {{$year}}</div>
+                <hr>
+                <div class="text-left fw-bolder">{{$client->client_id}} - {{$client->name}} RT.{{$client->rt}}/RW.{{$client->rw}}</div>
+                <div>Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>
                 <div class="row">
@@ -212,44 +190,23 @@
                         <div class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between mt-2">
-                    <div>Tanggal Bayar {{$day}} {{$month}} {{$year}}</div>
-                    <div>TTD Petugas</div>
-                </div>
                 <div class="mt-2" style="font-size: 7.5px;">
                     Kertas ini merupakan alat bukti sah pembayaran jika sudah ditempel tanda tangan petugas.
                     Mohon dicek ulang meter air, jika ada ketidak sesuaian hubungi <span class="fw-bolder">PENGURUS</span> (bukan loket)
+                </div>
+                <hr>
+                <div>
+                    <div class="text-center">Cek tagihan anda di</div>
+                    <div class="text-center fw-bolder">https://hipamklampok.com</div>
                 </div>
             </div>
             <div class="col">
-                <div class="text-center">STRUK BUKTI PEMBAYARAN IURAN AIR</div>
-                <div class="text-center">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
-                <div class="text-center fw-bolder">{{$month}} {{$year}}</div>
-                <br>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="text-start fw-bolder">No. Pelanggan </div>
-                    </div>
-                    <div class="col-8">
-                        <div class="text-start fw-bolder">: {{$client->client_id}}</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="text-start">Nama/RT/RW</div>
-                    </div>
-                    <div class="col-8">
-                        <div class="text-start">: {{$client->name}}/RT.{{$client->rt}}/RW.{{$client->rw}}</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="text-start">Penggunaan</div>
-                    </div>
-                    <div class="col-8">
-                        <div class="text-start">: {{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
-                    </div>
-                </div>
+                <div class="text-center fw-bolder">STRUK BUKTI PEMBAYARAN IURAN AIR</div>
+                <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
+                <div class="text-center fw-bolder text-uppercase">{{$month}} - {{$year}}</div>
+                <hr>
+                <div class="text-left fw-bolder">{{$client->client_id}} - {{$client->name}} RT.{{$client->rt}}/RW.{{$client->rw}}</div>
+                <div>Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>
                 <div class="row">
@@ -340,18 +297,20 @@
                         <div class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between mt-2">
-                    <div>Tanggal Bayar {{$day}} {{$month}} {{$year}}</div>
-                    <div>TTD Petugas</div>
-                </div>
                 <div class="mt-2" style="font-size: 7.5px;">
                     Kertas ini merupakan alat bukti sah pembayaran jika sudah ditempel tanda tangan petugas.
                     Mohon dicek ulang meter air, jika ada ketidak sesuaian hubungi <span class="fw-bolder">PENGURUS</span> (bukan loket)
+                </div>
+                <hr>
+                <div>
+                    <div class="text-center">Cek tagihan anda di</div>
+                    <div class="text-center fw-bolder">https://hipamklampok.com</div>
                 </div>
             </div>
         </div>
 
         <button onclick="window.print()" class="btn btn-primary mt-5 no-print">Print</button>
+        <a href="{{route('transaction.index')}}" class="btn btn-outline-primary mt-5 no-print">Kembali</a>
     </div>
     <!-- Core -->
     <script src="{{asset('vendor/@popperjs/core/dist/umd/popper.min.js')}}"></script>
@@ -363,6 +322,10 @@
     <!-- FA Icon -->
     <script src="https://kit.fontawesome.com/8482c12eb4.js" crossorigin="anonymous"></script>
 
+
+    <script>
+        window.onload = window.print();
+    </script>
     @yield('customJS')
 </body>
 

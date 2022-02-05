@@ -81,9 +81,11 @@
                         <th>RW</th>
                         <th>Pemakaian Awal</th>
                         <th>Pemakaian Terakhir</th>
+                        <th>Jumlah Pemakaian</th>
                         <th>Dibayar</th>
                         <th>Waktu Bayar</th>
                         <th>Keterangan</th>
+                        <th>Status</th>
                         <th>Penerima</th>
                     </tr>
                 </thead>
@@ -96,9 +98,11 @@
                         <td>{{$bill->usage->client->rw}}</td>
                         <td>{{$bill->usage->meter_cubic-$bill->meter_cubic}} m<sup>3</sup></td>
                         <td>{{$bill->usage->meter_cubic}} m<sup>3</sup></td>
-                        <td>Rp. {{number_format($bill->total,2,',','.')}}</td> 
+                        <td>{{$bill->meter_cubic}} m<sup>3</sup></td>
+                        <td>Rp. {{number_format($bill->total,2,',','.')}}</td>
                         <td>{{$bill->paid_at->isoFormat('dddd, DD-MM-YYYY hh:mm A')}}</td>
                         <td>{{$bill->fine ? 'Telat Membayar' : '-'}}</td>
+                        <td>{{$bill->usage->change_meter ? 'Ganti Meter' : '-'}}</td>
                         <td>{{$bill->admin ? $bill->admin->name : '-'}}</td>
                     </tr>
                     @endforeach

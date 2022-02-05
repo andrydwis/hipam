@@ -25,6 +25,8 @@
                         <th>No</th>
                         <th>Bulan</th>
                         <th>Tahun</th>
+                        <th>Meteran Bulan Lalu</th>
+                        <th>Meteran Bulan Ini</th>
                         <th>Pemakaian</th>
                         <th>Tarif</th>
                         <th>Abonemen</th>
@@ -39,6 +41,12 @@
                         <td>{{$loop->index+1}}</td>
                         <td>{{$usage->month}}</td>
                         <td>{{$usage->year}}</td>
+                        @if($usage->meter_cubic - $usage->bill->meter_cubic >= 0)
+                        <td>{{$usage->meter_cubic - $usage->bill->meter_cubic}} m<sup>3</sup></td>
+                        @else
+                        <td>0 m<sup>3</sup></td>
+                        @endif
+                        <td>{{$usage->meter_cubic}} m<sup>3</sup></td>
                         <td>{{$usage->bill->meter_cubic ?? '-'}} m<sup>3</sup></td>
                         <td>Rp. {{number_format($usage->bill->cost,2,',','.') ?? '-'}}</td>
                         <td>Rp. {{number_format($usage->bill->subscription,2,',','.') ?? '-'}}</td>

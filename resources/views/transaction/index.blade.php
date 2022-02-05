@@ -22,80 +22,133 @@
             <input type="text" class="form-control me-1" name="keyword" placeholder="Masukkan nomor atau nama pelanggan">
             <button type="submit" class="btn btn-primary">Cari</button>
         </form>
-        <div class="table-responsive py-4">
-            <table class="table table-hover" id="datatable">
-                <thead class="thead-light">
-                    <tr>
-                        <th>No Pelanggan</th>
-                        <th>Nama</th>
-                        <th>RT</th>
-                        <th>RW</th>
-                        <th>Pemakaian Terakhir</th>
-                        <th>Tagihan Terakhir</th>
-                        <th>Menu</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($clients as $client)
-                    <tr>
-                        <td>{{$client->client_id}}</td>
-                        <td>{{$client->name}}</td>
-                        <td>{{$client->rt}}</td>
-                        <td>{{$client->rw}}</td>
-                        <td>{{$client->usages->last()->bill->meter_cubic ?? '-'}} m<sup>3</sup></td>
-                        @if($client->usages->last())
-                        @php
-                        $last_bill = 0;
-                        foreach($client->usages as $usage) {
-                        if($usage->bill->status != 'paid') {
-                        $last_bill += $usage->bill->total;
-                        }
-                        }
-                        @endphp
-                        @if($last_bill > 0)
-                        <td>Rp. {{number_format($last_bill,2,',','.')}}</td>
-                        @else
-                        <td><span class="badge bg-success">LUNAS</span></td>
-                        @endif
-                        @else
-                        <td>{{'-'}}</td>
-                        @endif
-                        <td class="d-flex gap-1">
-                            <form action="{{route('transaction.pay-process', [$client])}}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Bayar</button>
-                            </form>
-                            <a href="{{route('transaction.show', [$client])}}" class="btn btn-outline-primary">Detail</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        @if($client)
+        <div class="row mt-5">
+            <div class="col">
+                <h3 class="text-center fw-bolder text-uppercase">{{$month}} - {{$year}}</h3>
+                <h3 class="text-left fw-bolder">{{$client->client_id}} - {{$client->name}} RT.{{$client->rt}}/RW.{{$client->rw}}</h3>
+                <p>Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</p>
+                <div class="text-start fw-bolder">RINCIAN</div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}})</div>
+                    </div>
+                    <div class="col-7">
+                        <div class="text-start">= Rp. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="text-start">Abonemen</div>
+                    </div>
+                    <div class="col-7">
+                        <div class="text-start">= Rp. {{number_format(config('custom.subscription'),2,',','.')}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="text-start">Tunggakan</div>
+                    </div>
+                    <div class="col-7">
+                        <div class="text-start">= {{$bills->where('status', 'late')->count()}} kali</div>
+                    </div>
+                </div>
+                @if($bills->where('status', 'late')->first())
+                @php
+                $late = 0;
+                foreach($bills->where('status', 'late') as $bill) {
+                $late++;
+                }
+                @endphp
+                <div class="row">
+                    <div class="col-5">
+                        <div class="text-start">Denda</div>
+                    </div>
+                    <div class="col-7">
+                        <div class="text-start">= Rp. {{number_format($late * config('custom.fine'),2,',','.')}}</div>
+                    </div>
+                </div>
+                <ul class="list-unstyled m-0 p-0">
+                    <li>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}}</div>
+                            </div>
+                            <div class="col-7">
+                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                            </div>
+                        </div>
+                    </li>
+                    @endif
+                    @if($bills->where('status', 'late')->skip(1)->first())
+                    <li>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}}</div>
+                            </div>
+                            <div class="col-7">
+                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                            </div>
+                        </div>
+                    </li>
+                    @endif
+                    @if($bills->where('status', 'late')->skip(2)->first())
+                    <li>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}}</div>
+                            </div>
+                            <div class="col-7">
+                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                            </div>
+                        </div>
+                    </li>
+                    @endif
+                </ul>
+                @php
+                $sumTotal = $bills->sum('total');
+                @endphp
+                <hr>
+                <div class="row">
+                    <div class="col-5">
+                        <h4 class="text-start fw-bolder">TOTAL</h4>
+                    </div>
+                    <div class="col-7">
+                        <h4 class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</h4>
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-end gap-1">
+                    <form action="{{route('transaction.pay-process', [$client])}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Bayar</button>
+                    </form>
+                    <a href="{{route('transaction.show', [$client])}}" class="btn btn-outline-primary">Detail</a>
+                    <button class="btn btn-outline-primary" disabled>Keringanan</button>
+                </div>
+            </div>
         </div>
-        @if($clients)
-        {{$clients->onEachSide(1)->appends(request()->query())->links('vendor.pagination.bootstrap-4')}}
         @endif
     </div>
-</div>
-@endsection
+    @endsection
 
-@section('customCSS')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.css" />
-@endsection
+    @section('customCSS')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.css" />
+    @endsection
 
-@section('customJS')
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#datatable').DataTable({
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Indonesian.json"
-            },
-            "searching": false,
-            "paging": false,
-            "lengthChange": false,
+    @section('customJS')
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Indonesian.json"
+                },
+                "searching": false,
+                "paging": false,
+                "lengthChange": false,
+            });
         });
-    });
-</script>
-@endsection
+    </script>
+    @endsection

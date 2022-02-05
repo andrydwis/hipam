@@ -15,12 +15,30 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         if ($request->keyword) {
+            $client = Client::where('client_id', $request->keyword)->orWhere('name', $request->keyword)->first();
+
+            if ($client) {
+                $usages = Usage::where('client_id', $client->id)->get()->pluck('id');
+                $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
+
+                //if no bills then return back
+                if ($bills->isEmpty()) {
+                    return back()->with('error', 'Semua tagihan pelanggan sudah dibayar');
+                }
+            } else {
+                return redirect()->back()->with('error', 'Data tidak ditemukan');
+            }
+
             $data = [
-                'clients' => Client::where('client_id', 'like', '%' . $request->keyword . '%')->orWhere('name', 'like', '%' . $request->keyword . '%')->with('usages.bill')->paginate(10)
+                'client' => $client,
+                'usages' => $usages,
+                'bills' => $bills,
+                'month' => Carbon::now()->isoFormat('MMMM'),
+                'year' => Carbon::now()->isoFormat('Y'),
             ];
         } else {
             $data = [
-                'clients' => []
+                'client' => null,
             ];
         }
 
@@ -56,7 +74,7 @@ class TransactionController extends Controller
         $usages = Usage::where('client_id', $client->id)->get()->pluck('id');
         $bills = Bill::whereIn('usage_id', $usages)->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
 
-        //if no bills then return back
+        // if no bills then return back
         if ($bills->isEmpty()) {
             return back()->with('error', 'Semua tagihan pelanggan sudah dibayar');
         }
