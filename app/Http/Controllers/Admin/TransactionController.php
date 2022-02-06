@@ -8,7 +8,6 @@ use App\Models\Client;
 use App\Models\Usage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {

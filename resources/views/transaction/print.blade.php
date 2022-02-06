@@ -96,9 +96,9 @@
             <div class="col" style="border-right: 0.5px dashed">
                 <div class="text-center fw-bolder">STRUK BUKTI PEMBAYARAN IURAN AIR</div>
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
-                <div class="text-center fw-bolder text-uppercase">{{$month}} - {{$year}}</div>
+                <div class="text-center fw-bolder text-uppercase mt-2" style="font-size: 15px;">{{$month}} - {{$year}}</div>
                 <hr>
-                <div class="text-left fw-bolder">{{$client->client_id}} - {{$client->name}} RT.{{$client->rt}}/RW.{{$client->rw}}</div>
+                <div class="text-left fw-bolder" style="font-size: 20px;">{{$client->client_id}} - {{$client->name}} - RT.{{$client->rt}}/RW.{{$client->rw}}</div>
                 <div>Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>
@@ -184,10 +184,10 @@
                 <hr>
                 <div class="row">
                     <div class="col-5">
-                        <div class="text-start fw-bolder">TOTAL</div>
+                        <div class="text-start fw-bolder" style="font-size: 15px;">TOTAL</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
+                        <div class="text-start fw-bolder" style="font-size: 15px;">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
                     </div>
                 </div>
                 <div class="mt-2" style="font-size: 7.5px;">
@@ -203,9 +203,9 @@
             <div class="col">
                 <div class="text-center fw-bolder">STRUK BUKTI PEMBAYARAN IURAN AIR</div>
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
-                <div class="text-center fw-bolder text-uppercase">{{$month}} - {{$year}}</div>
+                <div class="text-center fw-bolder text-uppercase mt-2" style="font-size: 15px;">{{$month}} - {{$year}}</div>
                 <hr>
-                <div class="text-left fw-bolder">{{$client->client_id}} - {{$client->name}} RT.{{$client->rt}}/RW.{{$client->rw}}</div>
+                <div class="text-left fw-bolder" style="font-size: 20px;">{{$client->client_id}} - {{$client->name}} - RT.{{$client->rt}}/RW.{{$client->rw}}</div>
                 <div>Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>
@@ -291,10 +291,10 @@
                 <hr>
                 <div class="row">
                     <div class="col-5">
-                        <div class="text-start fw-bolder">TOTAL</div>
+                        <div class="text-start fw-bolder" style="font-size: 15px;">TOTAL</div>
                     </div>
                     <div class="col-7">
-                        <div class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
+                        <div class="text-start fw-bolder" style="font-size: 15px;">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
                     </div>
                 </div>
                 <div class="mt-2" style="font-size: 7.5px;">
