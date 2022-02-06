@@ -79,7 +79,7 @@ class TransactionController extends Controller
             return back()->with('error', 'Semua tagihan pelanggan sudah dibayar');
         }
 
-        $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['admin_id' => Auth::user()->id, 'status' => 'paid', 'paid_at' => Carbon::now()]);
+        // $paid = Bill::WhereIn('id', $bills->pluck('id'))->update(['admin_id' => Auth::user()->id, 'status' => 'paid', 'paid_at' => Carbon::now()]);
 
         $data = [
             'client' => $client,

@@ -98,8 +98,8 @@
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
                 <div class="text-center fw-bolder text-uppercase mt-2" style="font-size: 15px;">{{$month}} - {{$year}}</div>
                 <hr>
-                <div class="text-left fw-bolder" style="font-size: 20px;">{{$client->client_id}} - {{$client->name}} - RT.{{$client->rt}}/RW.{{$client->rw}}</div>
-                <div>Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
+                <div class="text-left fw-bolder" style="font-size: 18px;">{{$client->client_id}} - {{$client->name}} - RT.{{$client->rt}}/RW.{{$client->rw}}</div>
+                <div style="font-size: 15px;">Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>
                 <div class="row">
@@ -205,8 +205,8 @@
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
                 <div class="text-center fw-bolder text-uppercase mt-2" style="font-size: 15px;">{{$month}} - {{$year}}</div>
                 <hr>
-                <div class="text-left fw-bolder" style="font-size: 20px;">{{$client->client_id}} - {{$client->name}} - RT.{{$client->rt}}/RW.{{$client->rw}}</div>
-                <div>Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
+                <div class="text-left fw-bolder" style="font-size: 18px;">{{$client->client_id}} - {{$client->name}} - RT.{{$client->rt}}/RW.{{$client->rw}}</div>
+                <div style="font-size: 15px;">Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</div>
                 <br>
                 <div class="text-start fw-bolder">RINCIAN</div>
                 <div class="row">
