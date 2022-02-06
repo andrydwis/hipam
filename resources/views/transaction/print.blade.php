@@ -308,7 +308,6 @@
         </div>
 
         <button onclick="window.print()" class="btn btn-primary mt-5 no-print">Print</button>
-        <a href="{{route('transaction.index')}}" class="btn btn-outline-primary mt-5 no-print">Kembali</a>
     </div>
     <!-- Core -->
     <script src="{{asset('vendor/@popperjs/core/dist/umd/popper.min.js')}}"></script>
