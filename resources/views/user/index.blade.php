@@ -42,7 +42,7 @@
                         @elseif($user->getRoleNames()->first() == 'officer')
                         <td><span class="badge bg-primary">Petugas Kontrol Air</span></td>
                         @else
-                        <td><span class="badge bg-primary">$user->getRoleNames()->first()</span></td>
+                        <td><span class="badge bg-primary">{{$user->getRoleNames()->first()}}</span></td>
                         @endif
                         <td>{{$user->email}}</td>
                         <td>
