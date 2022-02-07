@@ -37,7 +37,13 @@
                     @foreach($users as $user)
                     <tr>
                         <td>{{$user->name}}</td>
-                        <td><span class="badge bg-primary">{{$user->getRoleNames()->first()}}</span></td>
+                        @if($user->getRoleNames()->first() == 'admin')
+                        <td><span class="badge bg-primary">Kasir</span></td>
+                        @elseif($user->getRoleNames()->first() == 'officer')
+                        <td><span class="badge bg-primary">Petugas Kontrol Air</span></td>
+                        @else
+                        <td><span class="badge bg-primary">$user->getRoleNames()->first()</span></td>
+                        @endif
                         <td>{{$user->email}}</td>
                         <td>
                             @role('superadmin')

@@ -44,8 +44,8 @@
                 <select name="role" class="form-control @error('role') is-invalid @enderror">
                     <option value="" @if(old('role') == null) selected @endif  disabled>Pilih Role</option>
                     <option value="superadmin" @if(old('role') == 'superadmin') selected @endif>Super Admin</option>
-                    <option value="admin" @if(old('role') == 'admin') selected @endif>Admin</option>
-                    <option value="officer" @if(old('role') == 'officer') selected @endif>Petugas</option>
+                    <option value="admin" @if(old('role') == 'admin') selected @endif>Kasir</option>
+                    <option value="officer" @if(old('role') == 'officer') selected @endif>Petugas Kontrol Air</option>
                 </select>
             </div>
             <div class="mb-4">
