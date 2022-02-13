@@ -12,11 +12,20 @@
         <div class="mb-3 mb-lg-0">
             <h1 class="h4">Pemakaian</h1>
             <p class="mb-0">Menampilkan daftar pemakaian pelanggan perbulan tiap tahun</p>
+            <div class="mt-2">
+                <select name="year" id="year" class="form-control" style="width: 100px;" onchange="changeYear()">
+                    <option disabled>Pilih Tahun</Option>
+                    @foreach($yearUsages as $year)
+                    <option value="{{$year}}" @if($request->year == $year) selected @endif>{{$year}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
     </div>
 </div>
 <div class="row">
     @foreach($months as $month)
+    @if(!$request->year || $request->year == $yearNow)
     @if($monthNow == $month)
     <div class="col-md-4 col-sm-6 col-12 mb-1">
         <a href="{{route('usage.show', [$month, $yearNow])}}">
@@ -38,6 +47,17 @@
         </a>
     </div>
     @endif
+    @else
+    <div class="col-md-4 col-sm-6 col-12 mb-1">
+        <a href="{{route('usage.show', [$month, $request->year])}}">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text text-center">{{$month}}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    @endif
     @endforeach
 </div>
 <div class="row">
@@ -51,4 +71,20 @@
         </a>
     </div>
 </div>
+@endsection
+
+@section('customJS')
+<script>
+    changeYear = () => {
+        let year = document.getElementById("year").value
+        let url = new URL(window.location.href);
+        url.searchParams.set('year', year);
+        window.location.href = url;
+    }
+    setSelectedYear = () => {
+        let url = new URL(window.location.href);
+        let year = url.searchParams.get('year');
+    }
+    window.onload = setSelectedYear;
+</script>
 @endsection

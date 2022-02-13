@@ -17,6 +17,9 @@
     </div>
 </div>
 <div class="card">
+    <div class="card-header d-flex justify-content-end">
+        <a href="{{route('transaction.export', [$client])}}" class="btn btn-primary">Export</a>
+    </div>
     <div class="card-body">
         <div class="table-responsive py-4">
             <table class="table table-hover" id="datatable">

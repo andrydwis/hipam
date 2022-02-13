@@ -19,10 +19,12 @@ class UsageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // 
         $data = [
+            'request' => $request,
+            'yearUsages' => Usage::select('year')->distinct()->pluck('year'),
             'monthNow' => Carbon::now()->isoFormat('MMMM'),
             'yearNow' => Carbon::now()->isoFormat('Y'),
             'months' => collect(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'])

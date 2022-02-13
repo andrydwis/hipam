@@ -25,6 +25,7 @@
         @if($client)
         <div class="row mt-5">
             <div class="col">
+                @if(!$bills->isEmpty())
                 <h3 class="text-center fw-bolder text-uppercase">{{$month}} - {{$year}}</h3>
                 <h3 class="text-left fw-bolder">{{$client->client_id}} - {{$client->name}} RT.{{$client->rt}}/RW.{{$client->rw}}</h3>
                 <p>Pemakaian <span class="fw-bolder">{{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup></span> ({{($bills->where('status', 'unpaid')->first()->usage->meter_cubic)-($bills->where('status', 'unpaid')->first()->meter_cubic)}}-{{$bills->where('status', 'unpaid')->first()->usage->meter_cubic}})</p>
@@ -117,7 +118,84 @@
                         <h4 class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</h4>
                     </div>
                 </div>
+                @else
+                <div class="table-responsive py-4">
+                    <table class="table table-hover" id="datatable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Tahun</th>
+                                <th>Bulan</th>
+                                <th>Meteran Bulan Lalu</th>
+                                <th>Meteran Bulan Ini</th>
+                                <th>Pemakaian</th>
+                                <th>Tarif</th>
+                                <th>Abonemen</th>
+                                <th>Denda</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Dibayar</th>
+                                <th>Kasir</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $latest = $usages->first();
+                            @endphp
+                            <tr>
+                                <td>
+                                    {{$latest->year}}
+                                </td>
+                                <td>
+                                    {{$latest->month}}
+                                </td>
+                                @if($latest->meter_cubic - $latest->bill->meter_cubic >= 0)
+                                <td>{{$latest->meter_cubic - $latest->bill->meter_cubic}} m<sup>3</sup></td>
+                                @else
+                                <td>0 m<sup>3</sup></td>
+                                @endif
+                                <td>{{$latest->meter_cubic}} m<sup>3</sup></td>
+                                <td>{{$latest->bill->meter_cubic ?? '-'}} m<sup>3</sup></td>
+                                <td>Rp. {{number_format($latest->bill->cost,2,',','.') ?? '-'}}</td>
+                                <td>Rp. {{number_format($latest->bill->subscription,2,',','.') ?? '-'}}</td>
+                                <td>Rp. {{number_format($latest->bill->fine,2,',','.') ?? '-'}}</td>
+                                <td>Rp. {{number_format($latest->bill->total,2,',','.') ?? '-'}}</td>
+                                <td>
+                                    @if($latest->bill)
+                                    @if($latest->bill->status == 'unpaid')
+                                    <span class="badge bg-primary">belum membayar</span>
+                                    @elseif($latest->bill->status == 'late')
+                                    <span class="badge bg-danger">telat membayar</span>
+                                    @elseif($latest->bill->status == 'paid')
+                                    <span class="badge bg-success">sudah membayar</span>
+                                    @endif
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($latest->bill->paid_at)
+                                    {{$latest->bill->paid_at->isoFormat('dddd, DD-MM-YYYY hh:mm A')}}
+                                    @else
+                                    {{'-'}}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($latest->bill->paid_at)
+                                    {{$latest->bill->admin->name}}
+                                    @else
+                                    {{'-'}}
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{route('transaction.show', [$client])}}" class="btn btn-outline-primary">Detail</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @endif
                 <hr>
+                @if($client)
+                @if(!$bills->isEmpty())
                 <div class="d-flex justify-content-end gap-1">
                     <form action="{{route('transaction.pay-process', [$client])}}" method="post">
                         @csrf
@@ -126,6 +204,8 @@
                     <a href="{{route('transaction.show', [$client])}}" class="btn btn-outline-primary">Detail</a>
                     <button class="btn btn-outline-primary" disabled>Keringanan</button>
                 </div>
+                @endif
+                @endif
             </div>
         </div>
         @endif

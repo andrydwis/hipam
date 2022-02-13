@@ -20,7 +20,7 @@ class UsagesExport implements FromView, ShouldAutoSize
         $month = $this->month;
         $year = $this->year;
 
-        return view('usage.export', [
+        return view('transaction.export', [
             'month' => $month,
             'year' => $year,
             'clients' => Client::with(['usages' => function ($query) use ($month, $year) {

@@ -72,6 +72,7 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer'])->group(
 
     Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
     Route::get('/transaction/{client}', [TransactionController::class, 'show'])->name('transaction.show');
+    Route::get('/transaction/{client}/export', [TransactionController::class, 'export'])->name('transaction.export');
     Route::get('/transaction/{client}/pay', [TransactionController::class, 'pay'])->name('transaction.pay');
     Route::post('/transaction/{client}/pay-process', [TransactionController::class, 'payProcess'])->name('transaction.pay-process');
 
