@@ -188,7 +188,7 @@
                                 </td>
                                 <td>
                                     @if($latest->bill->paid_at)
-                                    {{$latest->bill->admin->name}}
+                                    {{$latest->bill->admin->name ?? '-'}}
                                     @else
                                     {{'-'}}
                                     @endif
