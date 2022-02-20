@@ -9,6 +9,7 @@ use App\Models\Client;
 use App\Models\Usage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -22,11 +23,6 @@ class TransactionController extends Controller
             if ($client) {
                 $usages = Usage::where('client_id', $client->id)->with('bill.admin')->orderBy('created_at', 'desc')->get();
                 $bills = Bill::whereIn('usage_id', $usages->pluck('id'))->where('status', '!=', 'paid')->orderBy('id', 'desc')->get();
-
-                // //if no bills then return back
-                // if ($bills->isEmpty()) {
-                //     return back()->with('error', 'Semua tagihan pelanggan sudah dibayar');
-                // }
             } else {
                 return redirect()->back()->with('error', 'Data tidak ditemukan');
             }
@@ -51,7 +47,7 @@ class TransactionController extends Controller
     {
         $data = [
             'client' => $client,
-            'usages' => Usage::where('client_id', $client->id)->with(['client', 'bill'])->orderBy('id', 'desc')->get()
+            'usages' => Usage::where('client_id', $client->id)->with(['client', 'bill.admin'])->orderBy('id', 'desc')->get()
         ];
 
         return view('transaction.show', $data);
@@ -96,6 +92,10 @@ class TransactionController extends Controller
             'month' => Carbon::now()->isoFormat('MMMM'),
             'year' => Carbon::now()->isoFormat('Y'),
         ];
+
+        // $pdf = App::make('dompdf.wrapper');
+        // $pdf->loadView('transaction.print-pdf', $data)->setPaper('Legal', 'landscape');
+        // return $pdf->stream();
 
         session()->flash('previousUrl', url()->previous());
 

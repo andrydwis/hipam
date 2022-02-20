@@ -125,6 +125,9 @@
                             <tr>
                                 <th>Tahun</th>
                                 <th>Bulan</th>
+                                <th>Nama</th>
+                                <th>RT</th>
+                                <th>RW</th>
                                 <th>Meteran Bulan Lalu</th>
                                 <th>Meteran Bulan Ini</th>
                                 <th>Pemakaian</th>
@@ -149,6 +152,11 @@
                                 <td>
                                     {{$latest->month}}
                                 </td>
+                                <td>
+                                    {{$client->name}}
+                                </td>
+                                <td>{{$client->rt}}</td>
+                                <td>{{$client->rw}}</td>
                                 @if($latest->meter_cubic - $latest->bill->meter_cubic >= 0)
                                 <td>{{$latest->meter_cubic - $latest->bill->meter_cubic}} m<sup>3</sup></td>
                                 @else

@@ -12,6 +12,8 @@
             <th>Denda</th>
             <th>Total</th>
             <th>Status</th>
+            <th>Dibayar</th>
+            <th>Kasir</th>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +42,20 @@
                 @elseif($usage->bill->status == 'paid')
                 sudah membayar
                 @endif
+                @endif
+            </td>
+            <td>
+                @if($usage->bill->paid_at)
+                {{$usage->bill->paid_at->isoFormat('dddd, DD-MM-YYYY hh:mm A')}}
+                @else
+                {{'-'}}
+                @endif
+            </td>
+            <td>
+                @if($usage->bill->paid_at)
+                {{$usage->bill->admin->name}}
+                @else
+                {{'-'}}
                 @endif
             </td>
         </tr>
