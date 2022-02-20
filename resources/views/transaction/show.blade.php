@@ -77,7 +77,7 @@
                         </td>
                         <td>
                             @if($usage->bill->paid_at)
-                            {{$usage->bill->admin->name}}
+                            {{$usage->bill->admin->name ?? '-'}}
                             @else
                             {{'-'}}
                             @endif
