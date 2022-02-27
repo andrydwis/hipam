@@ -46,6 +46,7 @@
                     <option value="superadmin" @if(old('role') == 'superadmin') selected @endif>Super Admin</option>
                     <option value="admin" @if(old('role') == 'admin') selected @endif>Kasir</option>
                     <option value="officer" @if(old('role') == 'officer') selected @endif>Petugas Kontrol Air</option>
+                    <option value="technician" @if(old('role') == 'technician') selected @endif>Teknisi Air</option>
                 </select>
             </div>
             <div class="mb-4">

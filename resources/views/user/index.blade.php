@@ -41,6 +41,8 @@
                         <td><span class="badge bg-primary">Kasir</span></td>
                         @elseif($user->getRoleNames()->first() == 'officer')
                         <td><span class="badge bg-primary">Petugas Kontrol Air</span></td>
+                        @elseif($user->getRoleNames()->first() == 'technician')
+                        <td><span class="badge bg-primary">Teknisi Air</span></td>
                         @else
                         <td><span class="badge bg-primary">{{$user->getRoleNames()->first()}}</span></td>
                         @endif

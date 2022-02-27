@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Admin\UserController;
@@ -33,7 +34,7 @@ Route::get('/user-statistic/{client}', [UserStaticticController::class, 'show'])
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer|technician'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('user.create');
     Route::post('/user/create', [UserController::class, 'store'])->withoutMiddleware('role:superadmin|admin')->middleware('role:superadmin')->name('user.store');
@@ -86,6 +87,8 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer'])->group(
     Route::get('/report/arrears/export', [ReportController::class, 'arrearsExport'])->name('report.arrears-export');
 
     // Route::get('/activity-log', [ActivityLogController::class, 'index'])->withoutMiddleware('role:admin')->name('activity-log.index');
+
+    Route::get('/my-activity', [ActivityController::class, 'index'])->name('my-activity.index');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

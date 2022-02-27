@@ -64,7 +64,7 @@
         }
 
         .print {
-            font-size: 10px !important;
+            font-size: 12px !important;
             /* font-family: sans-serif !important; */
         }
 
@@ -78,7 +78,7 @@
         }
 
         li {
-            font-size: 10px !important;
+            font-size: 12px !important;
             font-family: sans-serif !important;
         }
 
@@ -93,7 +93,7 @@
 <body>
     <div class="container-fluid">
         <div class="row print">
-            <div class="col-6 p-3" style="border-right: 0.5px dashed">
+            <div class="col-12 p-3">
                 <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
                 <hr class="m-0">
                 <div class="text-center fw-bolder mb-3">SURAT PERINGATAN TERLAMBAT 3 BULAN</div>
@@ -145,47 +145,25 @@
                 @endphp
                 <div class="row">
                     <div class="col-5">
-                        <div class="text-start">Denda</div>
+                        <div class="text-start">Denda Terlambat</div>
                     </div>
                     <div class="col-7">
                         <div class="text-start">= Rp. {{number_format($late * config('custom.fine'),2,',','.')}}</div>
                     </div>
                 </div>
                 <ul class="list-unstyled m-0 p-0">
+                    @foreach($bills->where('status', 'late') as $bill)
                     <li>
                         <div class="row">
                             <div class="col-5">
-                                <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}}</div>
+                                <div class="text-start">{{$bill->usage->month}}</div>
                             </div>
                             <div class="col-7">
-                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
+                                <div class="text-start">= Rp. {{number_format($bill->cost + config('custom.subscription'),2,',','.')}}</div>
                             </div>
                         </div>
                     </li>
-                    @endif
-                    @if($bills->where('status', 'late')->skip(1)->first())
-                    <li>
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}}</div>
-                            </div>
-                            <div class="col-7">
-                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
-                            </div>
-                        </div>
-                    </li>
-                    @endif
-                    @if($bills->where('status', 'late')->skip(2)->first())
-                    <li>
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}}</div>
-                            </div>
-                            <div class="col-7">
-                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
-                            </div>
-                        </div>
-                    </li>
+                    @endforeach
                     @endif
                 </ul>
                 @php
@@ -200,132 +178,7 @@
                         <div class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
                     </div>
                 </div>
-                <div class="text-start mt-2" style="font-size: 7.5px;">
-                    Apabila terdapat <span class="fw-bolder">ketidaksesuaian mohon mengkonfirmasi langsung kepada ketua/sekretaris,</span>
-                    mohon selesaikan <span class="fw-bolder">sebelum tanggal {{$expected_at}}</span> untuk menghindari pemutusan.
-                </div>
-                <br>
-                <br>
-                <div class="text-end">
-                    TTD KETUA
-                </div>
-                <br>
-                <br>
-                <hr>
-                <div class="text-center">
-                    Cek tagihan anda di
-                    <br>
-                    <span class="fw-bolder">https://hipamklampok.com</span>
-                </div>
-            </div>
-            <div class="col-6 p-3">
-                <div class="text-center fw-bolder">HIPAM SWADAYA RW.02 DESA KLAMPOK</div>
-                <hr class="m-0">
-                <div class="text-center fw-bolder mb-3">SURAT PERINGATAN TERLAMBAT 3 BULAN</div>
-                <div class="d-flex justify-content-between">
-                    <div class="fw-bolder">No: {{$number}}</div>
-                    <div>Klampok, {{$date}}</div>
-                </div>
-                <br>
-                <div class="text-start">
-                    Kepada YTH, <span class="fw-bolder">{{$client->client_id}} - {{$client->name}} - RT {{$client->rt}} RW {{$client->rw}}</span>
-                </div>
-                <br>
-                <div class="text-start">
-                    <span class="fw-bolder">Teguran keterlambatan 3 bulan</span> yang belum diselesaikan, maka dilakukan <span class="fw-bolder">PEMUTUSAN SEMENTARA oleh Petugas</span>.
-                    Mohon dibayarkan langsung di kasir HIPAM.
-                </div>
-                <br>
-                <div class="text-start fw-bolder">RINCIAN</div>
-                <div class="row">
-                    <div class="col-5">
-                        <div class="text-start">Tagihan ({{$bills->where('status', 'unpaid')->first()->meter_cubic}} m<sup>3</sup> x {{config('custom.cost')}})</div>
-                    </div>
-                    <div class="col-7">
-                        <div class="text-start">= Rp. {{number_format(($bills->where('status', 'unpaid')->first()->meter_cubic * config('custom.cost')),2,',','.')}}</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5">
-                        <div class="text-start">Abonemen</div>
-                    </div>
-                    <div class="col-7">
-                        <div class="text-start">= Rp. {{number_format(config('custom.subscription'),2,',','.')}}</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5">
-                        <div class="text-start">Tunggakan</div>
-                    </div>
-                    <div class="col-7">
-                        <div class="text-start">= {{$bills->where('status', 'late')->count()}} kali</div>
-                    </div>
-                </div>
-                @if($bills->where('status', 'late')->first())
-                @php
-                $late = 0;
-                foreach($bills->where('status', 'late') as $bill) {
-                $late++;
-                }
-                @endphp
-                <div class="row">
-                    <div class="col-5">
-                        <div class="text-start">Denda</div>
-                    </div>
-                    <div class="col-7">
-                        <div class="text-start">= Rp. {{number_format($late * config('custom.fine'),2,',','.')}}</div>
-                    </div>
-                </div>
-                <ul class="list-unstyled m-0 p-0">
-                    <li>
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="text-start">{{$bills->where('status', 'late')->first()->usage->month}}</div>
-                            </div>
-                            <div class="col-7">
-                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->first()->cost + config('custom.subscription'),2,',','.')}}</div>
-                            </div>
-                        </div>
-                    </li>
-                    @endif
-                    @if($bills->where('status', 'late')->skip(1)->first())
-                    <li>
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="text-start">{{$bills->where('status', 'late')->skip(1)->first()->usage->month}}</div>
-                            </div>
-                            <div class="col-7">
-                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(1)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
-                            </div>
-                        </div>
-                    </li>
-                    @endif
-                    @if($bills->where('status', 'late')->skip(2)->first())
-                    <li>
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="text-start">{{$bills->where('status', 'late')->skip(2)->first()->usage->month}}</div>
-                            </div>
-                            <div class="col-7">
-                                <div class="text-start">= Rp. {{number_format($bills->where('status', 'late')->skip(2)->first()->cost + config('custom.subscription'),2,',','.')}}</div>
-                            </div>
-                        </div>
-                    </li>
-                    @endif
-                </ul>
-                @php
-                $sumTotal = $bills->sum('total');
-                @endphp
-                <hr>
-                <div class="row">
-                    <div class="col-5">
-                        <div class="text-start fw-bolder">TOTAL</div>
-                    </div>
-                    <div class="col-7">
-                        <div class="text-start fw-bolder">= Rp. {{number_format($sumTotal,2,',','.')}}</div>
-                    </div>
-                </div>
-                <div class="text-start mt-2" style="font-size: 7.5px;">
+                <div class="text-start mt-2">
                     Apabila terdapat <span class="fw-bolder">ketidaksesuaian mohon mengkonfirmasi langsung kepada ketua/sekretaris,</span>
                     mohon selesaikan <span class="fw-bolder">sebelum tanggal {{$expected_at}}</span> untuk menghindari pemutusan.
                 </div>
