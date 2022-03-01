@@ -122,7 +122,7 @@ class ActivityController extends Controller
         $photo = null;
         if ($request->foto) {
             foreach ($request->foto as $foto) {
-                $paths[] = $foto->store('public/activity');
+                $paths[] = $foto->store('activity');
             }
             $photo = json_encode($paths);
         }
