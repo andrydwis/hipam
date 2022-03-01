@@ -20,7 +20,7 @@ class ActivityExport implements FromView, ShouldAutoSize
         $monthNow = Carbon::now()->isoFormat('MMMM');
         $yearNow = Carbon::now()->isoFormat('Y');
 
-        if ($this->request['month'] && $this->request['year']) {
+        if ($this->request && $this->request['month'] && $this->request['year']) {
             $activities = Activity::with('technician')->where('month', $this->request['month'])->where('year', $this->request['year'])->orderBy('created_at', 'desc')->get();
         } else {
             $activities = Activity::with('technician')->where('month', $monthNow)->where('year', $yearNow)->orderBy('created_at', 'desc')->get();
