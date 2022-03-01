@@ -48,7 +48,7 @@
             @endphp
             <div class="col-sm-10 d-flex flex-wrap gap-3">
                 @foreach($photos as $photo)
-                <img src="{{asset('storage/'.str_replace('public/', '', $photo))}}" alt="Foto" class="img-thumbnail" style="object-fit: cover; width:250px; height:250px;">
+                <img src="{{asset('storage/'.$photo)}}" alt="Foto" class="img-thumbnail" style="object-fit: cover;" width="250" height="250">
                 @endforeach
             </div>
         </div>
@@ -93,7 +93,7 @@
             @endphp
             <div class="col-sm-10 d-flex gap-3">
                 @foreach($photos as $photo)
-                <img src="{{asset('storage/'.str_replace('public/', '', $photo))}}" alt="Foto" class="img-thumbnail" style="object-fit: cover;" width="250" height="250">
+                <img src="{{asset('storage/'.$photo)}}" alt="Foto" class="img-thumbnail" style="object-fit: cover;" width="250" height="250">
                 @endforeach
             </div>
         </div>
