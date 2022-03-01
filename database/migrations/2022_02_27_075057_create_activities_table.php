@@ -22,6 +22,8 @@ class CreateActivitiesTable extends Migration
             $table->string('rt_rw')->nullable();
             $table->string('month');
             $table->integer('year');
+            $table->json('photo')->nullable();
+            $table->string('description')->nullable();
             $table->foreignId('technician_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

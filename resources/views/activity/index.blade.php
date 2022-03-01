@@ -25,14 +25,14 @@
                 <option value="100">100</option>
             </select>
         </div>
-        <a href="{{route('my-activity.create')}}" class="btn btn-outline-primary">Tambah Kegiatan</a>
+        <a href="{{route('activity.export', $request->all())}}" class="btn btn-outline-primary">Export</a>
     </div>
     <div class="card-body">
         <div class="d-flex gap-3">
             <select class="form-select" id="month" onchange="changeDate()" style="width: 175px;">
                 <option disabled>Pilih Bulan</option>
                 @foreach($months as $month)
-                <option value="{{$month}}" @if($month==$monthNow){{'selected'}}@endif>{{$month}}</option>
+                <option value="{{$month}}" @if($month==$monthNow ||$month==$request->month){{'selected'}}@endif>{{$month}}</option>
                 @endforeach
             </select>
             <select class="form-select" id="year" onchange="changeDate()" style="width: 175px;">
@@ -79,7 +79,12 @@
                         </td>
                         <td>{{$activity->job_type}}</td>
                         <td>
-                            <a href="{{route('my-activity.show', $activity)}}" class="btn btn-outline-primary">Detail</a>
+                            <form action="{{route('activity.destroy', $activity)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-primary">Hapus</button>
+                                <a href="{{route('activity.show-admin', $activity)}}" class="btn btn-outline-primary">Detail</a>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

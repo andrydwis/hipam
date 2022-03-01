@@ -88,7 +88,16 @@ Route::middleware(['auth', 'verified', 'role:superadmin|admin|officer|technician
 
     // Route::get('/activity-log', [ActivityLogController::class, 'index'])->withoutMiddleware('role:admin')->name('activity-log.index');
 
+    Route::get('/activity', [ActivityController::class, 'list'])->name('activity.list');
+    Route::get('/activity/export', [ActivityController::class, 'export'])->name('activity.export');
+    Route::get('/activity/{activity}', [ActivityController::class, 'showAdmin'])->name('activity.show-admin');
+    Route::delete('/activity/{activity}', [ActivityController::class, 'destroy'])->name('activity.destroy');
+
     Route::get('/my-activity', [ActivityController::class, 'index'])->name('my-activity.index');
+    Route::get('/my-activity/create', [ActivityController::class, 'create'])->name('my-activity.create');
+    Route::post('/my-activity/create', [ActivityController::class, 'store'])->name('my-activity.store');
+    Route::get('/my-activity/{activity}', [ActivityController::class, 'show'])->name('my-activity.show');
+    
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

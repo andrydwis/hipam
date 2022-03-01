@@ -15,6 +15,8 @@ class Activity extends Model
         'assignment_letter_number',
         'name',
         'rt_rw',
+        'photo',
+        'description',
         'month',
         'year',
         'technician_id',
