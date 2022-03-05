@@ -139,6 +139,14 @@
                                 <span class="sidebar-text">Pemutusan</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('activity.list')}}" class="nav-link">
+                                <span class="sidebar-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </span>
+                                <span class="sidebar-text">Kegiatan Teknisi</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -146,16 +154,6 @@
             @if(auth()->user()->getRoleNames()->first() == 'technician')
             <li class="nav-item">
                 <a href="{{route('my-activity.index')}}" class="nav-link">
-                    <span class="sidebar-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </span>
-                    <span class="sidebar-text">Kegiatan Teknisi</span>
-                </a>
-            </li>
-            @endif
-            @if(auth()->user()->getRoleNames()->first() == 'superadmin')
-            <li class="nav-item">
-                <a href="{{route('activity.list')}}" class="nav-link">
                     <span class="sidebar-icon">
                         <i class="fas fa-file-alt"></i>
                     </span>
