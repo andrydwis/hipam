@@ -21,14 +21,14 @@
     <div class="card-header">
         <div class="form-group row">
             <label for="tanggal_kegiatan" class="col-6 col-sm-2 col-form-label">Tanggal Kegiatan</label>
-            <div class="col-6 col-sm-10">
-                <input type="date" name="tanggal_kegiatan" class="form-control-plaintext px-3" placeholder="Tanggal Kegiatan" value="{{$activity->created_at->format('Y-m-d')}}" readonly>
+            <div class="col-6 col-sm-10 col-form-label">
+                <p>{{$activity->created_at->format('Y-m-d')}}</p>
             </div>
         </div>
         <div class="form-group row mt-3">
             <label for="jenis_kegiatan" class="col-6 col-sm-2 col-form-label">Jenis Kegiatan</label>
-            <div class="col-6 col-sm-10">
-                <input type="text" name="jenis_kegiatan" class="form-control-plaintext px-3" placeholder="Jenis kegiatan" value="{{$activity->activity_type}}" readonly>
+            <div class="col-6 col-sm-10 col-form-label">
+                <p>{{$activity->activity_type}}</p>
             </div>
         </div>
     </div>
@@ -36,8 +36,8 @@
     <div class="card-body">
         <div class="form-group row">
             <label for="jenis_pekerjaan" class="col-6 col-sm-2 col-form-label">Jenis Pekerjaan</label>
-            <div class="col-6 col-sm-10">
-                <input type="text" name="jenis_pekerjaan" class="form-control-plaintext px-3" placeholder="Jenis pekerjaan" value="{{$activity->job_type}}" readonly>
+            <div class="col-6 col-sm-10 col-form-label">
+                <p>{{$activity->job_type}}</p>
             </div>
         </div>
         @if($activity->photo)
@@ -63,26 +63,26 @@
     <div class="card-body">
         <div class="form-group row">
             <label for="jenis_pekerjaan" class="col-6 col-sm-2 col-form-label">Jenis Pekerjaan</label>
-            <div class="col-6 col-sm-10">
-                <input type="text" name="jenis_pekerjaan" class="form-control-plaintext px-3" placeholder="Jenis pekerjaan" value="{{$activity->job_type}}" readonly>
+            <div class="col-6 col-sm-10 col-form-label">
+                <p>{{$activity->job_type}}</p>
             </div>
         </div>
         <div class="form-group row mt-3">
             <label for="no_surat_tugas" class="col-6 col-sm-2 col-form-label">No Surat Tugas</label>
-            <div class="col-6 col-sm-10">
-                <input type="text" name="no_surat_tugas" class="form-control-plaintext px-3" placeholder="No Surat Tugas" value="{{$activity->assignment_letter_number}}" readonly>
+            <div class="col-6 col-sm-10 col-form-label">
+                <p>{{$activity->assignment_letter_number}}</p>
             </div>
         </div>
         <div class="form-group row mt-3">
             <label for="nama_pelanggan" class="col-6 col-sm-2 col-form-label">Nama Pelanggan</label>
-            <div class="col-6 col-sm-10">
-                <input type="text" name="nama_pelanggan" class="form-control-plaintext px-3" placeholder="Nama Pelanggan" value="{{$activity->name}}" readonly>
+            <div class="col-6 col-sm-10 col-form-label">
+                <p>{{$activity->name}}</p>
             </div>
         </div>
         <div class="form-group row mt-3">
             <label for="rt_rw" class="col-6 col-sm-2 col-form-label">RT / RW</label>
-            <div class="col-6 col-sm-10">
-                <input type="text" name="rt_rw" class="form-control-plaintext px-3" placeholder="RT / RW" value="{{$activity->rt_rw}}" readonly>
+            <div class="col-6 col-sm-10 col-form-label">
+                <p>{{$activity->rt_rw}}</p>
             </div>
         </div>
         @if($activity->photo)
